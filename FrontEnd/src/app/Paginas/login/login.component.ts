@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+
+  public mostrarPassword() {
+    const pass = document.getElementById('inputPassword') as HTMLInputElement;
+    const activador = document.getElementById('mostrarPass') as HTMLElement;
+    pass.type = "text";
+  }
+
+
 }

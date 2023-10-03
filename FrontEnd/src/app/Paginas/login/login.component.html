@@ -37,7 +37,8 @@
     </div>
     <div class="contenedorForm">
       <input type="text" placeholder="Correo electronico" class="input" />
-      <input type="password" placeholder="Contraseña" class="input" />
+      <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
+      <input type="password" placeholder="Contraseña" id="inputPassword" class="input" /> <span><i class="bi bi-eye iconoOjo" id="mostrarPass" (click)="mostrarPassword()"></i></span><span><i class="bi bi-unlock-fill iconoCandado" ></i></span>
       <div class="alinearBoton">
         <button class="botonIniciar">Iniciar</button>
       </div>

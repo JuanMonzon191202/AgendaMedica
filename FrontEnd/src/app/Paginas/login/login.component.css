@@ -137,8 +137,33 @@
   font-size: 24px;
   display: block;
   margin-bottom: 4rem;
+  position: relative;
 }
 
+.iconoEmail {
+  color: white;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+.iconoCandado {
+  color: white;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 40%;
+  right: 5px;
+}
+
+.iconoOjo {
+  color: white;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 40%;
+  right: 50px;
+  cursor: pointer;
+}
 ::placeholder {
   color: rgb(187, 187, 187);
 }
@@ -150,16 +175,12 @@
   width: 260px;
   height: 63px;
   border: none;
-  font-family: Poppins;
-  font-size: 24px;
   color: #0d5eaf;
   font-family: Poppins;
   font-size: 24px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   cursor: pointer;
-  transition: all ease 0.5s;
+  transition: all ease-in-out 0.5s;
 }
 
 .alinearBoton {
