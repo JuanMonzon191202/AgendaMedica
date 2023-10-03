@@ -1,49 +1,49 @@
 <div class="contenedorGeneral">
-    <div class="contenedorIzquierdo">
-      <img
-        src="https://cdn.aarp.net/content/dam/aarp/health/doctors_hospitals/2016/05/1140-how-to-choose-the-right-doctor-for-you-esp-.imgcache.rev.web.1000.575.jpg"
-        class="imagenDoctor"
-      />
-      <div class="titulo">
-        <div class="barraDecorativa"></div>
-        <h1 class="textoAgendar">Registro</h1>
-      </div>
-  
-      <div class="parrafoDatos">
-        <span>¿Porque pedimos tus datos?</span>
-        <p>
-            Desde luego tenemos que autenticar los perfiles de los especialistas registrados. Por motivos de seguridad. <br>
-            tanto de la plataforma como desde luego del paciente en cuestión. Por eso hacemos solicitud de tu:
-        </p>
-        <ul>
-            <li>Cedula profesional</li>
-            <li>Certificaciones</li>
-        </ul>
-        <span>Información básica como:</span>
-        <ul>
-            <li>Numero telefonico</li>
-            <li>Correo electronico</li>
-            <li>Dirección fisica</li>
-        </ul>
-        <p>
-            El proceso de confirmación y activación de cuenta es manual, por lo que tarda un lapso de 3 días hábiles.
-        </p>
-      </div>
+  <div class="contenedorIzquierdo">
+    <img
+      src="https://cdn.aarp.net/content/dam/aarp/health/doctors_hospitals/2016/05/1140-how-to-choose-the-right-doctor-for-you-esp-.imgcache.rev.web.1000.575.jpg"
+      class="imagenDoctor" />
+    <div class="titulo">
+      <div class="barraDecorativa"></div>
+      <h1 class="textoAgendar">Registro</h1>
     </div>
-    <div class="contenedorDerecho">
-      <div class="textosHeader">
-        <h1 class="textoLogin">Registro</h1>
-        <h2 class="mensajeBienvenido">Primero crea tu cuenta, ingresa tu email y contraseña</h2>
-      </div>
-      <div class="contenedorForm">
-        <input type="text" placeholder="Correo electronico" class="input" />
-        <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
-        <input type="password" placeholder="Contraseña" id="inputPassword" class="input" /> <span><i class="bi bi-eye iconoOjo" id="mostrarPass" (click)="mostrarPassword()"></i></span><span><i class="bi bi-unlock-fill iconoCandado" ></i></span>
-        <div class="alinearBoton">
-          <button class="botonIniciar">Continuar</button>
-        </div>
-        <h3 class="sugerenciaRegistrar">¿Ya tienes cuenta? <span routerLink="/login">¡Inicia sesión!</span></h3>
-      </div>
+
+    <div class="parrafoDatos">
+      <span>¿Porque pedimos tus datos?</span>
+      <p>
+        Desde luego tenemos que autenticar los perfiles de los especialistas registrados. Por motivos de seguridad. <br>
+        tanto de la plataforma como desde luego del paciente en cuestión. Por eso hacemos solicitud de tu:
+      </p>
+      <ul>
+        <li>Cedula profesional</li>
+        <li>Certificaciones</li>
+      </ul>
+      <span>Información básica como:</span>
+      <ul>
+        <li>Numero telefonico</li>
+        <li>Correo electronico</li>
+        <li>Dirección fisica</li>
+      </ul>
+      <p>
+        El proceso de confirmación y activación de cuenta es manual, por lo que tarda un lapso de 3 días hábiles.
+      </p>
     </div>
   </div>
-  
+  <div class="contenedorDerecho">
+    <div class="textosHeader">
+      <h1 class="textoLogin">Registro</h1>
+      <h2 class="mensajeBienvenido">Primero crea tu cuenta, ingresa tu email y contraseña</h2>
+    </div>
+    <div class="contenedorForm">
+      <input type="text" placeholder="Correo electronico" class="input" />
+      <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
+      <input type="password" placeholder="Contraseña" id="inputPassword" class="input" /> <span><i
+          class="bi bi-eye iconoOjo" id="mostrarPass" (click)="mostrarPassword()"></i></span><span><i
+          class="bi bi-unlock-fill iconoCandado"></i></span>
+      <div class="alinearBoton">
+        <button class="botonIniciar" routerLink="/home">Continuar</button>
+      </div>
+      <h3 class="sugerenciaRegistrar">¿Ya tienes cuenta? <span routerLink="/login">¡Inicia sesión!</span></h3>
+    </div>
+  </div>
+</div>
