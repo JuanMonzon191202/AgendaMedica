@@ -191,6 +191,18 @@
   transform: translateY(-10px);
 }
 
+.sugerenciaRegistrar{
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.sugerenciaRegistrar span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
 @media (max-width: 1360px) {
   .titulo {
     top: calc(198px * 0.7);

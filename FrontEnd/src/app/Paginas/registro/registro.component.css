@@ -1,0 +1,315 @@
+.contenedorGeneral {
+    display: grid;
+    grid-template-columns: 66.04% auto;
+    height: 100vh;
+  }
+  
+  .contenedorIzquierdo {
+    width: 100%;
+    position: relative;
+  }
+  
+  .imagenDoctor {
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.18;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+  }
+  
+  .barraDecorativa {
+    width: 48px;
+    height: 8px;
+    transform: rotate(90deg);
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #75c1eb 0%, #8cdf90 97.48%);
+  }
+  .contenedorDerecho {
+    background: linear-gradient(270deg, #1985ce 0%, #0d5eaf 100%);
+    width: 100%;
+  }
+  
+  .titulo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 198px;
+    left: 87px;
+  }
+
+  .parrafoDatos {
+    position: absolute;
+    top: 282px;
+    left: 87px;
+    width: 514px;
+
+  }
+
+  .parrafoDatos p,span,ul {
+    color: #7C7D7D;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .parrafoDatos span {
+    font-weight: 600;
+  }
+  
+  .textoAgendar {
+    color: #000;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .texto1 {
+    color: #7c7d7d;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+    top: 282px;
+    left: 130px;
+  
+    width: 647px;
+    height: 120px;
+    text-align: justify;
+  }
+  
+  .texto2 {
+    color: #7c7d7d;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .lista,
+  .texto3 {
+    color: #7c7d7d;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .texto3 span {
+    font-weight: 600;
+  }
+  .textoDescriptivo {
+    top: 471px;
+    position: absolute;
+    left: 130px;
+  }
+  
+  .contenedorDerecho {
+    position: relative;
+  }
+  
+  .textosHeader {
+    position: absolute;
+    top: 174px;
+    left: 89px;
+  }
+  
+  .textoLogin {
+    color: #fff;
+    font-family: Poppins;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    line-height: 5px;
+  }
+  
+  .mensajeBienvenido {
+    color: #fff;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .contenedorForm {
+    position: absolute;
+    top: 430px;
+    left: 89px;
+  }
+  
+  .contenedorForm input {
+    background-color: transparent;
+    width: 474px;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    font-family: Poppins;
+    border-bottom: 2px solid white;
+    outline: none;
+    color: white;
+    font-size: 24px;
+    display: block;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  
+  .iconoEmail {
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 5px;
+  }
+  
+  .iconoCandado {
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 40%;
+    right: 5px;
+  }
+  
+  .iconoOjo {
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 40%;
+    right: 50px;
+    cursor: pointer;
+  }
+  ::placeholder {
+    color: rgb(187, 187, 187);
+  }
+  
+  .botonIniciar {
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 0px 12px 14px 0px rgba(0, 0, 0, 0.25);
+    width: 260px;
+    height: 63px;
+    border: none;
+    color: #0d5eaf;
+    font-family: Poppins;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all ease-in-out 0.5s;
+  }
+  
+  .alinearBoton {
+    text-align: end;
+  }
+  
+  .botonIniciar:hover {
+    transform: translateY(-10px);
+  }
+  
+  .sugerenciaRegistrar{
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .sugerenciaRegistrar span {
+    font-weight: 600;
+    cursor: pointer;
+    color:white;
+  }
+  
+  @media (max-width: 1360px) {
+    .titulo {
+      top: calc(198px * 0.7);
+      left: calc(87px * 0.7);
+    }
+  
+    .textoAgendar {
+      font-size: calc(48px * 0.7);
+    }
+  
+    .texto1 {
+      font-size: calc(20px * 0.7);
+      top: calc(282px * 0.7);
+      left: calc(130px * 0.7);
+      width: calc(647px * 0.7);
+      height: calc(120px * 0.7);
+    }
+  
+    .lista,
+    .texto3,
+    .texto2 {
+      font-size: calc(20px * 0.7);
+    }
+  
+    .textoDescriptivo {
+      top: calc(471px * 0.7);
+      left: calc(130px * 0.7);
+    }
+  
+    .textosHeader {
+      top: calc(174px * 0.7);
+      left: calc(89px * 0.7);
+    }
+  
+    .textoLogin {
+      font-size: calc(64px * 0.7);
+      line-height: 5px;
+    }
+  
+    .mensajeBienvenido {
+      font-size: 16px;
+    }
+  
+    .contenedorForm {
+      top: calc(430px * 0.7);
+      left: calc(89px * 0.7);
+    }
+  
+    .contenedorForm input {
+      width: calc(474px * 0.7);
+      font-size: calc(24px * 0.7);
+      margin-bottom: calc(4rem * 0.7);
+    }
+  
+    ::placeholder {
+      color: rgb(187, 187, 187);
+    }
+  
+    .botonIniciar {
+      width: calc(260px * 0.7);
+      height: calc(63px * 0.7);
+      font-size: calc(24px * 0.7);
+      font-size: calc(24px * 0.7);
+    }
+
+    .parrafoDatos {
+      position: absolute;
+      top:  calc(300px*.7);
+      left: 87px;
+      width: 514px;
+    }
+
+    .parrafoDatos p,span,ul {
+      font-size:  calc(20px*.7);
+    }
+
+    .iconoCandado {
+      top: 30%;
+      right: 5px;
+    }
+    
+    .iconoOjo {
+      top: 30%;
+      right: 50px;
+    }
+  }
+  
