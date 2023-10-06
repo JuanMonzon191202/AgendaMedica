@@ -203,7 +203,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 1366px) {
   .titulo {
     top: calc(198px * 0.7);
     left: calc(87px * 0.7);
