@@ -25,6 +25,7 @@
   flex-shrink: 0;
   background: linear-gradient(90deg, #75c1eb 0%, #8cdf90 97.48%);
 }
+
 .contenedorDerecho {
   background: linear-gradient(270deg, #1985ce 0%, #0d5eaf 100%);
   width: 100%;
@@ -80,9 +81,11 @@
   font-weight: 400;
   line-height: normal;
 }
+
 .texto3 span {
   font-weight: 600;
 }
+
 .textoDescriptivo {
   top: 471px;
   position: absolute;
@@ -164,6 +167,7 @@
   right: 50px;
   cursor: pointer;
 }
+
 ::placeholder {
   color: rgb(187, 187, 187);
 }
@@ -191,7 +195,7 @@
   transform: translateY(-10px);
 }
 
-.sugerenciaRegistrar{
+.sugerenciaRegistrar {
   color: #FFF;
   font-size: 16px;
   font-style: normal;
@@ -266,5 +270,15 @@
     height: calc(63px * 0.7);
     font-size: calc(24px * 0.7);
     font-size: calc(24px * 0.7);
+  }
+
+  .iconoCandado {
+    top: 30%;
+    right: 5px;
+  }
+
+  .iconoOjo {
+    top: 30%;
+    right: 50px;
   }
 }

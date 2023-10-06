@@ -7,9 +7,10 @@ import { LoginComponent } from './Paginas/login/login.component';
 import { RouterModule } from '@angular/router';
 import { RegistroComponent } from './Paginas/registro/registro.component';
 import { HomeComponent } from './Paginas/home/home.component';
+import { CatalogoEspecialistasComponent } from './Paginas/catalogo-especialistas/catalogo-especialistas.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegistroComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, RegistroComponent, HomeComponent, CatalogoEspecialistasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -17,6 +18,7 @@ import { HomeComponent } from './Paginas/home/home.component';
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'especialistas', component: CatalogoEspecialistasComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
   ],
