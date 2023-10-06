@@ -1,22 +1,110 @@
-div {
-    width: 100%;
-    background-color: #EEE;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.contenedor_general {
+    overflow-x: hidden;
 }
 
-p {
-    background-color: white;
+.contenedor_superior {
+    background: linear-gradient(270deg, #1985CE 0%, #0D5EAF 100%);
+    width: 100%;
+    height: calc(426px *.7);
+    position: relative;
+}
+
+.imagen_doctores {
+    width: calc(575px * .7);
+    height: calc(426px * .7);
+    left: 0;
+    position: absolute;
+}
+
+.titulo1 {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: absolute;
+    right: 50px;
+    top: 30px;
+}
+
+.titulo2 {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+    right: 50px;
+    top: 55px;
+}
+
+.contenedor_buscador {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    width: calc(938px * .7);
+    height: calc(168px * .7);
     display: flex;
-    width: 200px;
-    height: 200px;
-    justify-content: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    background: rgba(117, 193, 235, 0.20);
     align-items: center;
-    border-radius: 10px;
-    color: rgb(70, 68, 68);
-    box-shadow: 0px 0px 36px -9px rgba(0, 0, 0, 0.2);
+    padding: 0 1rem;
+}
+
+.contenedor_buscador select {
+    width: calc(328px * .7);
+    height: calc(91px *.7);
+    font-family: Poppins;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.contenedor_buscador button {
+    width: calc(161px * .7);
+    height: calc(91px *.7);
+    font-family: Poppins;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    background: #8CDF90;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.contenedor_buscador button:hover {
+    background: #75C1EB;
+    border: 1px white solid;
+}
+
+.contenedor_inferior {
+    background-color: #f4f4f4;
+    width: 100%;
+    padding: 1rem;
+}
+
+.card {
+    width:  calc(428px * .7);
+    height:  calc(469px * .7);
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    padding: 1rem;
+}
+
+.card p {
+    text-align: justify;
+}
+
+.contenidoDudas {
+    display: flex;
+    justify-content: space-around;
 }
 
 * {
