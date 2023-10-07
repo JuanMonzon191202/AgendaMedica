@@ -1,0 +1,185 @@
+.header {
+    background: linear-gradient(270deg, #1985CE 9.03%, #0D5EAF 100%);
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buscador {
+    display: grid;
+    grid-template-columns: 40% auto auto;
+    width: calc(665px * .7);
+    height: 60px;
+    align-items: center;
+    background-color: #1985CE;
+    border-radius: 5px;
+    background: rgba(117, 193, 235, 0.30);
+    padding: 0 5px;
+    margin-left: 2rem;
+    gap: 5px;
+}
+
+.buscador select {
+    width: 100%;
+    font-family: Poppins;
+    border: none;
+    border-radius: 5px;
+    height: 60%;
+}
+
+.buscador button {
+    border-radius: 5px;
+    background: #8CDF90;
+    font-family: Poppins;
+    height: 60%;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+
+.buscador button:hover {
+    background-color: #1985CE;
+    border: 1px white solid;
+}
+
+.fotoPerfil {
+    width: 60px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+.fotoPerfil:hover {
+    width: 65px;
+}
+
+.flechaRetroceder {
+    color: white;
+    position: absolute;
+    left: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+.flechaRetroceder:hover {
+    font-size: 1.5rem;
+}
+
+
+.contenedorGeneral {
+    position: relative;
+}
+
+.contenedor-informacion-especialista {
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    left: 35px;
+    top: 150px;
+}
+
+.foto-especialista {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    position: absolute;
+
+    left: 24px;
+    top: 21px;
+}
+
+.contenedor-auxiliar {
+    position: relative;
+}
+
+.nombre-especialista {
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+
+    top: 21px;
+    left: 200px;
+}
+
+.nombre-especialidad {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+
+    left: 200px;
+    top: 70px;
+}
+
+.texto-cedula,
+.cedula {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 180px;
+}
+
+.cedula {
+    top: 240px;
+    background-color: #EEE;
+    border-radius: 5px;
+    width: 90%;
+    text-align: center;
+    padding: 1rem;
+}
+
+.descripcion-especialista {
+    text-align: justify;
+    position: absolute;
+    top: 320px;
+    width: 90%;
+    height: 200px;
+    left: 50%;
+    transform: translate(-50%);
+    overflow-y: scroll;
+}
+
+.contenedor-calificacion {
+    width: 180px;
+    height: 50px;
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    right: 15px;
+    top: 17px;
+}
+
+.contenedor-aux {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 1rem;
+}
+
+.barra-1,.barra-2,.barra-3 {
+    width: 35px;
+    height: 45px;
+    background-color: #8CDF90;
+    border-radius: 5px;
+}

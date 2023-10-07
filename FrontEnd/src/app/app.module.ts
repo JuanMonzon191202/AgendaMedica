@@ -8,9 +8,10 @@ import { RouterModule } from '@angular/router';
 import { RegistroComponent } from './Paginas/registro/registro.component';
 import { HomeComponent } from './Paginas/home/home.component';
 import { CatalogoEspecialistasComponent } from './Paginas/catalogo-especialistas/catalogo-especialistas.component';
+import { InfoEspecialistasComponent } from './Paginas/info-especialistas/info-especialistas.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegistroComponent, HomeComponent, CatalogoEspecialistasComponent],
+  declarations: [AppComponent, LoginComponent, RegistroComponent, HomeComponent, CatalogoEspecialistasComponent, InfoEspecialistasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,6 +20,7 @@ import { CatalogoEspecialistasComponent } from './Paginas/catalogo-especialistas
       { path: 'registro', component: RegistroComponent },
       { path: 'home', component: HomeComponent },
       { path: 'especialistas', component: CatalogoEspecialistasComponent },
+      { path: 'info-especialistas', component: InfoEspecialistasComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
   ],
