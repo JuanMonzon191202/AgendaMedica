@@ -25,6 +25,7 @@ builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<RolService>();
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<EspecialistaCmcService>();
+builder.Services.AddScoped<EspecialidadEspecialistaService>();
 
 var app = builder.Build();
 
