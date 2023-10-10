@@ -177,9 +177,80 @@
     padding: 2px 1rem;
 }
 
-.barra-1,.barra-2,.barra-3 {
+.barra-1,
+.barra-2,
+.barra-3 {
     width: 35px;
     height: 45px;
     background-color: #8CDF90;
     border-radius: 5px;
+}
+
+
+.agenda-especialista {
+    position: absolute;
+    right: 30px;
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    top: 150px;
+    width: calc(465px * .7);
+}
+
+.titulo-agenda {
+    color: #FFF;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 5px 5px 0px 0px;
+    background: linear-gradient(90deg, #75C1EB 2.58%, #8CDF90 104.41%);
+    margin-top: 0;
+    padding-left: 1rem;
+    flex-shrink: 0;
+}
+
+.texto-hora-del-dia {
+    color: #000;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.barra-divisora {
+    background-color: #808080;
+    width: calc(300px * .7);
+    height: 1px;
+}
+
+.agrupacoin {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.botonRevisarCalendario {
+    border-radius: 30px;
+    background: linear-gradient(270deg, #1985CE 0.28%, #75C1EB 103.34%);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    width:  calc(230px * .7);
+    height:  calc(57px * .7);
+    font-family: Poppins;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+    transition: all ease .2s;
+}
+
+.botonRevisarCalendario:hover {
+    border: 1px white solid;
+    
 }
