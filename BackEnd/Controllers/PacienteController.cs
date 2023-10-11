@@ -1,82 +1,88 @@
 using Microsoft.AspNetCore.Mvc;
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace BackEdn.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class PacienteController : ControllerBase
+namespace BackEdn.Controllers
 {
-    private readonly PacienteService _service;
-
-    public PacienteController(PacienteService service)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PacienteController : ControllerBase
     {
-        _service = service;
-    }
+        private readonly PacienteService _service;
 
-    [HttpGet("paciente")]
-    public IEnumerable<Paciente> Get()
-    {
-        return _service.GetAll();
-    }
-
-    [HttpGet("paciente/{id}")]
-    public ActionResult<Paciente> GetById(int id)
-    {
-        var pacienteFind = _service.GetById(id);
-        if (pacienteFind is null)
+        public PacienteController(PacienteService service)
         {
-            return NotFound("Paciente no encontrado...");
+            _service = service;
         }
-        return pacienteFind;
-    }
 
-    [HttpPost("paciente")]
-    public IActionResult Create(Paciente paciente)
-    {
-        try
+        [HttpGet("pacientes")]
+        public async Task<IEnumerable<Paciente>> Get()
         {
-            if (paciente == null)
+            return await _service.GetAllAsync();
+        }
+
+        [HttpGet("paciente/{id}")]
+        public async Task<ActionResult<Paciente>> GetById(int id)
+        {
+            var pacienteFind = await _service.GetByIdAsync(id);
+            if (pacienteFind == null)
             {
-                return BadRequest("El objeto paciente es nulo.");
+                return NotFound("Paciente no encontrado...");
+            }
+            return pacienteFind;
+        }
+
+        [HttpPost("paciente")]
+        public async Task<IActionResult> Create(Paciente paciente)
+        {
+            try
+            {
+                if (paciente == null)
+                {
+                    return BadRequest("El objeto paciente es nulo.");
+                }
+
+                var newPaciente = await _service.CreateAsync(paciente);
+
+                if (newPaciente == null)
+                {
+                    return BadRequest("Error al crear el paciente.");
+                }
+
+                return CreatedAtAction(nameof(GetById), new { id = newPaciente.Id }, newPaciente);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                Console.WriteLine($"Error en el método Create: {ex.Message}");
+
+                // Return a 500 Internal Server Error response
+                return StatusCode(500, "Se produjo un error interno al crear el paciente.");
+            }
+        }
+
+        [HttpPut("paciente/{id}")]
+        public async Task<IActionResult> Update(int id, Paciente paciente)
+        {
+            if (id != paciente.Id)
+            {
+                return BadRequest(
+                    "El ID proporcionado no coincide con el ID del Paciente seleccionado."
+                );
+            }
+            var pacienteToUpdate = await _service.GetByIdAsync(id);
+
+            if (pacienteToUpdate == null)
+            {
+                return NotFound($"Paciente con ID {id} no encontrado.");
             }
 
-            var newPaciente = _service.Create(paciente);
+            await _service.UpdateAsync(paciente);
 
-            if (newPaciente == null)
-            {
-                return BadRequest("Error al crear el paciente.");
-            }
-
-            return CreatedAtAction(nameof(GetById), new { id = newPaciente.Id }, newPaciente);
+            return NoContent();
         }
-        catch (Exception ex)
-        {
-            // Log the exception for debugging purposes
-            Console.WriteLine($"Error en el método Create: {ex.Message}");
-
-            // Return a 500 Internal Server Error response
-            return StatusCode(500, "Se produjo un error interno al crear el paciente.");
-        }
-    }
-
-    [HttpPut("paciente")]
-    public IActionResult Update(int id, Paciente paciente)
-    {
-        if (id != paciente.Id)
-        {
-            return BadRequest("El ID proporcionado no coincide con el ID del Rol seleccionado.");
-        }
-        var pacienteToUpdate = _service.GetById(id);
-
-        if (pacienteToUpdate == null)
-        {
-            return NotFound($"Usuario con ID {id} no encontrado.");
-        }
-
-        _service.Update(paciente);
-
-        return NoContent();
     }
 }

@@ -10,6 +10,6 @@ namespace BackEdn.Data.backendModels
         public int Id { get; set; }
         public string NombreEspecialidad { get; set; }
 
-        public ICollection<EspecialidadEspecialista> Especialistas { get; set; }
+        public ICollection<EspecialidadEspecialista>? Especialistas { get; set; }
     }
 }

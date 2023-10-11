@@ -1,54 +1,58 @@
-namespace BackEdn.Services;
-
-using Microsoft.EntityFrameworkCore;
-using BackEdn.Services;
-using BackEdn.Data.backendModels;
 using BackEdn.Data;
+using BackEdn.Data.backendModels;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-public class PacienteService
+namespace BackEdn.Services
 {
-    public readonly CitasContext _context;
-
-    public PacienteService(CitasContext context)
+    public class PacienteService
     {
-        _context = context;
-    }
+        private readonly CitasContext _context;
 
-    public IEnumerable<Paciente> GetAll()
-    {
-        var pacientesConUsuarios = _context.Pacientes.Include(p => p.Usuario).ToList();
-
-        return pacientesConUsuarios;
-    }
-
-    public Paciente? GetById(int id)
-    {
-        return _context.Pacientes.Find(id);
-    }
-
-    public Paciente Create(Paciente newPaciente)
-    {
-        _context.Pacientes.Add(newPaciente);
-        _context.SaveChanges();
-
-        return newPaciente;
-    }
-
-    public void Update(Paciente paciente)
-    {
-        var existingPaciente = GetById(paciente.Id);
-
-        if (existingPaciente != null)
+        public PacienteService(CitasContext context)
         {
-            if (paciente.Telefono != null)
-            {
-                existingPaciente.Telefono = paciente.Telefono;
-            }
-            if (paciente.Genero != null)
-            {
-                existingPaciente.Genero = paciente.Genero;
-            }
+            _context = context;
         }
-        _context.SaveChanges();
+
+        public async Task<IEnumerable<Paciente>> GetAllAsync()
+        {
+            var pacientesConUsuarios = await _context.Pacientes.Include(p => p.Usuario).ToListAsync();
+
+            return pacientesConUsuarios;
+        }
+
+        public async Task<Paciente?> GetByIdAsync(int id)
+        {
+            return await _context.Pacientes.FindAsync(id);
+        }
+
+        public async Task<Paciente> CreateAsync(Paciente newPaciente)
+        {
+            _context.Pacientes.Add(newPaciente);
+            await _context.SaveChangesAsync();
+
+            return newPaciente;
+        }
+
+        public async Task UpdateAsync(Paciente paciente)
+        {
+            var existingPaciente = await GetByIdAsync(paciente.Id);
+
+            if (existingPaciente != null)
+            {
+                if (paciente.Telefono != null)
+                {
+                    existingPaciente.Telefono = paciente.Telefono;
+                }
+                if (paciente.Genero != null)
+                {
+                    existingPaciente.Genero = paciente.Genero;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

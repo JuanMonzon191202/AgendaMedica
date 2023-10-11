@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-
-using BackEdn.Data;
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
-using System.IO.Pipelines;
-
-namespace BackEdn.Controllers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -19,15 +16,15 @@ public class CitaController : ControllerBase
     }
 
     [HttpGet("citas")]
-    public IEnumerable<Cita> Get()
+    public async Task<IEnumerable<Cita>> Get()
     {
-        return _service.GetAll();
+        return await _service.GetAllAsync();
     }
 
     [HttpGet("citas/{id}")]
-    public ActionResult<Cita> GetById(int id)
+    public async Task<ActionResult<Cita>> GetById(int id)
     {
-        var citaFind = _service.GetById(id);
+        var citaFind = await _service.GetByIdAsync(id);
 
         if (citaFind is null)
         {
@@ -37,9 +34,9 @@ public class CitaController : ControllerBase
     }
 
     [HttpGet("citas-user/{id}")]
-    public ActionResult<IEnumerable<Cita>> GetAllByUserId(int id)
+    public async Task<ActionResult<IEnumerable<Cita>>> GetAllByUserId(int id)
     {
-        var citas = _service.GetAllByUserId(id);
+        var citas = await _service.GetAllByUserIdAsync(id);
 
         if (citas == null || !citas.Any())
         {
@@ -50,9 +47,9 @@ public class CitaController : ControllerBase
     }
 
     [HttpGet("citas-especialista/{id}")]
-    public ActionResult<IEnumerable<Cita>> GetAllByEspecialistaId(int id)
+    public async Task<ActionResult<IEnumerable<Cita>>> GetAllByEspecialistaId(int id)
     {
-        var citas = _service.GetAllByEspecialistaId(id);
+        var citas = await _service.GetAllByEspecialistaIdAsync(id);
 
         if (citas == null || !citas.Any())
         {
@@ -63,29 +60,29 @@ public class CitaController : ControllerBase
     }
 
     [HttpPost("cita")]
-    public IActionResult Create(Cita cita)
+    public async Task<IActionResult> Create(Cita cita)
     {
-        var newCita = _service.Create(cita);
+        var newCita = await _service.CreateAsync(cita);
 
         return CreatedAtAction(nameof(GetById), new { id = newCita.Id }, newCita);
     }
 
     [HttpPut("cita/{id}")]
-    public IActionResult Update(int id, Cita cita)
+    public async Task<IActionResult> Update(int id, Cita cita)
     {
         if (id != cita.Id)
         {
             return BadRequest("El ID proporcionado no coincide con el ID seleccionado.");
         }
-        
-        var citaToUpdate = _service.GetById(id);
 
-        if(citaToUpdate == null)
+        var citaToUpdate = await _service.GetByIdAsync(id);
+
+        if (citaToUpdate == null)
         {
-            return NotFound($"Cita con ID {id} no encontrado."); 
+            return NotFound($"Cita con ID {id} no encontrado.");
         }
 
-        _service.Update(cita);
+        await _service.UpdateAsync(cita);
         return NoContent();
     }
 }

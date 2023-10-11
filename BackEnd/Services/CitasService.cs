@@ -1,62 +1,68 @@
-namespace BackEdn.Services;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using BackEdn.Data;
 using BackEdn.Data.backendModels;
 
-public class CitasService
+namespace BackEdn.Services
 {
-    private readonly CitasContext _context;
-
-    public CitasService(CitasContext context)
+    public class CitasService
     {
-        _context = context;
-    }
+        private readonly CitasContext _context;
 
-    public IEnumerable<Cita> GetAll()
-    {
-        return _context.Citas.ToList();
-    }
-
-    public Cita? GetById(int id)
-    {
-        return _context.Citas.Find(id);
-    }
-
-    // Get All Citas para pacientes
-    public IEnumerable<Cita> GetAllByUserId(int userId)
-    {
-        return _context.Citas.Where(c => c.IdUsuarioPaciente == userId).ToList();
-    }
-
-    // Get All Citas para EspecialistaCmc
-    public IEnumerable<Cita> GetAllByEspecialistaId(int especialistaId)
-    {
-        return _context.Citas.Where(c => c.IdUsuarioEspecialistaCmc == especialistaId).ToList();
-    }
-
-    public Cita Create(Cita newCita)
-    {
-        _context.Citas.Add(newCita);
-        _context.SaveChanges();
-
-        return newCita;
-    }
-
-    public void Update(Cita cita)
-    {
-        var existingcita = GetById(cita.Id);
-
-        if (existingcita != null)
+        public CitasService(CitasContext context)
         {
-            if (cita.IdUsuarioPaciente != 0)
-            {
-                existingcita.IdUsuarioPaciente = cita.IdUsuarioPaciente;
-            }
-            if (cita.IdUsuarioEspecialistaCmc != 0)
-            {
-                existingcita.IdUsuarioEspecialistaCmc = cita.IdUsuarioEspecialistaCmc;
-            }
+            _context = context;
         }
-        _context.SaveChanges();
+
+        public async Task<IEnumerable<Cita>> GetAllAsync()
+        {
+            return await _context.Citas.ToListAsync();
+        }
+
+        public async Task<Cita?> GetByIdAsync(int id)
+        {
+            return await _context.Citas.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Cita>> GetAllByUserIdAsync(int userId)
+        {
+            return await _context.Citas.Where(c => c.IdUsuarioPaciente == userId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Cita>> GetAllByEspecialistaIdAsync(int especialistaId)
+        {
+            return await _context.Citas
+                .Where(c => c.IdUsuarioEspecialistaCmc == especialistaId)
+                .ToListAsync();
+        }
+
+        public async Task<Cita> CreateAsync(Cita newCita)
+        {
+            _context.Citas.Add(newCita);
+            await _context.SaveChangesAsync();
+
+            return newCita;
+        }
+
+        public async Task UpdateAsync(Cita cita)
+        {
+            var existingcita = await GetByIdAsync(cita.Id);
+
+            if (existingcita != null)
+            {
+                if (cita.IdUsuarioPaciente != 0)
+                {
+                    existingcita.IdUsuarioPaciente = cita.IdUsuarioPaciente;
+                }
+                if (cita.IdUsuarioEspecialistaCmc != 0)
+                {
+                    existingcita.IdUsuarioEspecialistaCmc = cita.IdUsuarioEspecialistaCmc;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -1,7 +1,9 @@
-namespace BackEdn.Services;
-
 using BackEdn.Data;
 using BackEdn.Data.backendModels;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 public class RolService
 {
@@ -12,27 +14,27 @@ public class RolService
         _context = context;
     }
 
-    public IEnumerable<Rol> GetAll()
+    public async Task<IEnumerable<Rol>> GetAllAsync()
     {
-        return _context.Roles.ToList();
+        return await _context.Roles.ToListAsync();
     }
 
-    public Rol? GetById(int id)
+    public async Task<Rol?> GetByIdAsync(int id)
     {
-        return _context.Roles.Find(id);
+        return await _context.Roles.FindAsync(id);
     }
 
-    public Rol Create(Rol newRol)
+    public async Task<Rol> CreateAsync(Rol newRol)
     {
         _context.Roles.Add(newRol);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return newRol;
     }
 
-    public void Update(Rol rol)
+    public async Task UpdateAsync(Rol rol)
     {
-        var existingRol = GetById(rol.Id);
+        var existingRol = await GetByIdAsync(rol.Id);
 
         if (existingRol != null)
         {
@@ -40,7 +42,7 @@ public class RolService
             {
                 existingRol.NombreRol = rol.NombreRol;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
