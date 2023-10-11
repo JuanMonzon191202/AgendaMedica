@@ -1,67 +1,66 @@
 using Microsoft.AspNetCore.Mvc;
-
 using BackEdn.Services;
 using BackEdn.Data.backendModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-
-namespace BackEdn.Controllers;
-
-[ApiController]
-[Route("api[controller]")]
-public class EspecialidadController : ControllerBase
+namespace BackEdn.Controllers
 {
-    public readonly EspecialidadService _service;
-
-    public EspecialidadController(EspecialidadService service)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EspecialidadController : ControllerBase
     {
-        _service = service;
-    }
+        private readonly EspecialidadService _service;
 
-    [HttpGet("especialidad")]
-    public IEnumerable<Especialidad> GetAll()
-    {
-        return _service.GetAll();
-    }
-
-    [HttpGet("especialidad/{id}")]
-    public ActionResult<Especialidad> GetById(int id)
-    {
-        var EspecialidadFind = _service.GetById(id);
-
-        if (EspecialidadFind is null)
+        public EspecialidadController(EspecialidadService service)
         {
-            return NotFound("Especialidad no encontrado...");
+            _service = service;
         }
 
-        return EspecialidadFind;
-    }
-
-    [HttpPost("especialidad")]
-    public IActionResult Create(Especialidad especialidad)
-    {
-        var newEspecialidad = _service.Create(especialidad);
-        return CreatedAtAction(nameof(GetById), new { id = especialidad.Id }, newEspecialidad);
-    }
-
-    [HttpPut("especialidad/{id}")]
-    public IActionResult Update(int id, Especialidad especialidad)
-    {
-        if (id != especialidad.Id)
+        [HttpGet("especialidades")]
+        public async Task<IEnumerable<Especialidad>> GetAll()
         {
-            return BadRequest(
-                "El ID proporcionado no coincide con el ID de la Especialidad seleccionado."
-            );
+            return await _service.GetAllAsync();
         }
 
-        var especialidadToUpdate = _service.GetById(id);
-
-        if (especialidadToUpdate != null)
+        [HttpGet("especialidades/{id}")]
+        public async Task<ActionResult<Especialidad>> GetById(int id)
         {
-            return NotFound($"Especialidad con ID {id} no encontrado.");
+            var especialidadFind = await _service.GetByIdAsync(id);
+
+            if (especialidadFind == null)
+            {
+                return NotFound("Especialidad no encontrada...");
+            }
+
+            return especialidadFind;
         }
 
-        _service.Update(especialidad);
+        [HttpPost("especialidades")]
+        public async Task<IActionResult> Create(Especialidad especialidad)
+        {
+            var newEspecialidad = await _service.CreateAsync(especialidad);
+            return CreatedAtAction(nameof(GetById), new { id = newEspecialidad.Id }, newEspecialidad);
+        }
 
-        return NoContent();
+        [HttpPut("especialidades/{id}")]
+        public async Task<IActionResult> Update(int id, Especialidad especialidad)
+        {
+            if (id != especialidad.Id)
+            {
+                return BadRequest("El ID proporcionado no coincide con el ID de la Especialidad seleccionada.");
+            }
+
+            var especialidadToUpdate = await _service.GetByIdAsync(id);
+
+            if (especialidadToUpdate == null)
+            {
+                return NotFound($"Especialidad con ID {id} no encontrada.");
+            }
+
+            await _service.UpdateAsync(especialidad);
+
+            return NoContent();
+        }
     }
 }

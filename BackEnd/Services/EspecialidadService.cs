@@ -1,8 +1,8 @@
-namespace BackEdn.Services;
-
 using BackEdn.Data;
 using BackEdn.Data.backendModels;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class EspecialidadService
 {
@@ -13,27 +13,27 @@ public class EspecialidadService
         _context = context;
     }
 
-    public IEnumerable<Especialidad> GetAll()
+    public async Task<IEnumerable<Especialidad>> GetAllAsync()
     {
-        return _context.Especialidades.ToList();
+        return await _context.Especialidades.ToListAsync();
     }
 
-    public Especialidad? GetById(int id)
+    public async Task<Especialidad?> GetByIdAsync(int id)
     {
-        return _context.Especialidades.Find(id);
+        return await _context.Especialidades.FindAsync(id);
     }
 
-    public Especialidad Create(Especialidad newEspecialidad)
+    public async Task<Especialidad> CreateAsync(Especialidad newEspecialidad)
     {
         _context.Especialidades.Add(newEspecialidad);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return newEspecialidad;
     }
 
-    public void Update(Especialidad especialidad)
+    public async Task UpdateAsync(Especialidad especialidad)
     {
-        var existingEspecialidad = GetById(especialidad.Id);
+        var existingEspecialidad = await GetByIdAsync(especialidad.Id);
 
         if (existingEspecialidad != null)
         {
@@ -41,7 +41,7 @@ public class EspecialidadService
             {
                 existingEspecialidad.NombreEspecialidad = especialidad.NombreEspecialidad;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

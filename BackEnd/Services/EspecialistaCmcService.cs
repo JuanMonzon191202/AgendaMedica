@@ -1,8 +1,8 @@
-namespace BackEdn.Services;
-
 using BackEdn.Data;
 using BackEdn.Data.backendModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class EspecialistaCmcService
 {
@@ -13,39 +13,39 @@ public class EspecialistaCmcService
         _context = context;
     }
 
-    public IEnumerable<EspecialistaCmc> GetAll()
+    public async Task<IEnumerable<EspecialistaCmc>> GetAllAsync()
     {
-        var EspecialistasCmcConUsuarios = _context.EspecialistasCmc
+        var especialistasCmcConUsuarios = await _context.EspecialistasCmc
             .Include(p => p.Usuario)
-            .ToList();
+            .ToListAsync();
 
-        return EspecialistasCmcConUsuarios;
+        return especialistasCmcConUsuarios;
     }
 
-    public EspecialistaCmc? GetById(int id)
+    public async Task<EspecialistaCmc?> GetByIdAsync(int id)
     {
-        var especialistaCmcConUsuario = _context.EspecialistasCmc
+        var especialistaCmcConUsuario = await _context.EspecialistasCmc
             .Include(e => e.Usuario)
-            .FirstOrDefault(e => e.Id == id);
+            .FirstOrDefaultAsync(e => e.Id == id);
 
         return especialistaCmcConUsuario;
     }
 
-    public EspecialistaCmc Create (EspecialistaCmc newEspecialistaCmc)
+    public async Task<EspecialistaCmc> CreateAsync(EspecialistaCmc newEspecialistaCmc)
     {
         _context.EspecialistasCmc.Add(newEspecialistaCmc);
-        _context.SaveChanges();
-        
+        await _context.SaveChangesAsync();
+
         return newEspecialistaCmc;
     }
 
-    public void Update(EspecialistaCmc especialistaCmc)
+    public async Task UpdateAsync(EspecialistaCmc especialistaCmc)
     {
-        var existingEspecialistaCmc = GetById(especialistaCmc.Id);
+        var existingEspecialistaCmc = await GetByIdAsync(especialistaCmc.Id);
 
         if (existingEspecialistaCmc != null)
         {
-            if (especialistaCmc.Descripcion != null)
+            if (especialistaCmc.Direccion != null)
             {
                 existingEspecialistaCmc.Direccion = especialistaCmc.Direccion;
             }
@@ -61,6 +61,8 @@ public class EspecialistaCmcService
             {
                 existingEspecialistaCmc.Descripcion = especialistaCmc.Descripcion;
             }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

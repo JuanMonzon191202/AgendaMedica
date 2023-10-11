@@ -1,61 +1,66 @@
 using Microsoft.AspNetCore.Mvc;
 using BackEdn.Services;
 using BackEdn.Data.backendModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace BackEdn.Controllers;
-
-[ApiController]
-[Route("api[controller]")]
-public class RolController : ControllerBase
+namespace BackEdn.Controllers
 {
-    private readonly RolService _service;
-
-    public RolController(RolService service)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class RolController : ControllerBase
     {
-        _service = service;
-    }
+        private readonly RolService _service;
 
-    [HttpGet("roles")]
-    public IEnumerable<Rol> Get()
-    {
-        return _service.GetAll();
-    }
-
-    [HttpGet("roles/{id}")]
-    public ActionResult<Rol> GetById(int id)
-    {
-        var rolFind = _service.GetById(id);
-
-        if (rolFind is null)
+        public RolController(RolService service)
         {
-            return NotFound("Rol no encontrado...");
-        }
-        return rolFind;
-    }
-
-    [HttpPost("roles")]
-    public IActionResult Create(Rol rol)
-    {
-        var newRol = _service.Create(rol);
-        return CreatedAtAction(nameof(GetById), new { id = newRol.Id }, newRol);
-    }
-
-    [HttpPut("roles/{id}")]
-    public IActionResult Update(int id, Rol rol)
-    {
-        if (id != rol.Id)
-        {
-            return BadRequest("El ID proporcionado no coincide con el ID del Rol seleccionado.");
-        }
-        var rolToUpdate = _service.GetById(id);
-
-        if (rolToUpdate == null)
-        {
-            return NotFound($"Rol con ID {id} no encontrado.");
+            _service = service;
         }
 
-        _service.Update(rol);
+        [HttpGet("roles")]
+        public async Task<IEnumerable<Rol>> Get()
+        {
+            return await _service.GetAllAsync();
+        }
 
-        return NoContent();
+        [HttpGet("roles/{id}")]
+        public async Task<ActionResult<Rol>> GetById(int id)
+        {
+            var rolFind = await _service.GetByIdAsync(id);
+
+            if (rolFind == null)
+            {
+                return NotFound("Rol no encontrado...");
+            }
+
+            return rolFind;
+        }
+
+        [HttpPost("roles")]
+        public async Task<IActionResult> Create(Rol rol)
+        {
+            var newRol = await _service.CreateAsync(rol);
+            return CreatedAtAction(nameof(GetById), new { id = newRol.Id }, newRol);
+        }
+
+        [HttpPut("roles/{id}")]
+        public async Task<IActionResult> Update(int id, Rol rol)
+        {
+            if (id != rol.Id)
+            {
+                return BadRequest("El ID proporcionado no coincide con el ID del Rol seleccionado.");
+            }
+
+            var rolToUpdate = await _service.GetByIdAsync(id);
+
+            if (rolToUpdate == null)
+            {
+                return NotFound($"Rol con ID {id} no encontrado.");
+            }
+
+            await _service.UpdateAsync(rol);
+
+            return NoContent();
+        }
     }
 }

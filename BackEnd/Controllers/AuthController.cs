@@ -1,6 +1,7 @@
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BackEdn.Controllers
 {
@@ -18,14 +19,14 @@ namespace BackEdn.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest model)
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            var user = _usuarioService.Authenticate(model.Email, model.Password);
+            var user = await Task.Run(() => _usuarioService.AuthenticateAsync(model.Email, model.Password));
 
             if (user == null)
                 return Unauthorized("Credenciales inválidas");
 
-            var token = _authService.GenerateToken(user.Id.ToString(), user.Email);
+            var token = _authService.GenerateTokenAsync(user.Id.ToString(), user.Email);
 
             return Ok(new { Token = token });
         }

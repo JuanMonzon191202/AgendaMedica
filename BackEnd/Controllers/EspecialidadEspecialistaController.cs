@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-
-using BackEdn.Data;
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
-using System.IO.Pipelines;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BackEdn.Controllers
 {
@@ -19,15 +19,15 @@ namespace BackEdn.Controllers
         }
 
         [HttpGet("especialidad")]
-        public IEnumerable<EspecialidadEspecialista> Get()
+        public async Task<IEnumerable<EspecialidadEspecialista>> Get()
         {
-            return _service.GetAll();
+            return await _service.GetAllAsync();
         }
 
         [HttpGet("especialidadEspecialista/{id}")]
-        public ActionResult<EspecialidadEspecialista> GetById(int id)
+        public async Task<ActionResult<EspecialidadEspecialista>> GetById(int id)
         {
-            var EspFind = _service.GetById(id);
+            var EspFind = await _service.GetByIdAsync(id);
 
             if (EspFind is null)
             {
@@ -37,9 +37,9 @@ namespace BackEdn.Controllers
         }
 
         [HttpPost("especialidadEspecialista")]
-        public IActionResult Create(EspecialidadEspecialista especialidadEspecialista)
+        public async Task<IActionResult> Create(EspecialidadEspecialista especialidadEspecialista)
         {
-            var newEspecialidadEspecialista = _service.Create(especialidadEspecialista);
+            var newEspecialidadEspecialista = await _service.CreateAsync(especialidadEspecialista);
             return CreatedAtAction(
                 nameof(GetById),
                 new { id = newEspecialidadEspecialista.Id },
@@ -48,20 +48,20 @@ namespace BackEdn.Controllers
         }
 
         [HttpPut("EspecialidadEspecialista/{id}")]
-        public IActionResult Update(int id, EspecialidadEspecialista especialidadEspecialista)
+        public async Task<IActionResult> Update(int id, EspecialidadEspecialista especialidadEspecialista)
         {
             if (id != especialidadEspecialista.Id)
             {
                 return BadRequest("El ID proporcionado no coincide con el ID seleccionado.");
             }
 
-            var EspToUpdate = _service.GetById(id);
+            var EspToUpdate = await _service.GetByIdAsync(id);
 
             if (EspToUpdate == null)
             {
                 return NotFound($"Especialidades con ID {id} no encontrado.");
             }
-            _service.Update(especialidadEspecialista);
+            await _service.UpdateAsync(especialidadEspecialista);
             return NoContent();
         }
     }

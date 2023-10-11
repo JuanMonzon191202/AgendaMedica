@@ -1,7 +1,10 @@
-namespace BackEdn.Services;
-
 using BackEdn.Data;
 using BackEdn.Data.backendModels;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 public class EspecialidadEspecialistaService
 {
@@ -12,27 +15,27 @@ public class EspecialidadEspecialistaService
         _context = context;
     }
 
-    public IEnumerable<EspecialidadEspecialista> GetAll()
+    public async Task<IEnumerable<EspecialidadEspecialista>> GetAllAsync()
     {
-        return _context.EspecialidadesEspecialistas.ToList();
+        return await _context.EspecialidadesEspecialistas.ToListAsync();
     }
 
-    public EspecialidadEspecialista GetById(int id)
+    public async Task<EspecialidadEspecialista> GetByIdAsync(int id)
     {
-        return _context.EspecialidadesEspecialistas.SingleOrDefault(e => e.IdEspecialistaCmc == id);
+        return await _context.EspecialidadesEspecialistas.SingleOrDefaultAsync(e => e.IdEspecialistaCmc == id);
     }
 
-    public EspecialidadEspecialista Create(EspecialidadEspecialista newEspecialidadEspecialista)
+    public async Task<EspecialidadEspecialista> CreateAsync(EspecialidadEspecialista newEspecialidadEspecialista)
     {
         _context.EspecialidadesEspecialistas.Add(newEspecialidadEspecialista);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return newEspecialidadEspecialista;
     }
 
-    public void Update(EspecialidadEspecialista especialidadEspecialista)
+    public async Task UpdateAsync(EspecialidadEspecialista especialidadEspecialista)
     {
-        var existingEsp = GetById(especialidadEspecialista.Id);
+        var existingEsp = await GetByIdAsync(especialidadEspecialista.Id);
 
         if (existingEsp == null)
         {
@@ -46,6 +49,6 @@ public class EspecialidadEspecialistaService
             existingEsp.IdEspecialidad = especialidadEspecialista.IdEspecialidad;
         }
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }
