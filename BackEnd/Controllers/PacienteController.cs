@@ -1,12 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BackEdn.Controllers
 {
+    [Authorize] // Añade autenticación a todo el controlador
     [ApiController]
     [Route("api/[controller]")]
     public class PacienteController : ControllerBase
@@ -18,12 +22,14 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet("pacientes")]
         public async Task<IEnumerable<Paciente>> Get()
         {
             return await _service.GetAllAsync();
         }
 
+        [Authorize(Roles = "Administrador,Paciente")]
         [HttpGet("paciente/{id}")]
         public async Task<ActionResult<Paciente>> GetById(int id)
         {
@@ -35,6 +41,7 @@ namespace BackEdn.Controllers
             return pacienteFind;
         }
 
+        [Authorize(Roles = "Administrador,Paciente")]
         [HttpPost("paciente")]
         public async Task<IActionResult> Create(Paciente paciente)
         {
@@ -64,6 +71,7 @@ namespace BackEdn.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador,Paciente")]
         [HttpPut("paciente/{id}")]
         public async Task<IActionResult> Update(int id, Paciente paciente)
         {

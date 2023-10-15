@@ -1,6 +1,7 @@
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BackEdn.Controllers
@@ -21,7 +22,9 @@ namespace BackEdn.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            var user = await Task.Run(() => _usuarioService.AuthenticateAsync(model.Email, model.Password));
+            var user = await Task.Run(
+                () => _usuarioService.AuthenticateAsync(model.Email, model.Password)
+            );
 
             if (user == null)
                 return Unauthorized("Credenciales inválidas");
@@ -30,11 +33,32 @@ namespace BackEdn.Controllers
 
             return Ok(new { Token = token });
         }
-    }
 
-    public class LoginRequest
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+        {
+            try
+            {
+                var newAccessToken = await _authService.RefreshTokenAsync(request.RefreshToken);
+                return Ok(new { AccessToken = newAccessToken });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                Console.WriteLine($"Error al intentar renovar el token: {ex.Message}");
+                return BadRequest("Error al intentar renovar el token.");
+            }
+        }
+
+        public class LoginRequest
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+        }
+
+        public class RefreshTokenRequest
+        {
+            public string RefreshToken { get; set; }
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace BackEdn.Controllers
             return CreatedAtAction(nameof(GetById), new { id = newUsuario.Id }, newUsuario);
         }
 
-        // Actualiza tu UsuarioController
+        
         [HttpPut("usuario/{id}")]
         public async Task<IActionResult> Update(int id, Usuario usuario)
         {

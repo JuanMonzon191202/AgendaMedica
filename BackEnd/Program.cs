@@ -44,7 +44,9 @@ builder.Services.AddScoped<EspecialistaCmcService>();
 builder.Services.AddScoped<EspecialidadEspecialistaService>();
 builder.Services.AddScoped<EspecialidadService>();
 builder.Services.AddScoped<CitasService>();
-builder.Services.AddScoped<AuthService>(_ => new AuthService("zXB1vrgVMYuio4Z4fxEAL8w7aVI1ZBDkLvqRLA2U"));
+// builder.Services.AddScoped<UsuarioService>(); // Asegúrate de registrar UsuarioService si aún no lo has hecho
+builder.Services.AddScoped<AuthService>(_ => new AuthService("zXB1vrgVMYuio4Z4fxEAL8w7aVI1ZBDkLvqRLA2U", _.GetService<UsuarioService>()));
+
 
 
 // Configuración de la autenticación JWT
