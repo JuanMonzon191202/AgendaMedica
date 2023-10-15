@@ -48,17 +48,17 @@ namespace BackEdn.Services
 
         public async Task<string> RefreshTokenAsync(string refreshToken)
         {
-            Console.WriteLine($"Token de actualización recibido: {refreshToken}");
+            //Console.WriteLine($"Token de actualización recibido: {refreshToken}");
 
             if (string.IsNullOrEmpty(refreshToken))
             {
                 // Manejo de error: el token de actualización es nulo o vacío
-                Console.WriteLine("Error: el token de actualización es nulo o vacío");
+                //Console.WriteLine("Error: el token de actualización es nulo o vacío");
                 return null;
             }
             var decodedToken = DecodeJwtToken(refreshToken);
 
-            Console.WriteLine($"Token decodificado: {decodedToken}");
+            //Console.WriteLine($"Token decodificado: {decodedToken}");
 
             try
             {
@@ -68,11 +68,7 @@ namespace BackEdn.Services
                 {
                     // Manejo de error: no se pudieron extraer el ID de usuario o el correo electrónico del token
                     Console.WriteLine(
-                        "Error: no se pudieron extraer el ID del usuario o el correo electrónico del token",
-                        "user",
-                        userId,
-                        "email",
-                        userEmail
+                        "Error: no se pudieron extraer el ID del usuario o el correo electrónico del token"
                     );
                     return null;
                 }
@@ -98,7 +94,7 @@ namespace BackEdn.Services
                 // Verificar si jsonToken es nulo antes de intentar acceder a sus propiedades
                 if (jsonToken == null)
                 {
-                    Console.WriteLine("Error: el token de actualización no es válido");
+                    //Console.WriteLine("Error: el token de actualización no es válido");
                     return null;
                 }
 
@@ -122,12 +118,12 @@ namespace BackEdn.Services
             // Verificar si jsonToken es nulo antes de intentar acceder a sus propiedades
             if (jsonToken == null)
             {
-                Console.WriteLine("Error: el token de actualización no es válido");
+                //Console.WriteLine("Error: el token de actualización no es válido");
                 return (null, null);
             }
 
             // Mostrar todas las reclamaciones del token
-            Console.WriteLine("Reclamaciones del token:");
+            //Console.WriteLine("Reclamaciones del token:");
             foreach (var claim in jsonToken.Claims)
             {
                 if (claim.Type == "nameid")
@@ -138,15 +134,15 @@ namespace BackEdn.Services
                 {
                     userEmail = claim.Value;
                 }
-                Console.WriteLine($"{claim.Type}: {claim.Value}");
+                //Console.WriteLine($"{claim.Type}: {claim.Value}");
             }
 
             // Verificar si se encontraron las reclamaciones correspondientes
             if (userId == null || userEmail == null)
             {
-                Console.WriteLine(
-                    "Error: no se pudieron encontrar las reclamaciones necesarias en el token"
-                );
+                //Console.WriteLine(
+                //     "Error: no se pudieron encontrar las reclamaciones necesarias en el token"
+                // );
                 return (null, null);
             }
 
