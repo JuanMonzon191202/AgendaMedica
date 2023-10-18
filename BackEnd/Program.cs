@@ -12,7 +12,8 @@ using BackEdn.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agregar servicios al contenedor.
+// Add services to the container.
+
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -25,16 +26,17 @@ builder.Services
             .Preserve;
     });
 
-// Configuración de Swagger/OpenAPI
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configuración de la conexión a la base de datos
+// DBcontext
 builder.Services.AddSqlServer<CitasContext>(
     builder.Configuration.GetConnectionString("BackConnetion")
 );
 
-// Servicios
+// ******** Servicios ********\\
+
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<RolService>();
 builder.Services.AddScoped<PacienteService>();
@@ -42,9 +44,10 @@ builder.Services.AddScoped<EspecialistaCmcService>();
 builder.Services.AddScoped<EspecialidadEspecialistaService>();
 builder.Services.AddScoped<EspecialidadService>();
 builder.Services.AddScoped<CitasService>();
-
-// Obtener la clave secreta desde la configuración (appsettings.json)
 var secretKey = builder.Configuration["Jwt:SecretKey"];
+builder.Services.AddScoped<AuthService>(
+    _ => new AuthService(secretKey, _.GetService<UsuarioService>())
+);
 
 // Configuración de la autenticación JWT
 builder.Services
@@ -62,7 +65,7 @@ builder.Services
 
 var app = builder.Build();
 
-// Configuración del pipeline de solicitud HTTP
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -71,7 +74,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Añadir autenticación al pipeline
+// Añade autenticación al pipeline
 app.UseAuthentication();
 
 app.UseAuthorization();
