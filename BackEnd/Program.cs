@@ -12,8 +12,7 @@ using BackEdn.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Agregar servicios al contenedor.
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -26,17 +25,16 @@ builder.Services
             .Preserve;
     });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configuración de Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// DBcontext
+// Configuración de la conexión a la base de datos
 builder.Services.AddSqlServer<CitasContext>(
     builder.Configuration.GetConnectionString("BackConnetion")
 );
 
-// ******** Servicios ********\\
-
+// Servicios
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<RolService>();
 builder.Services.AddScoped<PacienteService>();
@@ -44,10 +42,9 @@ builder.Services.AddScoped<EspecialistaCmcService>();
 builder.Services.AddScoped<EspecialidadEspecialistaService>();
 builder.Services.AddScoped<EspecialidadService>();
 builder.Services.AddScoped<CitasService>();
-// builder.Services.AddScoped<UsuarioService>(); // Asegúrate de registrar UsuarioService si aún no lo has hecho
-builder.Services.AddScoped<AuthService>(_ => new AuthService("zXB1vrgVMYuio4Z4fxEAL8w7aVI1ZBDkLvqRLA2U", _.GetService<UsuarioService>()));
 
-
+// Obtener la clave secreta desde la configuración (appsettings.json)
+var secretKey = builder.Configuration["Jwt:SecretKey"];
 
 // Configuración de la autenticación JWT
 builder.Services
@@ -57,18 +54,15 @@ builder.Services
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes("zXB1vrgVMYuio4Z4fxEAL8w7aVI1ZBDkLvqRLA2U")
-            ),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
             ValidateIssuer = false,
             ValidateAudience = false,
-           
         };
     });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuración del pipeline de solicitud HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -77,7 +71,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Añade autenticación al pipeline
+// Añadir autenticación al pipeline
 app.UseAuthentication();
 
 app.UseAuthorization();
