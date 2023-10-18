@@ -3,9 +3,11 @@ using BackEdn.Services;
 using BackEdn.Data.backendModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RolController : ControllerBase
@@ -17,6 +19,7 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet("roles")]
         public async Task<IEnumerable<Rol>> Get()
         {
@@ -36,6 +39,7 @@ namespace BackEdn.Controllers
             return rolFind;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost("roles")]
         public async Task<IActionResult> Create(Rol rol)
         {
@@ -43,12 +47,15 @@ namespace BackEdn.Controllers
             return CreatedAtAction(nameof(GetById), new { id = newRol.Id }, newRol);
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPut("roles/{id}")]
         public async Task<IActionResult> Update(int id, Rol rol)
         {
             if (id != rol.Id)
             {
-                return BadRequest("El ID proporcionado no coincide con el ID del Rol seleccionado.");
+                return BadRequest(
+                    "El ID proporcionado no coincide con el ID del Rol seleccionado."
+                );
             }
 
             var rolToUpdate = await _service.GetByIdAsync(id);

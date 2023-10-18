@@ -35,7 +35,7 @@ namespace BackEdn.Services
                         new Claim(ClaimTypes.Role, userInfo.UserRole)
                     }
                 ),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature
@@ -53,7 +53,7 @@ namespace BackEdn.Services
             if (string.IsNullOrEmpty(refreshToken))
             {
                 // Manejo de error: el token de actualización es nulo o vacío
-                //Console.WriteLine("Error: el token de actualización es nulo o vacío");
+                // Console.WriteLine("Error: el token de actualización es nulo o vacío");
                 return null;
             }
             var decodedToken = DecodeJwtToken(refreshToken);

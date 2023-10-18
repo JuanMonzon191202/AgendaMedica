@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BackEdn.Data.backendModels;
 using BackEdn.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
     [ApiController]
-    [Route("api/Controller")]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         private readonly UsuarioService _service;
@@ -17,12 +18,14 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet("usuarios")]
         public async Task<IEnumerable<Usuario>> Get()
         {
             return await _service.GetAllAsync();
         }
 
+        [Authorize]
         [HttpGet("usuario/{id}")]
         public async Task<ActionResult<Usuario>> GetById(int id)
         {
@@ -40,11 +43,19 @@ namespace BackEdn.Controllers
         [HttpPost("usuario")]
         public async Task<IActionResult> Create(Usuario usuario)
         {
+            /* Establece IsActive en false para el rol de EspecialistaCmc
+            TODO cambiar con un GetById para cuando el rol deje de ser el 2 :)
+            */
+            if (usuario.IdRol == 2)
+            {
+                usuario.IsActive = false;
+            }
+
             var newUsuario = await _service.CreateAsync(usuario);
             return CreatedAtAction(nameof(GetById), new { id = newUsuario.Id }, newUsuario);
         }
 
-        
+        [Authorize]
         [HttpPut("usuario/{id}")]
         public async Task<IActionResult> Update(int id, Usuario usuario)
         {

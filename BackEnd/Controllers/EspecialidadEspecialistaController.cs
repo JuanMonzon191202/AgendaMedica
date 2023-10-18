@@ -4,9 +4,11 @@ using BackEdn.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
+    [Authorize(Roles = "Administrador,Paciente,Especialista")]
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialidadEspecialistaController : ControllerBase
@@ -48,7 +50,10 @@ namespace BackEdn.Controllers
         }
 
         [HttpPut("EspecialidadEspecialista/{id}")]
-        public async Task<IActionResult> Update(int id, EspecialidadEspecialista especialidadEspecialista)
+        public async Task<IActionResult> Update(
+            int id,
+            EspecialidadEspecialista especialidadEspecialista
+        )
         {
             if (id != especialidadEspecialista.Id)
             {

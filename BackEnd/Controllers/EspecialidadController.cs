@@ -3,9 +3,11 @@ using BackEdn.Services;
 using BackEdn.Data.backendModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
+    [Authorize(Roles = "Administrador,Paciente,Especialista")]
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialidadController : ControllerBase
@@ -40,7 +42,11 @@ namespace BackEdn.Controllers
         public async Task<IActionResult> Create(Especialidad especialidad)
         {
             var newEspecialidad = await _service.CreateAsync(especialidad);
-            return CreatedAtAction(nameof(GetById), new { id = newEspecialidad.Id }, newEspecialidad);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = newEspecialidad.Id },
+                newEspecialidad
+            );
         }
 
         [HttpPut("especialidades/{id}")]
@@ -48,7 +54,9 @@ namespace BackEdn.Controllers
         {
             if (id != especialidad.Id)
             {
-                return BadRequest("El ID proporcionado no coincide con el ID de la Especialidad seleccionada.");
+                return BadRequest(
+                    "El ID proporcionado no coincide con el ID de la Especialidad seleccionada."
+                );
             }
 
             var especialidadToUpdate = await _service.GetByIdAsync(id);

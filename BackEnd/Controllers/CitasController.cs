@@ -3,7 +3,9 @@ using BackEdn.Data.backendModels;
 using BackEdn.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Administrador,Paciente,Especialista")]
 [ApiController]
 [Route("api/[controller]")]
 public class CitaController : ControllerBase

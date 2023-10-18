@@ -4,9 +4,11 @@ using BackEdn.Data.backendModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialistaCmcController : ControllerBase
@@ -18,12 +20,14 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet("especialistas")]
         public async Task<IEnumerable<EspecialistaCmc>> Get()
         {
             return await _service.GetAllAsync();
         }
 
+        [Authorize(Roles = "Administrador,Paciente,Especialista")]
         [HttpGet("especialistas/{id}")]
         public async Task<ActionResult<EspecialistaCmc>> GetById(int id)
         {
@@ -36,6 +40,7 @@ namespace BackEdn.Controllers
             return especialistaFind;
         }
 
+        [Authorize(Roles = "Administrador,Paciente,Especialista")]
         [HttpPost("especialistas")]
         public async Task<IActionResult> Create(EspecialistaCmc especialistaCmc)
         {
@@ -69,6 +74,7 @@ namespace BackEdn.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador,Paciente,Especialista")]
         [HttpPut("especialistas/{id}")]
         public async Task<IActionResult> Update(int id, EspecialistaCmc especialistaCmc)
         {
