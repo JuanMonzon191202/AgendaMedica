@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
-    [Authorize(Roles = "Administrador,Paciente,Especialista")]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialidadEspecialistaController : ControllerBase
@@ -67,7 +67,8 @@ namespace BackEdn.Controllers
                 return NotFound($"Especialidades con ID {id} no encontrado.");
             }
             await _service.UpdateAsync(especialidadEspecialista);
-            return NoContent();
+
+            return Ok(new { Message = "Datos Actualizados" });
         }
     }
 }

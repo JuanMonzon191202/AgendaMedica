@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks; // Agregado para admitir operaciones asincrónicas
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BackEdn.Data;
 using BackEdn.Data.backendModels;

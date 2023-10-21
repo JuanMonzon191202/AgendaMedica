@@ -1,18 +1,58 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/Services/AlerServices/alert.service';
+import { LoginServiceService } from 'src/app/Services/Login/login-service.service';
+import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  public loginForm!: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private appComponent: AppComponent,
+    private loginService: LoginServiceService,
+    private Alertas: AlertService,
+    private router: Router
+  ) {}
 
-  public mostrarPassword() {
-    const pass = document.getElementById('inputPassword') as HTMLInputElement;
-    const activador = document.getElementById('mostrarPass') as HTMLElement;
-    pass.type = "text";
+  ngOnInit(): void {
+    this.initForm();
   }
 
+  public mostrarPassword() {
+    const pass = document.getElementById('Password') as HTMLInputElement;
+    const activador = document.getElementById('mostrarPass') as HTMLElement;
+    pass.type = 'text';
+  }
 
+  public Login() {
+    if (this.loginForm.valid) {
+      this.loginService.Login(this.loginForm.value).subscribe(
+        (response) => {
+          console.log(response.mensage);
+          if (response.mensage === 'Loguiado') {
+            this.Alertas.Animado('ano');
+            this.router.navigate(['/home']);
+          }
+        },
+        (error) => {
+          this.Alertas.ShowErrorAlert('credenciales incorrectas');
+        }
+      );
+    } else {
+      this.Alertas.ShowErrorAlert('Campos vacios');
+    }
+  }
+
+  private initForm(): void {
+    this.loginForm = this.fb.group({
+      Email: ['', Validators.required],
+      Password: ['', Validators.required],
+    });
+  }
 }

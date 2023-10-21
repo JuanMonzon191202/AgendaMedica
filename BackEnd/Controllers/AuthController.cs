@@ -31,7 +31,7 @@ namespace BackEdn.Controllers
 
             var token = _authService.GenerateTokenAsync(user.Id.ToString(), user.Email);
 
-            return Ok(new { Token = token });
+            return Ok(new { Token = token, Message = "Login Completo" });
         }
 
         [HttpPost("refresh")]

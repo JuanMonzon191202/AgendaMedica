@@ -22,11 +22,35 @@ public class EspecialidadEspecialistaService
 
     public async Task<EspecialidadEspecialista> GetByIdAsync(int id)
     {
-        return await _context.EspecialidadesEspecialistas.SingleOrDefaultAsync(e => e.IdEspecialistaCmc == id);
+        var especialidadEspecialista =
+            await _context.EspecialidadesEspecialistas.SingleOrDefaultAsync(
+                e => e.IdEspecialistaCmc == id
+            );
+
+        if (especialidadEspecialista == null)
+        {
+            Console.WriteLine($"EspecialidadEspecialista con ID {id} no encontrado.");
+        }
+
+        return especialidadEspecialista;
     }
 
-    public async Task<EspecialidadEspecialista> CreateAsync(EspecialidadEspecialista newEspecialidadEspecialista)
+    public async Task<EspecialidadEspecialista> CreateAsync(
+        EspecialidadEspecialista newEspecialidadEspecialista
+    )
     {
+        // Verificar duplicados antes de agregar
+        var existing = await _context.EspecialidadesEspecialistas.FirstOrDefaultAsync(
+            e =>
+                e.IdEspecialidad == newEspecialidadEspecialista.IdEspecialidad
+                && e.IdEspecialistaCmc == newEspecialidadEspecialista.IdEspecialistaCmc
+        );
+
+        if (existing != null)
+        {
+            return null;
+        }
+
         _context.EspecialidadesEspecialistas.Add(newEspecialidadEspecialista);
         await _context.SaveChangesAsync();
 
@@ -37,18 +61,12 @@ public class EspecialidadEspecialistaService
     {
         var existingEsp = await GetByIdAsync(especialidadEspecialista.Id);
 
-        if (existingEsp == null)
+        if (existingEsp != null)
         {
-            throw new ArgumentException(
-                $"EspecialidadEspecialista con ID {especialidadEspecialista.Id} no encontrado."
-            );
-        }
-
-        if (especialidadEspecialista.IdEspecialidad != null)
-        {
+            // Copiar otros campos si es necesario
             existingEsp.IdEspecialidad = especialidadEspecialista.IdEspecialidad;
-        }
 
-        await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+        }
     }
 }

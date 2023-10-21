@@ -19,7 +19,6 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Administrador")]
         [HttpGet("roles")]
         public async Task<IEnumerable<Rol>> Get()
         {
@@ -44,7 +43,11 @@ namespace BackEdn.Controllers
         public async Task<IActionResult> Create(Rol rol)
         {
             var newRol = await _service.CreateAsync(rol);
-            return CreatedAtAction(nameof(GetById), new { id = newRol.Id }, newRol);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = newRol.Id },
+                new { Rol = newRol, Message = "Rol Creado" }
+            );
         }
 
         [Authorize(Roles = "Administrador")]
@@ -67,7 +70,7 @@ namespace BackEdn.Controllers
 
             await _service.UpdateAsync(rol);
 
-            return NoContent();
+            return StatusCode(204, new { Message = "Datos Actualizados" });
         }
     }
 }

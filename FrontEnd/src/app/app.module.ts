@@ -10,9 +10,20 @@ import { HomeComponent } from './Paginas/home/home.component';
 import { CatalogoEspecialistasComponent } from './Paginas/catalogo-especialistas/catalogo-especialistas.component';
 import { InfoEspecialistasComponent } from './Paginas/info-especialistas/info-especialistas.component';
 import { ConfiguracionCuentaComponent } from './Paginas/configuracion-cuenta/configuracion-cuenta.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ObjToArray } from './ObjToArray.pipe';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegistroComponent, HomeComponent, CatalogoEspecialistasComponent, InfoEspecialistasComponent, ConfiguracionCuentaComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegistroComponent,
+    HomeComponent,
+    CatalogoEspecialistasComponent,
+    InfoEspecialistasComponent,
+    ConfiguracionCuentaComponent,
+    ObjToArray,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +36,9 @@ import { ConfiguracionCuentaComponent } from './Paginas/configuracion-cuenta/con
       { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

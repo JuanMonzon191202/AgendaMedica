@@ -74,19 +74,26 @@ namespace BackEnd.Migrations
 
             modelBuilder.Entity("BackEdn.Data.backendModels.EspecialidadEspecialista", b =>
                 {
-                    b.Property<int>("IdEspecialidad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEspecialistaCmc")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasKey("IdEspecialidad", "IdEspecialistaCmc");
+                    b.Property<int?>("EspecialidadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEspecialidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEspecialistaCmc")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EspecialidadId");
+
+                    b.HasIndex("IdEspecialidad");
 
                     b.HasIndex("IdEspecialistaCmc");
 
@@ -236,8 +243,12 @@ namespace BackEnd.Migrations
 
             modelBuilder.Entity("BackEdn.Data.backendModels.EspecialidadEspecialista", b =>
                 {
-                    b.HasOne("BackEdn.Data.backendModels.Especialidad", "Especialidad")
+                    b.HasOne("BackEdn.Data.backendModels.Especialidad", null)
                         .WithMany("Especialistas")
+                        .HasForeignKey("EspecialidadId");
+
+                    b.HasOne("BackEdn.Data.backendModels.Especialidad", "Especialidad")
+                        .WithMany()
                         .HasForeignKey("IdEspecialidad")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

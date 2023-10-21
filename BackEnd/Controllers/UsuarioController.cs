@@ -52,7 +52,11 @@ namespace BackEdn.Controllers
             }
 
             var newUsuario = await _service.CreateAsync(usuario);
-            return CreatedAtAction(nameof(GetById), new { id = newUsuario.Id }, newUsuario);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = newUsuario.Id },
+                new { Usuario = newUsuario, Message = "Perfil Creado" }
+            );
         }
 
         [Authorize]
@@ -69,7 +73,8 @@ namespace BackEdn.Controllers
             try
             {
                 await _service.UpdateAsync(usuario);
-                return NoContent();
+                return StatusCode(204, new { Message = "Datos Actualizados" });
+                ;
             }
             catch (Exception ex)
             {

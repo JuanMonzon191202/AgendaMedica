@@ -44,12 +44,19 @@ builder.Services.AddScoped<EspecialistaCmcService>();
 builder.Services.AddScoped<EspecialidadEspecialistaService>();
 builder.Services.AddScoped<EspecialidadService>();
 builder.Services.AddScoped<CitasService>();
+
+// ******** JWT Auth ********\\
+
 var secretKey = builder.Configuration["Jwt:SecretKey"];
 builder.Services.AddScoped<AuthService>(
     _ => new AuthService(secretKey, _.GetService<UsuarioService>())
 );
 
 // Configuración de la autenticación JWT
+
+//db local
+// "BackConnetion": "Server=localhost\\SQLEXPRESS;Database=CitasDB;Trusted_connection=true;Encrypt=False"
+
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -63,6 +70,17 @@ builder.Services
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "NuevaPolitica",
+        builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
+    );
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -71,7 +89,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("NuevaPolitica");
 app.UseHttpsRedirection();
 
 // Añade autenticación al pipeline

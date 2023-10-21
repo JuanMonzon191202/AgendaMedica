@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
-    [Authorize(Roles = "Administrador,Paciente,Especialista")]
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialidadController : ControllerBase
@@ -38,6 +37,7 @@ namespace BackEdn.Controllers
             return especialidadFind;
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost("especialidades")]
         public async Task<IActionResult> Create(Especialidad especialidad)
         {
@@ -45,10 +45,11 @@ namespace BackEdn.Controllers
             return CreatedAtAction(
                 nameof(GetById),
                 new { id = newEspecialidad.Id },
-                newEspecialidad
+                new { Especialidad = newEspecialidad, Message = "Especialidad Creada" }
             );
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPut("especialidades/{id}")]
         public async Task<IActionResult> Update(int id, Especialidad especialidad)
         {
@@ -68,7 +69,7 @@ namespace BackEdn.Controllers
 
             await _service.UpdateAsync(especialidad);
 
-            return NoContent();
+            return Ok(new { Message = "Datos Actualizados" });
         }
     }
 }

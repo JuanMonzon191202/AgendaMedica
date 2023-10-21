@@ -29,7 +29,7 @@ namespace BackEdn.Controllers
             return await _service.GetAllAsync();
         }
 
-        [Authorize(Roles = "Administrador,Paciente")]
+        [Authorize]
         [HttpGet("paciente/{id}")]
         public async Task<ActionResult<Paciente>> GetById(int id)
         {
@@ -41,7 +41,7 @@ namespace BackEdn.Controllers
             return pacienteFind;
         }
 
-        [Authorize(Roles = "Administrador,Paciente")]
+        [Authorize]
         [HttpPost("paciente")]
         public async Task<IActionResult> Create(Paciente paciente)
         {
@@ -59,7 +59,11 @@ namespace BackEdn.Controllers
                     return BadRequest("Error al crear el paciente.");
                 }
 
-                return CreatedAtAction(nameof(GetById), new { id = newPaciente.Id }, newPaciente);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = newPaciente.Id },
+                    new { Paciente = newPaciente, Message = "Datos completados" }
+                );
             }
             catch (Exception ex)
             {
@@ -90,7 +94,7 @@ namespace BackEdn.Controllers
 
             await _service.UpdateAsync(paciente);
 
-            return NoContent();
+            return StatusCode(204, new { Message = "Datos Actualizados" });
         }
     }
 }

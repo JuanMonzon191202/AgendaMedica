@@ -42,15 +42,24 @@ namespace BackEdn.Data
                 .WithOne(c => c.EspecialistaCmc)
                 .HasForeignKey(c => c.IdUsuarioEspecialistaCmc);
 
-            modelBuilder
-                .Entity<EspecialidadEspecialista>()
-                .HasKey(ee => new { ee.IdEspecialidad, ee.IdEspecialistaCmc });
+            modelBuilder.Entity<EspecialidadEspecialista>().HasKey(e => e.Id);
 
             modelBuilder
                 .Entity<EspecialidadEspecialista>()
-                .HasOne(ee => ee.Especialidad)
-                .WithMany(e => e.Especialistas)
-                .HasForeignKey(ee => ee.IdEspecialidad);
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder
+                .Entity<EspecialidadEspecialista>()
+                .HasOne(e => e.Especialidad)
+                .WithMany()
+                .HasForeignKey(e => e.IdEspecialidad);
+
+            modelBuilder
+                .Entity<EspecialidadEspecialista>()
+                .HasOne(e => e.EspecialistaCmc)
+                .WithMany()
+                .HasForeignKey(e => e.IdEspecialistaCmc);
 
             modelBuilder
                 .Entity<EspecialistaCmc>()

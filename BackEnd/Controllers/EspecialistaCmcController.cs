@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
-    [Authorize]
+    [Authorize] // Añade autenticación a todo el controlador
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialistaCmcController : ControllerBase
@@ -20,14 +20,12 @@ namespace BackEdn.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Administrador")]
         [HttpGet("especialistas")]
         public async Task<IEnumerable<EspecialistaCmc>> Get()
         {
             return await _service.GetAllAsync();
         }
 
-        [Authorize(Roles = "Administrador,Paciente,Especialista")]
         [HttpGet("especialistas/{id}")]
         public async Task<ActionResult<EspecialistaCmc>> GetById(int id)
         {
@@ -40,7 +38,21 @@ namespace BackEdn.Controllers
             return especialistaFind;
         }
 
-        [Authorize(Roles = "Administrador,Paciente,Especialista")]
+        [HttpGet("especialistas-por-especialidad/{id}")]
+        public async Task<ActionResult<IEnumerable<EspecialistaCmc>>> GetByEspecialidadAsync(int id)
+        {
+            var especialistas = await _service.GetByEspecialidadAsync(id);
+
+            if (especialistas == null || !especialistas.Any())
+            {
+                return NotFound(
+                    $"No se encontraron especialistas para la especialidad con ID {id}"
+                );
+            }
+
+            return Ok(especialistas);
+        }
+
         [HttpPost("especialistas")]
         public async Task<IActionResult> Create(EspecialistaCmc especialistaCmc)
         {
@@ -61,7 +73,7 @@ namespace BackEdn.Controllers
                 return CreatedAtAction(
                     nameof(GetById),
                     new { id = newespecialistaCmc.Id },
-                    newespecialistaCmc
+                    new { EspecialistaCmc = newespecialistaCmc, Message = "Datos completados" }
                 );
             }
             catch (Exception ex)
@@ -74,7 +86,7 @@ namespace BackEdn.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador,Paciente,Especialista")]
+        [Authorize(Roles = "Administrador,Especialista")]
         [HttpPut("especialistas/{id}")]
         public async Task<IActionResult> Update(int id, EspecialistaCmc especialistaCmc)
         {
@@ -94,7 +106,7 @@ namespace BackEdn.Controllers
 
             await _service.UpdateAsync(especialistaCmc);
 
-            return NoContent();
+            return Ok(new { Message = "Datos Actualizados" });
         }
     }
 }

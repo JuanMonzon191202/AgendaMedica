@@ -35,14 +35,37 @@
       <h1 class="textoLogin">Login</h1>
       <h2 class="mensajeBienvenido">Bienvenido a tu directorio de citas</h2>
     </div>
-    <div class="contenedorForm">
-      <input type="text" placeholder="Correo electronico" class="input" />
-      <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
-      <input type="password" placeholder="Contraseña" id="inputPassword" class="input" /> <span><i class="bi bi-eye iconoOjo" id="mostrarPass" (click)="mostrarPassword()"></i></span><span><i class="bi bi-unlock-fill iconoCandado" ></i></span>
-      <div class="alinearBoton">
-        <button class="botonIniciar" routerLink="/home">Iniciar</button>
+    <form [formGroup]="loginForm" (ngSubmit)="Login()">
+      <div class="contenedorForm">
+        <input
+          type="text"
+          formControlName="Email"
+          placeholder="Correo electronico"
+          class="input"
+        />
+        <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          id="inputPassword"
+          class="input"
+          formControlName="Password"
+        />
+        <span
+          ><i
+            class="bi bi-eye iconoOjo"
+            id="mostrarPass"
+            (click)="mostrarPassword()"
+          ></i></span
+        ><span><i class="bi bi-unlock-fill iconoCandado"></i></span>
+        <div class="alinearBoton">
+          <button class="botonIniciar" (click)="Login()">Iniciar</button>
+        </div>
+        <h3 class="sugerenciaRegistrar">
+          ¿No estas registrado?
+          <span routerLink="/registro">¡Registrate ahora!</span>
+        </h3>
       </div>
-      <h3 class="sugerenciaRegistrar">¿No estas registrado? <span routerLink="/registro">¡Registrate ahora!</span></h3>
-    </div>
+    </form>
   </div>
 </div>

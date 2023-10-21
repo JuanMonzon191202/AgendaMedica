@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize(Roles = "Administrador,Paciente,Especialista")]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class CitaController : ControllerBase
@@ -32,7 +32,7 @@ public class CitaController : ControllerBase
         {
             return NotFound("Cita no encontrada...");
         }
-        return citaFind;
+        return Ok(new { Cita = citaFind, Message = "Cita encontrada" });
     }
 
     [HttpGet("citas-user/{id}")]
@@ -45,7 +45,7 @@ public class CitaController : ControllerBase
             return NotFound("No se encontraron citas para el usuario");
         }
 
-        return Ok(citas);
+        return Ok(new { citas, Message = "Citas Encontradas" });
     }
 
     [HttpGet("citas-especialista/{id}")]
@@ -58,7 +58,7 @@ public class CitaController : ControllerBase
             return NotFound("No se encontraron citas para el usuario");
         }
 
-        return Ok(citas);
+        return Ok(new { citas, Message = "Cita Encontrada" });
     }
 
     [HttpPost("cita")]
@@ -66,7 +66,11 @@ public class CitaController : ControllerBase
     {
         var newCita = await _service.CreateAsync(cita);
 
-        return CreatedAtAction(nameof(GetById), new { id = newCita.Id }, newCita);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = newCita.Id },
+            new { Cita = newCita, Message = "Cita Creada" }
+        );
     }
 
     [HttpPut("cita/{id}")]
@@ -85,6 +89,6 @@ public class CitaController : ControllerBase
         }
 
         await _service.UpdateAsync(cita);
-        return NoContent();
+        return Ok(new { Message = "Datos Actualizados" });
     }
 }
