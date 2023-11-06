@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           console.log(response);
 
           if (response.message === 'Login Completo') {
-            this.Alertas.showSuccess('-Directorio-', 'Bien Venido');
+            this.Alertas.showSuccess('-Directorio-', 'bienvenido');
             this.router.navigate(['/home']);
           }
         },

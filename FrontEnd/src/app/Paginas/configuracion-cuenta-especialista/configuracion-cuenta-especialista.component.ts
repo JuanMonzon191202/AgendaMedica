@@ -23,13 +23,22 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const tokenRol = this.LoginService.getUserRole();
-
-    if (tokenRol === 'Especialista') {
-      this.getUserData();
-    } else {
+    const tokencio = localStorage.getItem('token');
+    if (tokencio === null) {
       this.router.navigate(['/login']);
+    } else {
+      const tokenRol = this.LoginService.getUserRole();
+
+      if (tokenRol === 'Especialista') {
+        this.getUserData();
+      } else {
+        this.router.navigate(['/login']);
+      }
     }
+  }
+  public cerrarSesion() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   private getUserData() {
@@ -37,7 +46,7 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
 
     this.usuario.Usuario(tokenid).subscribe((res) => {
       this.userData = res;
-      console.log(res);
+      // console.log(res);
     });
   }
 }

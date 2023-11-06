@@ -9,6 +9,7 @@ import { EspecialidadesServiceService } from 'src/app/Services/Especialidades/es
   templateUrl: './info-especialistas.component.html',
   styleUrls: ['./info-especialistas.component.css'],
 })
+
 export class InfoEspecialistasComponent {
   public ListaEspecialidades = [];
   selectedEspecialidad: string | null = null;

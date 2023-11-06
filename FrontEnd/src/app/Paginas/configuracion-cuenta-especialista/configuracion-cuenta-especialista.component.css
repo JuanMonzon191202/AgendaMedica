@@ -230,7 +230,14 @@
   flex-direction: column;
   gap: 15px;
 }
-
+.pildora {
+  display: inline-block;
+  padding: 1% 1%;
+  background-color: #1985ce; /* Puedes cambiar este color según tu diseño */
+  color: #fff;
+  border-radius: 20px; /* Ajusta el radio según tu diseño */
+  margin: 5; /* Ajusta el margen según tu diseño */
+}
 .ladoEmail input {
   width: 90%;
   border: none;
@@ -251,4 +258,64 @@
   font-size: 1.4rem;
   font-family: Poppins;
   cursor: pointer;
+}
+.descripcion-especialista {
+  text-align: justify;
+  position: absolute;
+  top: 20px;
+  width: 90%;
+  height: 200px;
+  left: 50%;
+  transform: translate(-50%);
+  overflow-y: scroll;
+}
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Cambia la dirección de la fila a columna */
+  }
+
+  .izquierdo,
+  .derecho {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .fotoPerfil {
+    width: 50px; /* Reduzca el tamaño de la foto de perfil para dispositivos móviles */
+    height: 50px;
+  }
+
+  .contenedorInformacionBasica {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .menuNavegacion button {
+    height: 50px; /* Reduzca la altura de los botones de navegación */
+  }
+
+  .botonCerrarSesion {
+    margin-top: 1rem; /* Ajusta el margen superior */
+    height: 40px; /* Reduzca la altura del botón de cierre de sesión */
+  }
+
+  .contenedorConfiguracionCuenta h1,
+  .contenedorConfiguracionCuenta h3 {
+    font-size: 14px; /* Reduzca el tamaño de la fuente en la configuración de la cuenta */
+  }
+
+  .form1 h1 {
+    font-size: 16px; /* Reduzca el tamaño de la fuente en el formulario */
+  }
+
+  .form1 input {
+    width: 100%; /* Ajusta el ancho del campo de entrada */
+  }
+
+  .ladoNumero,
+  .ladoEmail {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .pildora {
+    padding: 0.5% 1%; /* Ajusta el relleno de la píldora */
+  }
 }
