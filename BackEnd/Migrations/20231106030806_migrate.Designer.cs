@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(CitasContext))]
-    [Migration("20231020021557_EspeEspeMigas")]
-    partial class EspeEspeMigas
+    [Migration("20231106030806_migrate")]
+    partial class migrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

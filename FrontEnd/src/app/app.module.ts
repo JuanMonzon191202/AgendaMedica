@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ObjToArray } from './ObjToArray.pipe';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ConfiguracionCuentaEspecialistaComponent } from './Paginas/configuracion-cuenta-especialista/configuracion-cuenta-especialista.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     InfoEspecialistasComponent,
     ConfiguracionCuentaComponent,
     ObjToArray,
+    ConfiguracionCuentaEspecialistaComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,10 @@ import { JwtModule } from '@auth0/angular-jwt';
       { path: 'info-especialistas', component: InfoEspecialistasComponent },
       { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
+      {
+        path: 'configuracion-especialista',
+        component: ConfiguracionCuentaEspecialistaComponent,
+      },
     ]),
     JwtModule.forRoot({
       config: {

@@ -26,7 +26,17 @@ export class ConfiguracionCuentaComponent {
   ) {}
 
   ngOnInit(): void {
-    this.UserData();
+    const tokenRol = this.LoginService.getUserRole();
+    console.log(tokenRol);
+
+    // Realiza la autorización basada en el rol
+    if (tokenRol === 'Paciente') {
+      // El usuario tiene el rol de administrador, puedes permitir el acceso
+      this.UserData();
+    } else {
+      // El usuario no tiene el rol adecuado, redirige o toma alguna acción
+      this.router.navigate(['/home']);
+    }
   }
 
   private UserData() {

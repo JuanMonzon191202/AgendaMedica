@@ -52,9 +52,13 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  public onSubmit() {
-    console.log('Especialidad seleccionada:', this.selectedEspecialidad);
-    console.log('Estado seleccionado:', this.selectedEstado);
+  onSubmit(): void {
+    this.router.navigate(['/especialistas'], {
+      queryParams: {
+        especialidad: this.selectedEspecialidad,
+        estado: this.selectedEstado,
+      },
+    });
   }
 
   private logEspecialidades() {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackEdn.Controllers
 {
-    [Authorize] // Añade autenticación a todo el controlador
+    // [Authorize] // Añade autenticación a todo el controlador
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialistaCmcController : ControllerBase
@@ -51,6 +51,34 @@ namespace BackEdn.Controllers
             }
 
             return Ok(especialistas);
+        }
+
+        [HttpGet("especialidad/{idEspecialidad}/estado/{estado}")]
+        public async Task<
+            ActionResult<IEnumerable<EspecialistaCmc>>
+        > GetByEspecialidadAndEstadoAsync(int idEspecialidad, string estado)
+        {
+            try
+            {
+                var especialistas = await _service.GetByEspecialidadAndEstadoAsync(
+                    idEspecialidad,
+                    estado
+                );
+
+                if (especialistas == null || !especialistas.Any())
+                {
+                    return NotFound(
+                        $"No se encontraron especialistas para la especialidad con ID {idEspecialidad} y estado {estado}"
+                    );
+                }
+
+                return Ok(especialistas);
+            }
+            catch (Exception ex)
+            {
+                // Maneja el error de alguna manera, loguea, etc.
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
         }
 
         [HttpPost("especialistas")]

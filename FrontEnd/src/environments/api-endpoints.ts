@@ -38,6 +38,8 @@ export const ApiEndpoints = {
       `/api/EspecialistaCmc/especialistas/${id}`,
     getEspecialistasByEspecialidad: (id: number) =>
       `/api/EspecialistaCmc/especialistas-por-especialidad/${id}`,
+    getEspecialidadAndEstado: (idEspecialidad: number, estado: string) =>
+      `/api/EspecialistaCmc/especialidad/${idEspecialidad}/estado/${estado}`,
   },
   paciente: {
     getPacientes: '/api/Paciente/pacientes',

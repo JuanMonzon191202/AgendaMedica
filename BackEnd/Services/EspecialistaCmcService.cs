@@ -41,6 +41,23 @@ public class EspecialistaCmcService
         return especialistasPorEspecialidad;
     }
 
+    public async Task<IEnumerable<EspecialistaCmc>> GetByEspecialidadAndEstadoAsync(
+        int idEspecialidad,
+        string estado
+    )
+    {
+        var especialistasPorEspecialidadYEstado = await _context.EspecialistasCmc
+            .Include(e => e.Usuario)
+            .Where(
+                e =>
+                    e.Especialidades.Any(es => es.IdEspecialidad == idEspecialidad)
+                    && e.Ciudad == estado
+            )
+            .ToListAsync();
+
+        return especialistasPorEspecialidadYEstado;
+    }
+
     public async Task<EspecialistaCmc> CreateAsync(EspecialistaCmc newEspecialistaCmc)
     {
         _context.EspecialistasCmc.Add(newEspecialistaCmc);
