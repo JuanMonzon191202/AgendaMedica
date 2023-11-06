@@ -1,1 +1,114 @@
-<p>configuracion-cuenta-especialista works!</p>
+<!-- Plantilla HTML -->
+<div class="header">
+  <i class="bi bi-arrow-left-circle-fill retroceder"></i>
+  <h1 class="nombreApp">Consultas medicas</h1>
+</div>
+
+<div class="contenido">
+  <div class="separar">
+    <div class="izquierdo">
+      <div class="contenedorInformacionBasica">
+        <h1 class="textoInformacionBasica">Información básica de la cuenta</h1>
+        <div class="contenedor1">
+          <img
+            src="https://wallpapercave.com/wp/wp2740020.jpg"
+            class="fotoPerfil"
+          />
+          <div>
+            <h1>{{ userData.nombre }} {{ userData.apellido }}</h1>
+            <h2>{{ userData.email }}</h2>
+            <h2>{{ userData.rol.nombreRol }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="menuNavegacion">
+        <h1>Menú de navegación</h1>
+        <div class="botones">
+          <button>Configuración de la cuenta</button>
+          <button>Mis citas</button>
+        </div>
+        <br />
+      </div>
+
+      <button class="botonCerrarSesion">
+        Cerrar sesión <i class="bi bi-door-open"></i>
+      </button>
+    </div>
+    <div class="derecho">
+      <div class="contenedorConfiguracionCuenta">
+        <h1>Configuración de la cuenta</h1>
+        <h3>Los campos que son totalmente requeridos estan marcados con *</h3>
+        <div class="form1">
+          <h1>Nombre:</h1>
+          <input type="text" [(ngModel)]="userData.nombre" />
+        </div>
+        <div class="form1">
+          <h1>Apellido:</h1>
+          <input type="text" [(ngModel)]="userData.apellido" />
+        </div>
+
+        <div class="form1">
+          <h1>Direccion:</h1>
+          <input
+            type="text"
+            [(ngModel)]="userData.especialistasCmc.$values[0].direccion"
+          />
+        </div>
+
+        <div class="form1">
+          <h1>Ciudad:</h1>
+          <input
+            type="text"
+            [(ngModel)]="userData.especialistasCmc.$values[0].ciudad"
+          />
+        </div>
+
+        <div class="form1">
+          <h1>Ciudad:</h1>
+          <input
+            type="text"
+            [(ngModel)]="userData.especialistasCmc.$values[0].pais"
+          />
+        </div>
+
+        <div class="form1">
+          <h1>No. Cedula:</h1>
+          <input
+            type="text"
+            [(ngModel)]="userData.especialistasCmc.$values[0].noCedula"
+          />
+        </div>
+
+        <div class="form1">
+          <h1>Descripcion:</h1>
+          <input
+            type="text"
+            [(ngModel)]="userData.especialistasCmc.$values[0].descripcion"
+          />
+        </div>
+
+        <div class="separador">
+          <!-- <div class="ladoNumero">
+            <input
+              type="email"
+              [(ngModel)]="userData.telefono"
+              placeholder="Número telefonico"
+            />
+          </div> -->
+          <div class="ladoEmail">
+            <input
+              type="email"
+              [(ngModel)]="userData.correo"
+              placeholder="Correo"
+            />
+            <input type="password" placeholder="Contraseña" />
+          </div>
+        </div>
+        <button class="botonGuardarCambios">
+          Guardar cambios <i class="bi bi-floppy-fill"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

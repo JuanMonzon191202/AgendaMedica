@@ -19,11 +19,11 @@ export class CatalogoEspecialistasComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private alertService: AlertService,
+    private Alertas: AlertService,
     private especialidadesService: EspecialidadesServiceService,
     private router: Router,
     private loginService: LoginServiceService,
-    private route: ActivatedRoute // Agrega el servicio ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class CatalogoEspecialistasComponent implements OnInit {
   private ListaEspecialistas(idEspecialidad?: any | null, estado?: any | null) {
     this.especialidadesService.Especialistas(idEspecialidad, estado).subscribe(
       (res) => {
-        console.log('Respuesta completa especialistas:', res);
+        // console.log('Respuesta completa especialistas:', res);
 
         if (res && res.$values) {
           this.Especialistas = res.$values;
@@ -71,6 +71,12 @@ export class CatalogoEspecialistasComponent implements OnInit {
         }
       },
       (error) => {
+        this.Alertas.ShowErrorAlert('No hay Especialistas :(');
+        if (error.status === 404) {
+          this.Alertas.ShowErrorAlert('No hay Especialistas :(');
+        } else {
+          console.log('Error en la llamada:', error);
+        }
         console.log('Error en la llamada:', error);
       }
     );
@@ -97,6 +103,7 @@ export class CatalogoEspecialistasComponent implements OnInit {
       },
       (error) => {
         console.log('Error en la llamada:', error);
+        this.Alertas.showSuccess('-Directorio-', 'Bien Venido');
       }
     );
   }
@@ -104,11 +111,13 @@ export class CatalogoEspecialistasComponent implements OnInit {
   public onSubmit() {
     console.log('Especialidad seleccionada:', this.selectedEspecialidad);
     console.log('Estado seleccionado:', this.selectedEstado);
+    this.Especialistas = [];
+    this.ListaEspecialistas(this.selectedEspecialidad, this.selectedEstado);
   }
 
   private logEspecialidades() {
     if (this.ListaEspecialidades && this.ListaEspecialidades.length > 0) {
-      console.log(this.ListaEspecialidades);
+      // console.log(this.ListaEspecialidades);
     } else {
       console.log('ListaEspecialidades está vacía o indefinida.');
     }

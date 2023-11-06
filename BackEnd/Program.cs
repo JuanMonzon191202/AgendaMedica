@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen();
 
 // DBcontext
 builder.Services.AddSqlServer<CitasContext>(
-    builder.Configuration.GetConnectionString("BackConnetion2")
+    builder.Configuration.GetConnectionString("BackConnetion")
 );
 
 // ******** Servicios ********\\

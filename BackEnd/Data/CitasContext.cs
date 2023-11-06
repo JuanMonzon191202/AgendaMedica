@@ -81,8 +81,6 @@ namespace BackEdn.Data
                 .HasForeignKey(c => c.IdUsuarioEspecialistaCmc)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Aquí puedes agregar otras configuraciones según sea necesario
-
             base.OnModelCreating(modelBuilder);
         }
     }

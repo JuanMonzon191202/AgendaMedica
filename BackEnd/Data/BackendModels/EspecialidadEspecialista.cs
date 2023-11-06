@@ -10,7 +10,11 @@ namespace BackEdn.Data.backendModels
         public int Id { get; set; }
         public int IdEspecialidad { get; set; }
         public int IdEspecialistaCmc { get; set; }
+
+        [ForeignKey("IdEspecialidad")] 
         public Especialidad? Especialidad { get; set; }
+
+        [ForeignKey("IdEspecialistaCmc")] 
         public EspecialistaCmc? EspecialistaCmc { get; set; }
     }
 }
