@@ -58,7 +58,7 @@ export class AlertService {
       title: '¡Perfil Creado!',
       icon: 'success',
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2500,
       didOpen: (modal) => {
         setTimeout(() => {
           modal.style.opacity = '1';

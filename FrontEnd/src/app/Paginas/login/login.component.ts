@@ -34,9 +34,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginService.Login(this.loginForm.value).subscribe(
         (response) => {
-          console.log(response.mensage);
-          if (response.mensage === 'Loguiado') {
-            this.Alertas.Animado('ano');
+          console.log(response.message);
+          console.log(response);
+
+          if (response.message === 'Login Completo') {
+            this.Alertas.showSuccess('-Directorio-', 'Bien Venido');
             this.router.navigate(['/home']);
           }
         },

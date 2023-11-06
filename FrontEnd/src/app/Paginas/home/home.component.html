@@ -1,42 +1,76 @@
 <div class="contenedor_general">
-    <div class="contenedor_superior">
-        <img src="https://www.convatecclass.com/wp-content/uploads/elementor/thumbs/Medicos-achou-interessante-p5ntuwluymk39w2jf8bmjy1exvwlagreknqcs01gq4.png"
-            class="imagen_doctores">
-        <h1 class="titulo1">Encuentra a tu especialista y agenda tu cita</h1>
-        <h2 class="titulo2">¡Ya no es un problema la desconexión!</h2>
-        <i class="bi bi-arrow-left-short retroceder" routerLink="/login"></i>
-        
-        <div class="contenedor_buscador">
-            <select>
-                <option value="">Especialidad</option>
-            </select>
-            <select>
-                <option value="">Estado</option>
-            </select>
-            <button routerLink="/especialistas"><i class="bi bi-search"></i> Buscar</button>
-        </div>
-    </div>
-    <div class="contenedor_inferior">
-        <div class="contenidoDudas">
-            <div class="card">
-                <img src="../assets/imagenes/interrogacion.png" alt="Signo de interrogación" class="imagenInterrogacion">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat doloremque dolor, labore, tempora quis
-                    modi deserunt iure non ducimus culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam saepe
-                    nulla.</p>
-            </div>
-            <div class="card">
-                <img src="../assets/imagenes/interrogacion.png" alt="Signo de interrogación" class="imagenInterrogacion">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat doloremque dolor, labore, tempora quis
-                    modi deserunt iure non ducimus culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam saepe
-                    nulla.</p>
-            </div>
-            <div class="card">
-                <img src="../assets/imagenes/interrogacion.png" alt="Signo de interrogación" class="imagenInterrogacion">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat doloremque dolor, labore, tempora quis
-                    modi deserunt iure non ducimus culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam saepe
-                    nulla.</p>
-            </div>
-        </div>
+  <div class="contenedor_superior">
+    <img
+      src="https://www.convatecclass.com/wp-content/uploads/elementor/thumbs/Medicos-achou-interessante-p5ntuwluymk39w2jf8bmjy1exvwlagreknqcs01gq4.png"
+      class="imagen_doctores"
+    />
+    <h1 class="titulo1">Encuentra a tu especialista y agenda tu cita</h1>
+    <h2 class="titulo2">¡Ya no es un problema la desconexión!</h2>
+    <i class="bi bi-arrow-left-short retroceder" routerLink="/login"></i>
 
+    <div class="contenedor_buscador">
+      <form (ngSubmit)="onSubmit()">
+        <select [(ngModel)]="selectedEspecialidad" name="especialidad">
+          <option value="" disabled selected>Seleccionar especialidad</option>
+          <option
+            *ngFor="let especialidad of ListaEspecialidades | ObjToArray"
+            [value]="especialidad.id"
+          >
+            {{ especialidad.nombreEspecialidad }}
+          </option>
+        </select>
+
+        <select [(ngModel)]="selectedEstado" name="estado">
+          <option value="">Estado</option>
+          <option *ngFor="let estado of estadosMexico" [value]="estado">
+            {{ estado }}
+          </option>
+        </select>
+        <button><i class="bi bi-search"></i> Buscar</button>
+      </form>
     </div>
+  </div>
+  <div class="contenedor_inferior">
+    <div class="contenidoDudas">
+      <div class="card">
+        <img
+          src="../assets/imagenes/interrogacion.png"
+          alt="Signo de interrogación"
+          class="imagenInterrogacion"
+        />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          doloremque dolor, labore, tempora quis modi deserunt iure non ducimus
+          culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam
+          saepe nulla.
+        </p>
+      </div>
+      <div class="card">
+        <img
+          src="../assets/imagenes/interrogacion.png"
+          alt="Signo de interrogación"
+          class="imagenInterrogacion"
+        />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          doloremque dolor, labore, tempora quis modi deserunt iure non ducimus
+          culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam
+          saepe nulla.
+        </p>
+      </div>
+      <div class="card">
+        <img
+          src="../assets/imagenes/interrogacion.png"
+          alt="Signo de interrogación"
+          class="imagenInterrogacion"
+        />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          doloremque dolor, labore, tempora quis modi deserunt iure non ducimus
+          culpa sit dolores, quam perferendis. Soluta dignissimos alias ipsam
+          saepe nulla.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

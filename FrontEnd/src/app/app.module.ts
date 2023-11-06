@@ -13,6 +13,7 @@ import { ConfiguracionCuentaComponent } from './Paginas/configuracion-cuenta/con
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ObjToArray } from './ObjToArray.pipe';
+import { JwtModule } from '@auth0/angular-jwt';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,10 +37,18 @@ import { ObjToArray } from './ObjToArray.pipe';
       { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+      },
+    }),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent],
 })

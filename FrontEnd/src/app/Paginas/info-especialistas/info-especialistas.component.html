@@ -1,7 +1,31 @@
 <div class="contenedorGeneral">
-    <div class="header">
-        <i class="bi bi-arrow-left-circle-fill flechaRetroceder" routerLink="/especialistas"></i>
-        <div class="buscador">
+  <div class="header">
+    <i
+      class="bi bi-arrow-left-circle-fill flechaRetroceder"
+      routerLink="/especialistas"
+    ></i>
+    <div class="buscador">
+      <form (ngSubmit)="onSubmit()">
+        <select [(ngModel)]="selectedEspecialidad" name="especialidad">
+          <option value="" disabled selected>Seleccionar especialidad</option>
+          <option
+            *ngFor="let especialidad of ListaEspecialidades | ObjToArray"
+            [value]="especialidad.id"
+          >
+            {{ especialidad.nombreEspecialidad }}
+          </option>
+        </select>
+
+        <select [(ngModel)]="selectedEstado" name="estado">
+          <option value="">Estado</option>
+          <option *ngFor="let estado of estadosMexico" [value]="estado">
+            {{ estado }}
+          </option>
+        </select>
+        <button><i class="bi bi-search"></i> Buscar</button>
+      </form>
+    </div>
+    <!-- <div class="buscador">
             <select name="" id="especialidad">
                 <option value="">Especialidad</option>
             </select>
@@ -9,52 +33,65 @@
                 <option value="">Estado</option>
             </select>
             <button><i class="bi bi-search"></i> Buscar</button>
+        </div> -->
+    <img
+      src="https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png"
+      alt="Foto de perfil del usuario"
+      class="fotoPerfil"
+      routerLink="/configuracion-cuenta"
+    />
+  </div>
+
+  <div class="contenedor-informacion-especialista">
+    <div class="contenedor-auxiliar">
+      <img
+        src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/07/halo-infinite-2005379.jpg?itok=BbHyj_Do"
+        class="foto-especialista"
+      />
+      <h1 class="nombre-especialista">John 117</h1>
+      <h2 class="nombre-especialidad">Jefe Maestro</h2>
+
+      <div class="contenedor-calificacion">
+        <div class="contenedor-aux">
+          <div class="barra-1"></div>
+          <div class="barra-2"></div>
+          <div class="barra-3"></div>
         </div>
-        <img src="https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png"
-            alt="Foto de perfil del usuario" class="fotoPerfil" routerLink="/configuracion-cuenta">
+      </div>
+
+      <h1 class="texto-cedula">Cedula profesional:</h1>
+      <h2 class="cedula">7438392048304</h2>
+      <p class="descripcion-especialista">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
+        consectetur deleniti modi voluptas porro ratione aut molestias ut
+        eligendi iste accusamus numquam nesciunt quam corporis, ducimus sint
+        minus autem veniam. Lorem ipsum, dolor sit amet consectetur adipisicing
+        elit. Laborum itaque ab tempora id nemo quisquam corporis saepe sit
+        dolorem facilis cupiditate consectetur, assumenda, pariatur earum. Odit
+        perspiciatis dicta cupiditate alias? Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Aspernatur saepe aperiam perferendis!
+        Magnam aliquam aperiam deleniti, consequuntur quos reiciendis possimus
+        inventore necessitatibus fugiat officia impedit repudiandae, animi iure.
+        Beatae, itaque. Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Ad nemo, cumque amet ipsa explicabo doloremque harum. Aliquam
+        voluptatem esse dolore atque, odit, provident ipsa neque repellendus,
+        eius adipisci praesentium perspiciatis. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Facilis ipsa fugit eum ex dolor iste ipsum
+        quos, reprehenderit magnam omnis tenetur at, exercitationem officiis
+        labore maiores consequatur aliquam sequi qui.
+      </p>
     </div>
+    <br /><br />
+  </div>
 
-    <div class="contenedor-informacion-especialista">
-        <div class="contenedor-auxiliar">
-            <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/07/halo-infinite-2005379.jpg?itok=BbHyj_Do"
-                class="foto-especialista">
-            <h1 class="nombre-especialista">John 117</h1>
-            <h2 class="nombre-especialidad">Jefe Maestro</h2>
-
-            <div class="contenedor-calificacion">
-                <div class="contenedor-aux">
-                    <div class="barra-1"></div>
-                    <div class="barra-2"></div>
-                    <div class="barra-3"></div>
-                </div>
-
-            </div>
-
-            <h1 class="texto-cedula">Cedula profesional:</h1>
-            <h2 class="cedula">7438392048304</h2>
-            <p class="descripcion-especialista">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-                consectetur deleniti modi voluptas
-                porro ratione aut molestias ut eligendi iste accusamus numquam nesciunt quam corporis, ducimus sint
-                minus autem veniam. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum itaque ab tempora
-                id nemo quisquam corporis saepe sit dolorem facilis cupiditate consectetur, assumenda, pariatur earum.
-                Odit perspiciatis dicta cupiditate alias? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aspernatur saepe aperiam perferendis! Magnam aliquam aperiam deleniti, consequuntur quos reiciendis
-                possimus inventore necessitatibus fugiat officia impedit repudiandae, animi iure. Beatae, itaque. Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit. Ad nemo, cumque amet ipsa explicabo doloremque
-                harum. Aliquam voluptatem esse dolore atque, odit, provident ipsa neque repellendus, eius adipisci
-                praesentium perspiciatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ipsa fugit
-                eum ex dolor iste ipsum quos, reprehenderit magnam omnis tenetur at, exercitationem officiis labore
-                maiores consequatur aliquam sequi qui.</p>
-        </div>
-        <br><br>
+  <div class="agenda-especialista">
+    <h1 class="titulo-agenda">Agendar cita</h1>
+    <div class="agrupacoin">
+      <h3 class="texto-hora-del-dia">Calendario</h3>
+      <div class="barra-divisora"></div>
     </div>
-
-    <div class="agenda-especialista">
-        <h1 class="titulo-agenda">Agendar cita</h1>
-        <div class="agrupacoin">
-            <h3 class="texto-hora-del-dia">Calendario</h3>
-            <div class="barra-divisora"></div>
-        </div>
-        <button class="botonRevisarCalendario">Revisar calendario <i class="bi bi-calendar-week"></i></button>
-    </div>
+    <button class="botonRevisarCalendario">
+      Revisar calendario <i class="bi bi-calendar-week"></i>
+    </button>
+  </div>
 </div>
