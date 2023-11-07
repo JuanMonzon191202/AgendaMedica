@@ -47,7 +47,8 @@ export class LoginServiceService {
       );
   }
 
-  private scheduleTokenCheck(): void {
+  public scheduleTokenCheck(): void {
+    // window.location.reload();
     setInterval(() => {
       this.checkTokenAndRefreshIfNeeded();
     }, this.checkInterval);
@@ -71,7 +72,9 @@ export class LoginServiceService {
       } else {
         // Código para manejar la cancelación
         localStorage.removeItem('token');
+
         this.Alertas.ShowErrorAlert('Sesión no renovada');
+        window.location.reload();
       }
     }
   }

@@ -5,15 +5,16 @@
 .contenedor_superior {
   background: linear-gradient(270deg, #1985ce 0%, #0d5eaf 100%);
   width: 100%;
-  height: calc(426px * 0.7);
+  height: calc(474px * 0.7);
   position: relative;
 }
 
 .imagen_doctores {
-  width: calc(575px * 0.7);
-  height: calc(426px * 0.7);
-  left: 0;
+  width: calc(570px * 0.7);
+  height: calc(400px * 0.7);
+  left: -7px;
   position: absolute;
+  top: 52px;
 }
 
 .titulo1 {
@@ -108,17 +109,22 @@
 }
 
 .retroceder {
-  position: absolute;
+  position: relative;
   color: white;
   font-size: 2rem;
   padding: 5px;
   cursor: pointer;
   transition: all ease 0.5s;
+  display: inline-block; /* O inline, dependiendo de tus necesidades */
+  margin-right: 10px; /* O el espacio que prefieras entre los iconos */
 }
 
 .retroceder:hover {
   color: #8cdf90;
   font-size: 2.5rem;
+}
+.icon-container {
+  margin-bottom: 10px;
 }
 * {
   padding: 0;

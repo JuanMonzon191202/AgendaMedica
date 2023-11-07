@@ -28,30 +28,26 @@ export class ConfiguracionCuentaComponent {
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
     const validityToken = this.LoginService.checkTokenValidity();
+    if (tokencio != null) {
+      this.LoginService.scheduleTokenCheck();
+    }
 
-    if (validityToken != true) {
-      this.cerrarSesion();
-      this.alertService.ShowErrorAlert(
-        'sesión Expirada, inicie sesión nuevamente'
-      );
+    if (tokencio === null) {
+      this.alertService.ShowErrorAlert('Primero inicia sesion');
       this.router.navigate(['/login']);
     } else {
-      if (tokencio === null) {
-        this.alertService.ShowErrorAlert('Primero inicia sesion');
-        this.router.navigate(['/login']);
-      } else {
-        const tokenRol = this.LoginService.getUserRole();
+      const tokenRol = this.LoginService.getUserRole();
 
-        if (tokenRol === 'Paciente') {
-          this.UserData();
-        } else {
-          this.alertService.ShowErrorAlert(
-            'No tienes permiso a esta vista (-.-)'
-          );
-          this.router.navigate(['/home']);
-        }
+      if (tokenRol === 'Paciente') {
+        this.UserData();
+      } else {
+        this.alertService.ShowErrorAlert(
+          'No tienes permiso a esta vista (-.-)'
+        );
+        this.router.navigate(['/home']);
       }
     }
+    // }
   }
   public cerrarSesion() {
     localStorage.removeItem('token');

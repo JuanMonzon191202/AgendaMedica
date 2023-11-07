@@ -26,30 +26,23 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     const tokencio = localStorage.getItem('token');
     const validityToken = this.LoginService.checkTokenValidity();
 
-    if (validityToken != true) {
-      // console.log(validityToken);
-      this.cerrarsesion();
-      this.alertService.ShowErrorAlert(
-        'sesión Expirada, inicie sesión nuevamente'
-      );
+    if (tokencio != null) {
+      this.LoginService.scheduleTokenCheck();
+    }
+
+    if (tokencio === null) {
+      this.alertService.ShowErrorAlert('Primero inicia sesión');
       this.router.navigate(['/login']);
     } else {
-      // console.log(validityToken);
+      const tokenRol = this.LoginService.getUserRole();
 
-      if (tokencio === null) {
-        this.alertService.ShowErrorAlert('Primero inicia sesión');
-        this.router.navigate(['/login']);
+      if (tokenRol === 'Especialista') {
+        this.getUserData();
       } else {
-        const tokenRol = this.LoginService.getUserRole();
-
-        if (tokenRol === 'Especialista') {
-          this.getUserData();
-        } else {
-          this.alertService.ShowErrorAlert(
-            'No tienes permiso a esta vista (-.-)'
-          );
-          this.router.navigate(['/home']);
-        }
+        this.alertService.ShowErrorAlert(
+          'No tienes permiso a esta vista (-.-)'
+        );
+        this.router.navigate(['/home']);
       }
     }
   }

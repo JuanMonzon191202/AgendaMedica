@@ -26,6 +26,7 @@ namespace BackEdn.Controllers
             return await _service.GetAllAsync();
         }
 
+        // [Authorize]
         [HttpGet("especialistas/{id}")]
         public async Task<ActionResult<EspecialistaCmc>> GetById(int id)
         {

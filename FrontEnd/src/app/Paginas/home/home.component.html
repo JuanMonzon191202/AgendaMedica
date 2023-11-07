@@ -8,9 +8,17 @@
     <h2 class="titulo2">¡Ya no es un problema la desconexión!</h2>
 
     <i
+      *ngIf="hasToken()"
       class="bi bi-person-circle retroceder"
       [routerLink]="getProfileLink()"
-    ></i>
+      >Mi cuenta</i
+    >
+    <i
+      *ngIf="!hasToken()"
+      class="bi bi-box-arrow-in-right retroceder"
+      routerLink="/login"
+      >Iniciar Sesión</i
+    >
 
     <div class="contenedor_buscador">
       <form (ngSubmit)="onSubmit()">
