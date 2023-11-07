@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/Services/AlerServices/alert.service';
 import { EspecialidadesServiceService } from 'src/app/Services/Especialidades/especialidades-service.service';
+import { LoginServiceService } from 'src/app/Services/Login/login-service.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     private alertService: AlertService,
     private especialidadesService: EspecialidadesServiceService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginServiceService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,18 @@ export class HomeComponent implements OnInit {
         estado: this.selectedEstado,
       },
     });
+  }
+  getProfileLink(): string {
+    const tokenRol = this.loginService.getUserRole();
+    const adminRoute = '/configuracion-admin';
+    const userRoute = '/configuracion-cuenta';
+    const especialistaRoute = '/configuracion-especialista';
+
+    return tokenRol === 'Administrador'
+      ? adminRoute
+      : tokenRol === 'Especialista'
+      ? especialistaRoute
+      : userRoute;
   }
 
   private logEspecialidades() {

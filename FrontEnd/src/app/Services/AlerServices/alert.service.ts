@@ -35,8 +35,8 @@ export class AlertService {
     message: string,
     confirmText: string,
     cancelText: string
-  ) {
-    Swal.fire({
+  ): Promise<boolean> {
+    return Swal.fire({
       icon: 'warning',
       title: title,
       text: message,
@@ -44,11 +44,7 @@ export class AlertService {
       confirmButtonText: confirmText,
       cancelButtonText: cancelText,
     }).then((result) => {
-      if (result.isConfirmed) {
-        this.showSuccess('CORRECTO', 'Esta nota no tendra imagendes');
-      } else if (result.isDismissed) {
-        console.log('Se hizo clic en ' + cancelText);
-      }
+      return result.isConfirmed;
     });
   }
 

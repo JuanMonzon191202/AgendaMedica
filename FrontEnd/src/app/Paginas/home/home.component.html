@@ -6,7 +6,11 @@
     />
     <h1 class="titulo1">Encuentra a tu especialista y agenda tu cita</h1>
     <h2 class="titulo2">¡Ya no es un problema la desconexión!</h2>
-    <i class="bi bi-arrow-left-short retroceder" routerLink="/login"></i>
+
+    <i
+      class="bi bi-person-circle retroceder"
+      [routerLink]="getProfileLink()"
+    ></i>
 
     <div class="contenedor_buscador">
       <form (ngSubmit)="onSubmit()">

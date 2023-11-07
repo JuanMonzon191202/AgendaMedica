@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.loginService.Login(this.loginForm.value).subscribe(
         (response) => {
           console.log(response.message);
-          console.log(response);
+          // console.log(response);
 
           if (response.message === 'Login Completo') {
             this.Alertas.showSuccess('-Directorio-', 'bienvenido');

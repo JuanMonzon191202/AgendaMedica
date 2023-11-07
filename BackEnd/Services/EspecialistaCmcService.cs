@@ -3,6 +3,7 @@ using BackEdn.Data.backendModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 // ]
 public class EspecialistaCmcService
 {
@@ -52,6 +53,7 @@ public class EspecialistaCmcService
                 e =>
                     e.Especialidades.Any(es => es.IdEspecialidad == idEspecialidad)
                     && e.Ciudad == estado
+            // && e.Usuario.IsActive == true
             )
             .ToListAsync();
 

@@ -57,7 +57,7 @@ export class CatalogoEspecialistasComponent implements OnInit {
 
         if (res && res.$values) {
           this.Especialistas = res.$values;
-          console.log(this.Especialistas);
+          // console.log(this.Especialistas);
 
           if (this.Especialistas && this.Especialistas.length > 0) {
             // console.log('ListaEspecialidades:', this.ListaEspecialidades);
@@ -85,7 +85,7 @@ export class CatalogoEspecialistasComponent implements OnInit {
   private ListaEspecialidad() {
     this.especialidadesService.Especialidades().subscribe(
       (res) => {
-        console.log('Respuesta completa:', res);
+        // console.log('Respuesta completa:', res);
 
         if (res && res.$values) {
           this.ListaEspecialidades = res.$values;
@@ -103,7 +103,6 @@ export class CatalogoEspecialistasComponent implements OnInit {
       },
       (error) => {
         console.log('Error en la llamada:', error);
-        this.Alertas.showSuccess('-Directorio-', 'Bien Venido');
       }
     );
   }

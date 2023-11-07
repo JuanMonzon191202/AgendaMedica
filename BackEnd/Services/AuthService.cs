@@ -35,7 +35,7 @@ namespace BackEdn.Services
                         new Claim(ClaimTypes.Role, userInfo.UserRole)
                     }
                 ),
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature
