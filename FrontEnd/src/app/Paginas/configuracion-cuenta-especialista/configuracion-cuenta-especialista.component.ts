@@ -24,19 +24,37 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
 
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    if (tokencio === null) {
+    const validityToken = this.LoginService.checkTokenValidity(tokencio);
+
+    if (validityToken != true) {
+      // console.log(validityToken);
+      this.cerrarsesion();
+      this.alertService.ShowErrorAlert(
+        'sesión Expirada, inicie sesión nuevamente'
+      );
       this.router.navigate(['/login']);
     } else {
-      const tokenRol = this.LoginService.getUserRole();
+      // console.log(validityToken);
 
-      if (tokenRol === 'Especialista') {
-        this.getUserData();
-      } else {
+      if (tokencio === null) {
+        this.alertService.ShowErrorAlert('Primero inicia sesión');
         this.router.navigate(['/login']);
+      } else {
+        const tokenRol = this.LoginService.getUserRole();
+
+        if (tokenRol === 'Especialista') {
+          this.getUserData();
+        } else {
+          this.alertService.ShowErrorAlert(
+            'No tienes permiso a esta vista (-.-)'
+          );
+          this.router.navigate(['/home']);
+        }
       }
     }
   }
-  public cerrarSesion() {
+
+  public cerrarsesion() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }

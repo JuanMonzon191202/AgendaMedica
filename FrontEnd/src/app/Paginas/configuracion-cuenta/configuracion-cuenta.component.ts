@@ -26,19 +26,37 @@ export class ConfiguracionCuentaComponent {
   ) {}
 
   ngOnInit(): void {
-    const tokenRol = this.LoginService.getUserRole();
-    console.log(tokenRol);
-
-    // Realiza la autorización basada en el rol
-    if (tokenRol === 'Paciente') {
-      // El usuario tiene el rol de administrador, puedes permitir el acceso
-      this.UserData();
+    const tokencio = localStorage.getItem('token');
+    const validityToken = this.LoginService.checkTokenValidity(tokencio);
+    
+    if (validityToken != true) {
+      this.cerrarSesion();
+      this.alertService.ShowErrorAlert(
+        'sesión Expirada, inicie sesión nuevamente'
+      );
+      this.router.navigate(['/login']);
     } else {
-      // El usuario no tiene el rol adecuado, redirige o toma alguna acción
-      this.router.navigate(['/home']);
+      if (tokencio === null) {
+        this.alertService.ShowErrorAlert('Primero inicia sesion');
+        this.router.navigate(['/login']);
+      } else {
+        const tokenRol = this.LoginService.getUserRole();
+
+        if (tokenRol === 'Paciente') {
+          this.UserData();
+        } else {
+          this.alertService.ShowErrorAlert(
+            'No tienes permiso a esta vista (-.-)'
+          );
+          this.router.navigate(['/home']);
+        }
+      }
     }
   }
-
+  public cerrarSesion() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
   private UserData() {
     const tokenid = this.LoginService.getUserId();
 
@@ -48,8 +66,6 @@ export class ConfiguracionCuentaComponent {
       this.correo = res.email;
       this.userData = res;
       this.telefono = res.pacientes.$values[0].telefono;
-      // console.log(res.especialistasCmc.$values.noCedula);res.especialistasCmc.$values[0].noCedula
-      // console.log(res);
     });
   }
 }

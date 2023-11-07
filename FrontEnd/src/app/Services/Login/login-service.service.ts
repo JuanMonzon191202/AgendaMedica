@@ -18,7 +18,7 @@ export class LoginServiceService {
       .post(`${this.apiUrl}${ApiEndpoints.auth.login}`, registro)
       .pipe(
         map((response: any) => {
-          console.log('Respuesta completa:', response);
+          // console.log('Respuesta completa:', response);
 
           if (response != null && response.token && response.token.result) {
             const token = response.token.result;
@@ -57,5 +57,16 @@ export class LoginServiceService {
   public getUserRole(): string {
     const decodedToken = this.getDecodedToken();
     return decodedToken ? decodedToken.role : '';
+  }
+
+  checkTokenValidity(token: any): boolean {
+    try {
+      const decodedToken: any = this.getDecodedToken();
+      const expirationDate = new Date(decodedToken.exp * 1000);
+      return expirationDate > new Date();
+    } catch (error) {
+      console.error('Error decoding or checking token validity:', error);
+      return false;
+    }
   }
 }
