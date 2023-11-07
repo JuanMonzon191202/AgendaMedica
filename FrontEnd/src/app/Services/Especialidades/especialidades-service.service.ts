@@ -47,9 +47,8 @@ export class EspecialidadesServiceService {
       params = params.set('id', id.toString());
     }
 
-    // const url = `${this.apiUrl+ApiEndpoints.especialistaCmc.getEspecialistaById}/${id}}`;
-
-    const url = `${this.apiUrl}/api/EspecialistaCmc/especialistas/${id}`;
+    // const url = `${this.apiUrl}/api/EspecialistaCmc/especialistas/${id}`;
+    const url = `${this.apiUrl}${ApiEndpoints.especialistaCmc.getEspecialistaById}${id}`;
 
     return this.http.get(url, { params: params });
   }

@@ -32,10 +32,8 @@ export const ApiEndpoints = {
   especialistaCmc: {
     getEspecialistas: '/api/EspecialistaCmc/especialistas',
     createEspecialista: '/api/EspecialistaCmc/especialistas',
-    getEspecialistaById: (id: number) =>
-      `/api/EspecialistaCmc/especialistas/${id}`,
-    updateEspecialista: (id: number) =>
-      `/api/EspecialistaCmc/especialistas/${id}`,
+    getEspecialistaById: '/api/EspecialistaCmc/especialistas/',
+    updateEspecialista: `/api/EspecialistaCmc/especialistas/`,
     getEspecialistasByEspecialidad: (id: number) =>
       `/api/EspecialistaCmc/especialistas-por-especialidad/${id}`,
     getEspecialidadAndEstado: (idEspecialidad: number, estado: string) =>
