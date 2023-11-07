@@ -24,7 +24,7 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
 
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    const validityToken = this.LoginService.checkTokenValidity(tokencio);
+    const validityToken = this.LoginService.checkTokenValidity();
 
     if (validityToken != true) {
       // console.log(validityToken);

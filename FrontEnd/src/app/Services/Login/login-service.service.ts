@@ -59,9 +59,10 @@ export class LoginServiceService {
     return decodedToken ? decodedToken.role : '';
   }
 
-  checkTokenValidity(token: any): boolean {
+  checkTokenValidity(): boolean {
     try {
       const decodedToken: any = this.getDecodedToken();
+      //obtener la fecha y hora exacta en las que el token expira
       const expirationDate = new Date(decodedToken.exp * 1000);
       return expirationDate > new Date();
     } catch (error) {

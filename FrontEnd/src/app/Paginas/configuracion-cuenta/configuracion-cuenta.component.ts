@@ -27,8 +27,8 @@ export class ConfiguracionCuentaComponent {
 
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    const validityToken = this.LoginService.checkTokenValidity(tokencio);
-    
+    const validityToken = this.LoginService.checkTokenValidity();
+
     if (validityToken != true) {
       this.cerrarSesion();
       this.alertService.ShowErrorAlert(
