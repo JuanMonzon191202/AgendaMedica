@@ -70,6 +70,7 @@ export class LoginServiceService {
         this.refreshToken();
       } else {
         // Código para manejar la cancelación
+        localStorage.removeItem('token');
         this.Alertas.ShowErrorAlert('Sesión no renovada');
       }
     }
