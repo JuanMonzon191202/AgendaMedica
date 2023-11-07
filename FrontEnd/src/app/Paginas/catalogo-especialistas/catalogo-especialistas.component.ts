@@ -107,6 +107,11 @@ export class CatalogoEspecialistasComponent implements OnInit {
       }
     );
   }
+  verInformacionEspecialista(especialistaId: number) {
+    this.router.navigate(['/info-especialistas'], {
+      queryParams: { id: especialistaId },
+    });
+  }
 
   public onSubmit() {
     console.log('Especialidad seleccionada:', this.selectedEspecialidad);

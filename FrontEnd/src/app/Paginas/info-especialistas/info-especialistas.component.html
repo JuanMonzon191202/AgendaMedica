@@ -2,9 +2,10 @@
   <div class="header">
     <i
       class="bi bi-arrow-left-circle-fill flechaRetroceder"
-      routerLink="/especialistas"
+      routerLink="/home"
     ></i>
-    <div class="buscador">
+    <div></div>
+    <!-- <div class="buscador">
       <form (ngSubmit)="onSubmit()">
         <select [(ngModel)]="selectedEspecialidad" name="especialidad">
           <option value="" disabled selected>Seleccionar especialidad</option>
@@ -24,7 +25,7 @@
         </select>
         <button><i class="bi bi-search"></i> Buscar</button>
       </form>
-    </div>
+    </div> -->
     <!-- <div class="buscador">
             <select name="" id="especialidad">
                 <option value="">Especialidad</option>
@@ -48,8 +49,18 @@
         src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/07/halo-infinite-2005379.jpg?itok=BbHyj_Do"
         class="foto-especialista"
       />
-      <h1 class="nombre-especialista">John 117</h1>
-      <h2 class="nombre-especialidad">Jefe Maestro</h2>
+      <h1 class="nombre-especialista">
+        {{ userData.usuario.nombre }}
+        {{ userData.usuario.apellido }}
+      </h1>
+      <h2 class="nombre-especialidad">{{ userData.ciudad }}</h2>
+      <br />
+      <h2 class="direccion">{{ userData.direccion }}</h2>
+      <br />
+      <br />
+
+      <!-- <h2 class="nombre-especialidad">{{ userData.noCedula }}</h2> -->
+      <!-- Agrega el código para mostrar otras propiedades del especialista -->
 
       <div class="contenedor-calificacion">
         <div class="contenedor-aux">
@@ -60,26 +71,8 @@
       </div>
 
       <h1 class="texto-cedula">Cedula profesional:</h1>
-      <h2 class="cedula">7438392048304</h2>
-      <p class="descripcion-especialista">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-        consectetur deleniti modi voluptas porro ratione aut molestias ut
-        eligendi iste accusamus numquam nesciunt quam corporis, ducimus sint
-        minus autem veniam. Lorem ipsum, dolor sit amet consectetur adipisicing
-        elit. Laborum itaque ab tempora id nemo quisquam corporis saepe sit
-        dolorem facilis cupiditate consectetur, assumenda, pariatur earum. Odit
-        perspiciatis dicta cupiditate alias? Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Aspernatur saepe aperiam perferendis!
-        Magnam aliquam aperiam deleniti, consequuntur quos reiciendis possimus
-        inventore necessitatibus fugiat officia impedit repudiandae, animi iure.
-        Beatae, itaque. Lorem ipsum dolor sit amet consectetur, adipisicing
-        elit. Ad nemo, cumque amet ipsa explicabo doloremque harum. Aliquam
-        voluptatem esse dolore atque, odit, provident ipsa neque repellendus,
-        eius adipisci praesentium perspiciatis. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Facilis ipsa fugit eum ex dolor iste ipsum
-        quos, reprehenderit magnam omnis tenetur at, exercitationem officiis
-        labore maiores consequatur aliquam sequi qui.
-      </p>
+      <h2 class="cedula">{{ userData.noCedula }}</h2>
+      <p class="descripcion-especialista">{{ userData.descripcion }}</p>
     </div>
     <br /><br />
   </div>

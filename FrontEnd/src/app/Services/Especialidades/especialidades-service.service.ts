@@ -38,4 +38,19 @@ export class EspecialidadesServiceService {
     // Agrega los parámetros a la solicitud
     return this.http.get(url, { params: params });
   }
+
+  public especialistaInfo(id?: number): Observable<any> {
+    let params = new HttpParams();
+    // console.log('el especialista llego con', id);
+
+    if (id) {
+      params = params.set('id', id.toString());
+    }
+
+    // const url = `${this.apiUrl+ApiEndpoints.especialistaCmc.getEspecialistaById}/${id}}`;
+
+    const url = `${this.apiUrl}/api/EspecialistaCmc/especialistas/${id}`;
+
+    return this.http.get(url, { params: params });
+  }
 }

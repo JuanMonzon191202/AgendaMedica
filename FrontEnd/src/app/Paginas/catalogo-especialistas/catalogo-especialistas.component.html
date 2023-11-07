@@ -32,9 +32,9 @@
   <div class="contenido">
     <div class="contenedorEspecialistas">
       <div
-        *ngFor="let especialista of Especialistas"
+        *ngFor="let especialista of Especialistas "
         class="cardEspecialista"
-        routerLink="/info-especialistas"
+        (click)="verInformacionEspecialista(especialista.id)"
       >
         <div class="contenidoIzquierdo">
           <img
@@ -49,6 +49,7 @@
           /> -->
           <div class="textos">
             <h1 class="nombreEspecialista">
+              <!-- {{ especialista.id }} -->
               {{ especialista.usuario.nombre }}
               {{ especialista.usuario.apellido }}
             </h1>

@@ -1,255 +1,265 @@
 .header {
-    background: linear-gradient(270deg, #1985CE 9.03%, #0D5EAF 100%);
-    width: 100%;
-    height: 80px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+  background: linear-gradient(270deg, #1985ce 9.03%, #0d5eaf 100%);
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .buscador {
-    display: grid;
-    grid-template-columns: 40% auto auto;
-    width: calc(665px * .7);
-    height: 60px;
-    align-items: center;
-    background-color: #1985CE;
-    border-radius: 5px;
-    background: rgba(117, 193, 235, 0.30);
-    padding: 0 5px;
-    margin-left: 2rem;
-    gap: 5px;
+  display: grid;
+  grid-template-columns: 40% auto auto;
+  width: calc(665px * 0.7);
+  height: 60px;
+  align-items: center;
+  background-color: #1985ce;
+  border-radius: 5px;
+  background: rgba(117, 193, 235, 0.3);
+  padding: 0 5px;
+  margin-left: 2rem;
+  gap: 5px;
 }
 
 .buscador select {
-    width: 100%;
-    font-family: Poppins;
-    border: none;
-    border-radius: 5px;
-    height: 60%;
+  width: 100%;
+  font-family: Poppins;
+  border: none;
+  border-radius: 5px;
+  height: 60%;
 }
 
 .buscador button {
-    border-radius: 5px;
-    background: #8CDF90;
-    font-family: Poppins;
-    height: 60%;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: all ease 0.2s;
+  border-radius: 5px;
+  background: #8cdf90;
+  font-family: Poppins;
+  height: 60%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all ease 0.2s;
 }
 
 .buscador button:hover {
-    background-color: #1985CE;
-    border: 1px white solid;
+  background-color: #1985ce;
+  border: 1px white solid;
 }
 
 .fotoPerfil {
-    width: 60px;
-    margin-right: 1rem;
-    cursor: pointer;
-    transition: all ease .2s;
+  width: 60px;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
 }
 
 .fotoPerfil:hover {
-    width: 65px;
+  width: 65px;
 }
 
 .flechaRetroceder {
-    color: white;
-    position: absolute;
-    left: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all ease .2s;
+  color: white;
+  position: absolute;
+  left: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
 }
 
 .flechaRetroceder:hover {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-
 .contenedorGeneral {
-    position: relative;
+  position: relative;
 }
 
 .contenedor-informacion-especialista {
-    position: absolute;
-    width: 800px;
-    height: 600px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-    left: 35px;
-    top: 150px;
+  position: absolute;
+  width: 800px;
+  height: 600px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  left: 35px;
+  top: 100px;
 }
 
 .foto-especialista {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 5px;
-    position: absolute;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  position: absolute;
 
-    left: 24px;
-    top: 21px;
+  left: 24px;
+  top: 21px;
 }
 
 .contenedor-auxiliar {
-    position: relative;
+  position: relative;
 }
 
 .nombre-especialista {
-    color: #000;
-    font-family: Poppins;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: absolute;
+  color: #000;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
 
-    top: 21px;
-    left: 200px;
+  top: 21px;
+  left: 200px;
 }
 
 .nombre-especialidad {
-    color: #000;
-    font-family: Poppins;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: absolute;
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
 
-    left: 200px;
-    top: 70px;
+  left: 200px;
+  top: 70px;
+}
+.direccion {
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+
+  left: 200px;
+  top: 50px;
 }
 
 .texto-cedula,
 .cedula {
-    color: #000;
-    font-family: Poppins;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    top: 180px;
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 180px;
 }
 
 .cedula {
-    top: 240px;
-    background-color: #EEE;
-    border-radius: 5px;
-    width: 90%;
-    text-align: center;
-    padding: 1rem;
+  top: 240px;
+  background-color: #eee;
+  border-radius: 5px;
+  width: 90%;
+  text-align: center;
+  padding: 1rem;
 }
 
 .descripcion-especialista {
-    text-align: justify;
-    position: absolute;
-    top: 320px;
-    width: 90%;
-    height: 200px;
-    left: 50%;
-    transform: translate(-50%);
-    overflow-y: scroll;
+  text-align: justify;
+  position: absolute;
+  top: 320px;
+  width: 90%;
+  height: 200px;
+  left: 50%;
+  transform: translate(-50%);
+  overflow-y: scroll;
 }
 
 .contenedor-calificacion {
-    width: 180px;
-    height: 50px;
-    border-radius: 5px;
-    background: #FFF;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    position: absolute;
-    right: 15px;
-    top: 17px;
+  width: 180px;
+  height: 50px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  right: 15px;
+  top: 17px;
 }
 
 .contenedor-aux {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2px 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 1rem;
 }
 
 .barra-1,
 .barra-2,
 .barra-3 {
-    width: 35px;
-    height: 45px;
-    background-color: #8CDF90;
-    border-radius: 5px;
+  width: 35px;
+  height: 45px;
+  background-color: #8cdf90;
+  border-radius: 5px;
 }
 
-
 .agenda-especialista {
-    position: absolute;
-    right: 30px;
-    border-radius: 5px;
-    background: #FFF;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-    top: 150px;
-    width: calc(465px * .7);
+  position: absolute;
+  right: 30px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  top: 150px;
+  width: calc(465px * 0.7);
 }
 
 .titulo-agenda {
-    color: #FFF;
-    text-align: justify;
-    font-family: Poppins;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    border-radius: 5px 5px 0px 0px;
-    background: linear-gradient(90deg, #75C1EB 2.58%, #8CDF90 104.41%);
-    margin-top: 0;
-    padding-left: 1rem;
-    flex-shrink: 0;
+  color: #fff;
+  text-align: justify;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px 5px 0px 0px;
+  background: linear-gradient(90deg, #75c1eb 2.58%, #8cdf90 104.41%);
+  margin-top: 0;
+  padding-left: 1rem;
+  flex-shrink: 0;
 }
 
 .texto-hora-del-dia {
-    color: #000;
-    text-align: justify;
-    font-family: Poppins;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  text-align: justify;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .barra-divisora {
-    background-color: #808080;
-    width: calc(300px * .7);
-    height: 1px;
+  background-color: #808080;
+  width: calc(300px * 0.7);
+  height: 1px;
 }
 
 .agrupacoin {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .botonRevisarCalendario {
-    border-radius: 30px;
-    background: linear-gradient(270deg, #1985CE 0.28%, #75C1EB 103.34%);
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
-    width:  calc(230px * .7);
-    height:  calc(57px * .7);
-    font-family: Poppins;
-    border: none;
-    color: white;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    margin-bottom: 1rem;
-    transition: all ease .2s;
+  border-radius: 30px;
+  background: linear-gradient(270deg, #1985ce 0.28%, #75c1eb 103.34%);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  width: calc(230px * 0.7);
+  height: calc(57px * 0.7);
+  font-family: Poppins;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+  transition: all ease 0.2s;
 }
 
 .botonRevisarCalendario:hover {
-    border: 1px white solid;
+  border: 1px white solid;
 }
