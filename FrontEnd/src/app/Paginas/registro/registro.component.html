@@ -42,28 +42,48 @@
     </div>
     <form [formGroup]="registerForm" (ngSubmit)="Register()">
       <div class="contenedorForm">
-        <!-- TODO agregar un checkbox para definir roles "especialista value = 2, Paciente value = 3" -->
+        <div class="custom-select-container">
+          <p>Registrarme como *</p>
+          <select
+            name="selectconten"
+            formControlName="IdRol"
+            class="custom-select"
+          >
+            <option value="3" selected>Paciente</option>
+            <option value="2">Especialistas</option>
+          </select>
+        </div>
+        <br />
         <input
           type="text"
           formControlName="Email"
           placeholder="Correo electronico"
           class="input"
         />
-        <span><i class="bi bi-envelope-at-fill iconoEmail"></i></span>
+
         <input
           type="password"
           placeholder="Contraseña"
           formControlName="Password"
-          id="inputPassword"
           class="input"
         />
-        <span
-          ><i
-            class="bi bi-eye iconoOjo"
-            id="mostrarPass"
-            (click)="mostrarPassword()"
-          ></i></span
-        ><span><i class="bi bi-unlock-fill iconoCandado"></i></span>
+
+        <input
+          type="text"
+          placeholder="Nombre (s)"
+          formControlName="Nombre"
+          class="input"
+        />
+
+        <input
+          type="text"
+          placeholder="Apellidos"
+          formControlName="Apellido"
+          class="input"
+        />
+
+        <!-- Agrega un contenedor adicional para los elementos de roles -->
+
         <div class="alinearBoton">
           <button class="botonIniciar">Continuar</button>
         </div>

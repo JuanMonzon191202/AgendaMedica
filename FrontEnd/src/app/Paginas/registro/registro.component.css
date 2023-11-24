@@ -1,11 +1,13 @@
 .contenedorGeneral {
   display: grid;
   grid-template-columns: 66.04% auto;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 .contenedorIzquierdo {
   width: 100%;
+  height: 128vh;
   position: relative;
 }
 
@@ -18,17 +20,11 @@
   height: 100%;
 }
 
-.barraDecorativa {
-  width: 48px;
-  height: 8px;
-  transform: rotate(90deg);
-  flex-shrink: 0;
-  background: linear-gradient(90deg, #75c1eb 0%, #8cdf90 97.48%);
-}
-
 .contenedorDerecho {
   background: linear-gradient(270deg, #1985ce 0%, #0d5eaf 100%);
+  height: 100%;
   width: 100%;
+  left: auto;
 }
 
 .titulo {
@@ -44,13 +40,12 @@
   top: 282px;
   left: 87px;
   width: 514px;
-
 }
 
 .parrafoDatos p,
 span,
 ul {
-  color: #7C7D7D;
+  color: #7c7d7d;
   text-align: justify;
   font-family: Poppins;
   font-size: 20px;
@@ -147,7 +142,7 @@ ul {
 
 .contenedorForm {
   position: absolute;
-  top: 430px;
+  top: 400px;
   left: 89px;
 }
 
@@ -220,7 +215,7 @@ ul {
 }
 
 .sugerenciaRegistrar {
-  color: #FFF;
+  color: #fff;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -232,7 +227,46 @@ ul {
   color: white;
 }
 
+/* Agrega un margen derecho a los elementos de roles */
+.contenedorRoles {
+  margin-right: 20px; /* Ajusta el espacio según tu diseño */
+} /* Estilos para el contenedor del select */
+.custom-select-container {
+  position: relative;
+  width: 200px; /* Personaliza el ancho según tus necesidades */
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #8cdf90;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilos para las opciones del select */
+.custom-select option {
+  background-color: #fff;
+  color: #000;
+}
+
+.roles-container label {
+  margin-right: 10px;
+}
+
 @media (max-width: 1366px) {
+  .roles-container {
+    display: flex;
+  }
+  .contenedorRoles {
+    margin-right: 20px; /* Ajusta el espacio según tu diseño */
+  }
+  .roles-container label {
+    margin-right: 10px; /* Ajusta el espacio entre los radio buttons según tu diseño */
+  }
   .titulo {
     top: calc(198px * 0.7);
     left: calc(87px * 0.7);
@@ -276,8 +310,8 @@ ul {
   }
 
   .contenedorForm {
-    top: calc(430px * 0.7);
-    left: calc(89px * 0.7);
+    top: calc(330px * 0.7);
+    left: calc(80px * 0.7);
   }
 
   .contenedorForm input {
@@ -299,7 +333,7 @@ ul {
 
   .parrafoDatos {
     position: absolute;
-    top: calc(300px*.7);
+    top: calc(300px * 0.7);
     left: 87px;
     width: 514px;
   }
@@ -307,7 +341,7 @@ ul {
   .parrafoDatos p,
   span,
   ul {
-    font-size: calc(20px*.7);
+    font-size: calc(20px * 0.7);
   }
 
   .iconoCandado {

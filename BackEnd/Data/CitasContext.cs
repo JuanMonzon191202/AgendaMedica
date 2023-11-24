@@ -36,12 +36,6 @@ namespace BackEdn.Data
                 .WithOne(ec => ec.Usuario)
                 .HasForeignKey(ec => ec.IdUsuario);
 
-            modelBuilder
-                .Entity<EspecialistaCmc>()
-                .HasMany(ec => ec.Citas)
-                .WithOne(c => c.EspecialistaCmc)
-                .HasForeignKey(c => c.IdUsuarioEspecialistaCmc);
-
             modelBuilder.Entity<EspecialidadEspecialista>().HasKey(e => e.Id);
 
             modelBuilder
@@ -70,14 +64,14 @@ namespace BackEdn.Data
             modelBuilder
                 .Entity<Cita>()
                 .HasOne(c => c.Paciente)
-                .WithMany(p => p.Citas)
+                .WithMany(u => u.CitasPaciente)
                 .HasForeignKey(c => c.IdUsuarioPaciente)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<Cita>()
                 .HasOne(c => c.EspecialistaCmc)
-                .WithMany(ec => ec.Citas)
+                .WithMany(u => u.CitasEspecialista)
                 .HasForeignKey(c => c.IdUsuarioEspecialistaCmc)
                 .OnDelete(DeleteBehavior.NoAction);
 

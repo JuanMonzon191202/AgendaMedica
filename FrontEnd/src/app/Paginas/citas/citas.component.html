@@ -1,0 +1,71 @@
+<div class="header">
+  <i class="bi bi-house-door-fill retroceder" routerLink="/home"></i>
+
+  <h1 class="nombreApp">Consultas medicas</h1>
+</div>
+
+<div class="contenido">
+  <div class="separar">
+    <div class="izquierdo">
+      <div class="contenedorInformacionBasica">
+        <h1 class="textoInformacionBasica">Información básica de la cuenta</h1>
+        <div class="contenedor1">
+          <img
+            src="https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png"
+            class="fotoPerfil"
+          />
+          <div>
+            <h1>{{ userData.nombre }} {{ userData.apellido }}</h1>
+            <h2>{{ userData.email }}</h2>
+            <h2 class="pildora">{{ userData.rol.nombreRol }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="menuNavegacion">
+        <h1>Menú de navegación</h1>
+        <div class="botones">
+          <button [routerLink]="getProfileLink()">
+            Configuración de la cuenta
+          </button>
+          <button>Mis citas</button>
+        </div>
+        <br />
+      </div>
+
+      <button class="botonCerrarSesion" (click)="cerrarsesion()">
+        Cerrar sesión <i class="bi bi-door-open"></i>
+      </button>
+    </div>
+    <div class="derecho">
+      <mat-grid-list cols="2" rowHeight="200px">
+        <mat-grid-tile *ngFor="let cita of userDataCitas" class="custom-tile">
+          <mat-card class="card">
+            <!-- Contenido de tu tarjeta -->
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title> Citas </mat-card-title>
+              <mat-card-subtitle>
+                <div
+                  class="pildoraStatus"
+                  [ngStyle]="getStatusStyle(cita.status)"
+                >
+                  {{ cita.status }}
+                </div>
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Fecha: {{ cita.fecha | date : "mediumDate" }}<br />
+                Hora: {{ cita.horaCita | date : "shortTime" }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Button</button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>

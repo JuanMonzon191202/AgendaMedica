@@ -26,6 +26,12 @@ namespace BackEdn.Controllers
             return await _service.GetAllAsync();
         }
 
+        [HttpGet("especialistas-noActive")]
+        public async Task<IEnumerable<EspecialistaCmc>> GetNoActive()
+        {
+            return await _service.GetAllNoActiveAsync();
+        }
+
         // [Authorize]
         [HttpGet("especialistas/{id}")]
         public async Task<ActionResult<EspecialistaCmc>> GetById(int id)

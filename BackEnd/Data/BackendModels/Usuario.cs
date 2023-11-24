@@ -22,7 +22,10 @@ namespace BackEdn.Data.backendModels
 
         public Rol? Rol { get; set; }
 
-        public ICollection<Paciente>? Pacientes { get; set; }
-        public ICollection<EspecialistaCmc>? EspecialistasCmc { get; set; }
+        public ICollection<Paciente>? Pacientes { get; set; } = new HashSet<Paciente>();
+        public ICollection<EspecialistaCmc>? EspecialistasCmc { get; set; } =
+            new HashSet<EspecialistaCmc>();
+        public ICollection<Cita>? CitasPaciente { get; set; } = new HashSet<Cita>();
+        public ICollection<Cita>? CitasEspecialista { get; set; } = new HashSet<Cita>();
     }
 }

@@ -23,6 +23,16 @@ public class EspecialistaCmcService
         return especialistasCmcConUsuarios;
     }
 
+    public async Task<IEnumerable<EspecialistaCmc>> GetAllNoActiveAsync()
+    {
+        var especialistasCmcConUsuarios = await _context.EspecialistasCmc
+            .Include(e => e.Usuario)
+            .Where(e => e.Usuario.IsActive == false)
+            .ToListAsync();
+
+        return especialistasCmcConUsuarios;
+    }
+
     public async Task<EspecialistaCmc?> GetByIdAsync(int id)
     {
         var especialistaCmcConUsuario = await _context.EspecialistasCmc

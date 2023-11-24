@@ -24,36 +24,40 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
   }
-  public mostrarPassword() {
-    const pass = document.getElementById('inputPassword') as HTMLInputElement;
-    const activador = document.getElementById('mostrarPass') as HTMLElement;
-    pass.type = 'text';
-  }
 
   public Register() {
+    console.log(this.registerForm.value);
+
     if (this.registerForm.valid) {
       this.RegistroService.Crear(this.registerForm.value).subscribe(
         (response) => {
-          console.log(response.mensage);
-          if (response.mensage === 'Perfil Creado') {
+          console.log(response);
+
+          const message = response.message;
+          if (message === 'Perfil Creado') {
             this.Alertas.Animado('Perfil Creado');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/login']);
           }
         },
         (error) => {
           this.Alertas.ShowErrorAlert('error en el servidor');
+          console.log(error);
         }
       );
     } else {
       this.Alertas.ShowErrorAlert('Campos vacios');
     }
   }
-  //TODO agregar los demas campos del registro
+
   private initForm(): void {
     this.registerForm = this.fb.group({
       Email: ['', Validators.required],
       Password: ['', Validators.required],
       IdRol: ['', Validators.required],
+      Nombre: ['', Validators.required],
+      Apellido: ['', Validators.required],
+      IsActive: [true],
+      Foto: ['null'],
     });
   }
 }

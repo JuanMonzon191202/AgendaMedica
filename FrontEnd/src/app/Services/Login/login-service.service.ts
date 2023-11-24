@@ -11,8 +11,8 @@ import { AlertService } from '../AlerServices/alert.service';
 })
 export class LoginServiceService {
   private apiUrl = environment.apiUrl;
-  private checkInterval: number = 15000; // Verificar cada minuto
-  private refreshThreshold: number = 300000; // Umbral de 5 minutos
+  private checkInterval: number = 60000; // Verificar cada minuto
+  
 
   constructor(
     private http: HttpClient,

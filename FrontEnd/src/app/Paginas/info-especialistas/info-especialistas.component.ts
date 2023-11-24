@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/Services/AlerServices/alert.service';
 import { EspecialidadesServiceService } from 'src/app/Services/Especialidades/especialidades-service.service';
@@ -13,7 +13,7 @@ import { LoginServiceService } from 'src/app/Services/Login/login-service.servic
 export class InfoEspecialistasComponent {
   public ListaEspecialidades = [];
   public userData: any;
-
+  selectedDate = new FormControl(new Date());
   selectedEspecialidad: string | null = null;
   selectedEstado: string | null = null;
 

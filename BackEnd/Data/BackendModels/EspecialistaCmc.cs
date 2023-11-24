@@ -16,7 +16,7 @@ namespace BackEdn.Data.backendModels
         public string Descripcion { get; set; }
 
         public Usuario? Usuario { get; set; }
-        public ICollection<Cita>? Citas { get; set; }
+
         public ICollection<EspecialidadEspecialista>? Especialidades { get; set; }
     }
 }

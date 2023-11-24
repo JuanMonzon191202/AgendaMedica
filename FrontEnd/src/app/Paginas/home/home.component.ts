@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
   }
   getProfileLink(): string {
     const tokenRol = this.loginService.getUserRole();
-    const adminRoute = '/configuracion-admin';
+    const adminRoute = '/Admin-Dashboard';
     const userRoute = '/configuracion-cuenta';
     const especialistaRoute = '/configuracion-especialista';
 

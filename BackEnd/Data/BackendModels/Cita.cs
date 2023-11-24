@@ -14,7 +14,7 @@ namespace BackEdn.Data.backendModels
         public DateTime Fecha { get; set; }
         public string Status { get; set; }
 
-        public Paciente? Paciente { get; set; }
-        public EspecialistaCmc? EspecialistaCmc { get; set; }
+        public Usuario? Paciente { get; set; }
+        public Usuario? EspecialistaCmc { get; set; }
     }
 }

@@ -1,0 +1,357 @@
+.header {
+  background: linear-gradient(270deg, #0d5eaf 0%, #1985ce 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  color: white;
+}
+
+.retroceder {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+.retroceder:hover {
+  color: #eee;
+}
+
+.header h1 {
+  background-color: rgba(117, 193, 235, 0.3);
+  padding: 5px 30px;
+}
+
+.separar {
+  display: grid;
+  grid-template-columns: 35% auto;
+}
+
+.izquierdo {
+  width: 100%;
+  height: 90vh;
+}
+
+.derecho {
+  background-color:   #f0f0f0;
+  padding: 5px;
+  width: 100%;
+  height: 90vh;
+  overflow-y: auto;
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Para ocupar al menos el 100% de la altura de la ventana */
+}
+
+.fotoPerfil {
+  width: 100px;
+  height: 100px;
+  margin: 5%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.contenedorInformacionBasica {
+  background-color: white;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  height: 260px;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.textoInformacionBasica {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 1rem;
+  padding-top: 1rem;
+}
+
+.contenedor1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+}
+
+.contenedor1 h1 {
+  font-size: 20px;
+}
+
+.contenedor1 h2 {
+  font-size: 1rem;
+}
+
+.menuNavegacion {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin: auto;
+}
+
+.menuNavegacion h1 {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background: linear-gradient(90deg, #75c1eb 2.58%, #8cdf90 104.41%);
+  border-radius: 5px 5px 0 0;
+  padding-left: 10px;
+}
+
+.menuNavegacion button {
+  font-family: Poppins;
+  font-size: 1rem;
+  border: none;
+  height: 70px;
+  transition: all ease 0.2s;
+  cursor: pointer;
+  background-color: white;
+}
+
+.menuNavegacion button:hover {
+  background-color: #eee;
+}
+
+.botones {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 5px;
+  margin: 5px;
+}
+
+.botonCerrarSesion {
+  width: 90%;
+  font-family: Poppins;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  margin: auto;
+  display: block;
+  margin-top: 2rem;
+  height: 50px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.botonCerrarSesion:hover {
+  background-color: #1985ce;
+  border: 1px white solid;
+  color: white;
+}
+
+.contenedorConfiguracionCuenta {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  border-radius: 5px;
+  padding: 5px 1rem;
+  margin-top: 10px;
+}
+
+.contenedorConfiguracionCuenta h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.contenedorConfiguracionCuenta h3 {
+  color: #7a7a7a;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: -20px;
+}
+
+.form1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form1 h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.form1 input {
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  outline: none;
+  font-family: Poppins;
+  font-size: 1rem;
+  width: 80%;
+  padding: 5px 10px;
+}
+
+.separador {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.ladoNumero,
+.ladoEmail {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  gap: 5px;
+}
+
+.ladoNumero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ladoNumero input {
+  font-family: Poppins;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background-color: #eee;
+  text-align: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid black;
+  width: 90%;
+}
+.ladoEmail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.pildora {
+  display: inline-block;
+  padding: 1% 1%;
+  background-color: #1985ce; /* Puedes cambiar este color según tu diseño */
+  color: #fff;
+  border-radius: 20px; /* Ajusta el radio según tu diseño */
+  margin: 5px; /* Ajusta el margen según tu diseño */
+}
+.mat-mdc-card {
+  position: absolute;
+  height: 80%;
+  width: 96%;
+}
+.ladoEmail input {
+  width: 90%;
+  border: none;
+  outline: none;
+  font-family: Poppins;
+  font-size: 1rem;
+  padding: 5px 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+.botonGuardarCambios {
+  border-radius: 0px 0px 5px 5px;
+  background: linear-gradient(270deg, #75c1eb 0.56%, #8cdf90 98.99%);
+  width: 100%;
+  height: 50px;
+  color: white;
+  border: none;
+  font-size: 1.4rem;
+  font-family: Poppins;
+  cursor: pointer;
+}
+.descripcion-especialista {
+  text-align: justify;
+  position: absolute;
+  top: 20px;
+  width: 90%;
+  height: 200px;
+  left: 50%;
+  transform: translate(-50%);
+  overflow-y: scroll;
+}
+
+.custom-card {
+  width: 40%;
+  height: 40%;
+  padding: 5px;
+}
+.mdc-card__actions {
+  display: contents;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 8px;
+}
+.pildoraStatus {
+  display: inline-block;
+  background-color: grey;
+  padding: 1% 1%;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Cambia la dirección de la fila a columna */
+  }
+
+  .izquierdo,
+  .derecho {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .fotoPerfil {
+    width: 50px; /* Reduzca el tamaño de la foto de perfil para dispositivos móviles */
+    height: 50px;
+  }
+
+  .contenedorInformacionBasica {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .menuNavegacion button {
+    height: 50px; /* Reduzca la altura de los botones de navegación */
+  }
+
+  .botonCerrarSesion {
+    margin-top: 1rem; /* Ajusta el margen superior */
+    height: 40px; /* Reduzca la altura del botón de cierre de sesión */
+  }
+
+  .contenedorConfiguracionCuenta h1,
+  .contenedorConfiguracionCuenta h3 {
+    font-size: 14px; /* Reduzca el tamaño de la fuente en la configuración de la cuenta */
+  }
+
+  .form1 h1 {
+    font-size: 16px; /* Reduzca el tamaño de la fuente en el formulario */
+  }
+
+  .form1 input {
+    width: 100%; /* Ajusta el ancho del campo de entrada */
+  }
+
+  .ladoNumero,
+  .ladoEmail {
+    height: auto; /* Ajusta la altura según el contenido */
+  }
+
+  .pildora {
+    padding: 0.5% 1%; /* Ajusta el relleno de la píldora */
+  }
+}
