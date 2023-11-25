@@ -35,11 +35,16 @@ export class CatalogoEspecialistasComponent implements OnInit {
         : undefined;
       this.ListaEspecialistas(idEspecialidad, params['estado']);
     });
+    const tokencio = localStorage.getItem('token');
+
+    if (tokencio != null) {
+      this.loginService.scheduleTokenCheck();
+    }
   }
 
   getProfileLink(): string {
     const tokenRol = this.loginService.getUserRole();
-    const adminRoute = '/configuracion-admin';
+    const adminRoute = '/Admin-Dashboard';
     const userRoute = '/configuracion-cuenta';
     const especialistaRoute = '/configuracion-especialista';
 

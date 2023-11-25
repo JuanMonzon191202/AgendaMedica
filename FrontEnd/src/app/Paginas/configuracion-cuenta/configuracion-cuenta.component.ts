@@ -62,6 +62,16 @@ export class ConfiguracionCuentaComponent {
       this.correo = res.email;
       this.userData = res;
       this.telefono = res.pacientes.$values[0].telefono;
+      const alerta = this.userData.isActive;
+
+      if (alerta === false) {
+        this.alertService.ShowConfirmationAlert(
+          'Su cuenta fue desactivada',
+          'consulte con soporte',
+          'aceptar',
+          'Salir'
+        );
+      }
     });
   }
 }

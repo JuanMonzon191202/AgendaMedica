@@ -31,6 +31,11 @@ export class InfoEspecialistasComponent {
       const id = params['id'];
       this.DataEspecialista(id);
     });
+    const tokencio = localStorage.getItem('token');
+
+    if (tokencio != null) {
+      this.loginService.scheduleTokenCheck();
+    }
   }
 
   private DataEspecialista(id: number) {

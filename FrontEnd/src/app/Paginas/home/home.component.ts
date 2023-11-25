@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
       this.loginService.scheduleTokenCheck();
     }
   }
+  
   hasToken(): boolean {
     const token = localStorage.getItem('token');
     return !!token; // Devuelve true si token existe, false si no existe

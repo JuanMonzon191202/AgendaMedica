@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BackEdn.Controllers
 {
-    [Authorize] // Añade autenticación a todo el controlador
+    
     [ApiController]
     [Route("api/[controller]")]
     public class PacienteController : ControllerBase
@@ -41,7 +41,7 @@ namespace BackEdn.Controllers
             return pacienteFind;
         }
 
-        [Authorize]
+        
         [HttpPost("paciente")]
         public async Task<IActionResult> Create(Paciente paciente)
         {

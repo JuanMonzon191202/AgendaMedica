@@ -43,4 +43,24 @@ export class UsuariosService {
     )}`;
     return this.http.get(url, { headers: this.headers });
   }
+
+  public Crear(registro: FormGroup): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}${ApiEndpoints.usuario.createUsuario}`,
+      registro
+    );
+  }
+
+  public crearEspecialista(registro: FormGroup): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}${ApiEndpoints.especialistaCmc.createEspecialista}`,
+      registro
+    );
+  }
+  public crearPaciente(registro: FormGroup): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}${ApiEndpoints.paciente.createPaciente}`,
+      registro, { headers: this.headers }
+    );
+  }
 }

@@ -22,6 +22,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    const tokencio = localStorage.getItem('token');
+
+    if (tokencio != null) {
+      this.loginService.scheduleTokenCheck();
+    }
   }
 
   public mostrarPassword() {

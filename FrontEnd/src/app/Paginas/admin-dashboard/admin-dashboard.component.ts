@@ -22,7 +22,6 @@ export class AdminDashboardComponent {
   ) {}
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    const validityToken = this.LoginService.checkTokenValidity();
     if (tokencio != null) {
       this.LoginService.scheduleTokenCheck();
     }

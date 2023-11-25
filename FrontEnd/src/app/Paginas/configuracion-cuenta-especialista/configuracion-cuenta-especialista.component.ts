@@ -57,6 +57,16 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
 
     this.usuario.Usuario(tokenid).subscribe((res) => {
       this.userData = res;
+      const alerta = this.userData.isActive;
+      
+      if (alerta === false) {
+        this.alertService.ShowConfirmationAlert(
+          'Su cuenta no esta activada',
+          'Complete su informacion y consulte con soporte',
+          'aceptar',
+          'Salir'
+        );
+      }
       // console.log(res);
     });
   }
