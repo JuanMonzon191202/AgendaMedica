@@ -1,6 +1,53 @@
-mat-toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style-type: none;
+  margin-left: auto;
+}
+
+a {
+  margin-right: 25px;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links a {
+  margin-right: 25px;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #8cdf90;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none; /* Oculta los enlaces en pantallas pequeñas */
+    flex-direction: column; /* Muestra los enlaces en una columna */
+    position: absolute; /* Aprovecha toda la pantalla */
+    top: 60px; /* Ajusta la distancia desde la parte superior según tu diseño */
+    left: 0;
+    background-color: #333; /* Fondo del menú desplegable */
+    width: 100%; /* Ajusta el ancho al 100% de la pantalla */
+  }
+
+  .nav-links a {
+    margin: 0; /* Elimina el margen entre los enlaces */
+    padding: 15px; /* Añade espacio alrededor de cada enlace */
+    width: 100%; /* Ajusta el ancho al 100% del menú desplegable */
+    text-align: center; /* Centra el texto dentro de cada enlace */
+  }
+
+  .nav-links.active {
+    display: flex; /* Muestra los enlaces cuando el menú está activo */
+  }
 }

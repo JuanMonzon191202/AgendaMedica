@@ -1,0 +1,143 @@
+<app-navbar></app-navbar>
+<div class="contenedor-general">
+  <div class="sidebar">
+    <button class="boton-sidebar" (click)="visualizarPacientes()">
+      Visualizar Pacientes
+    </button>
+    <button class="boton-sidebar" (click)="visualizarEspecialistas()">
+      Visualizar Especialistas
+    </button>
+    <button class="boton-sidebar" (click)="visualizarNoAutorizados()">
+      Visualizar Especialistas no autorizados
+    </button>
+    <button class="boton-sidebar" (click)="cerrarsesion()">
+      Cerrar sesión
+    </button>
+  </div>
+
+  <div class="contenido-principal">
+    <!-- Mostrar el contenido según la variable contenidoAMostrar -->
+    <ng-container *ngIf="contenidoAMostrar === 'Mostrar pacientes'">
+      <h2>Lista de Usuarios Pacientes</h2>
+      <div class="card-container">
+        <div *ngFor="let paciente of userData">
+          <div class="card">
+            <div class="card-info">
+              <h3>{{ paciente.nombre }} {{ paciente.apellido }}</h3>
+              <p>Email: {{ paciente.email }}</p>
+              <!-- Agrega más información según sea necesario -->
+
+              <!-- Píldora de estado -->
+              <div
+                class="status-pill"
+                [ngClass]="{
+                  active: paciente.isActive,
+                  inactive: !paciente.isActive
+                }"
+              >
+                {{ paciente.isActive ? "Activo" : "Inactivo" }}
+              </div>
+
+              <!-- Botones en la parte inferior -->
+              <div class="card-buttons">
+                <button (click)="openModal(paciente)">Ver Detalles</button>
+                <button (click)="editInfo(paciente)">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coloca aquí el contenido que quieres mostrar para pacientes -->
+    </ng-container>
+
+    <ng-container *ngIf="contenidoAMostrar === 'Mostrar especialistas'">
+      <!-- Coloca aquí el contenido que quieres mostrar para especialistas -->
+      <h2>Lista de Usuarios Pacientes</h2>
+      <div class="card-container">
+        <div *ngFor="let paciente of userData | ObjToArray">
+          <div class="card">
+            <div class="card-info">
+              <h3>
+                {{ paciente.usuario.nombre }} {{ paciente.usuario.apellido }}
+              </h3>
+              <p>Email: {{ paciente.usuario.email }}</p>
+
+              <p>Dirección: {{ paciente.direccion + " " + paciente.ciudad }}</p>
+
+              <p>Número de cédula: {{ paciente.noCedula }}</p>
+
+              <!-- Agrega más información según sea necesario -->
+
+              <!-- Píldora de estado -->
+              <!-- Píldora de estado -->
+              <div
+                class="status-pill"
+                [ngClass]="{
+                  active: paciente.usuario.isActive,
+                  inactive: !paciente.usuario.isActive
+                }"
+              >
+                {{ paciente.usuario.isActive ? "Activo" : "Inactivo" }}
+              </div>
+
+              <!-- Botones en la parte inferior -->
+              <div class="card-buttons">
+                <button (click)="openModal(paciente)">Ver Detalles</button>
+                <button (click)="editInfo(paciente)">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="contenidoAMostrar === 'Mostrar especialistas no autorizados'"
+    >
+      <!-- Coloca aquí el contenido que quieres mostrar para especialistas no autorizados -->
+      <h2>Lista de Usuarios Pacientes</h2>
+      <div class="card-container">
+        <div *ngFor="let paciente of userData | ObjToArray">
+          <div class="card">
+            <div class="card-info">
+              <h3>
+                {{ paciente.usuario.nombre }} {{ paciente.usuario.apellido }}
+              </h3>
+              <p>Email: {{ paciente.usuario.email }}</p>
+
+              <p>Dirección: {{ paciente.direccion + " " + paciente.ciudad }}</p>
+
+              <p>Número de cédula: {{ paciente.noCedula }}</p>
+
+              <!-- Agrega más información según sea necesario -->
+
+              <!-- Píldora de estado -->
+              <div
+                class="status-pill"
+                [ngClass]="{
+                  active: paciente.usuario.isActive,
+                  inactive: !paciente.usuario.isActive
+                }"
+              >
+                {{ paciente.usuario.isActive ? "Activo" : "Inactivo" }}
+              </div>
+
+              <!-- Botones en la parte inferior -->
+              <div class="card-buttons">
+                <button (click)="openModal(paciente)">Ver Detalles</button>
+                <button (click)="editInfo(paciente)">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="modalAbierto">
+    <app-modal
+      [selectedUser]="selectedUser"
+      (cerrar)="cerrarModal()"
+    ></app-modal>
+  </ng-container>
+</div>

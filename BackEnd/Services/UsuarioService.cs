@@ -54,6 +54,7 @@ public class UsuarioService
 
         if (existingUser != null)
         {
+            // Actualiza solo si se proporciona un valor no nulo o vacío
             if (!string.IsNullOrEmpty(usuario.Nombre))
             {
                 existingUser.Nombre = usuario.Nombre;
@@ -68,15 +69,15 @@ public class UsuarioService
             {
                 existingUser.Email = usuario.Email;
             }
+
+            // Actualiza la contraseña solo si se proporciona
             if (!string.IsNullOrEmpty(usuario.Password))
             {
                 // Encripta la nueva contraseña antes de almacenarla
                 existingUser.Password = HashPassword(usuario.Password);
             }
-            if (usuario.IsActive)
-            {
-                existingUser.IsActive = usuario.IsActive;
-            }
+
+            existingUser.IsActive = usuario.IsActive;
 
             await _context.SaveChangesAsync();
         }
@@ -123,5 +124,22 @@ public class UsuarioService
         };
 
         return userInfo;
+    }
+
+    public async Task<IEnumerable<Usuario>> GetPacientesAsync()
+    {
+        return await _context.Usuarios.Where(u => u.IdRol == 3).ToListAsync();
+    }
+
+    public async Task<IEnumerable<Usuario>> GetEspecialistasAsync()
+    {
+        return await _context.Usuarios.Where(u => u.IdRol == 2).ToListAsync();
+    }
+
+    public async Task<IEnumerable<Usuario>> GetEspecialistasNoActivosAsync()
+    {
+        return await _context.Usuarios
+            .Where(u => u.IdRol == 2 && !u.IsActive) // Supongamos que el ID del rol para especialistas es 2
+            .ToListAsync();
     }
 }

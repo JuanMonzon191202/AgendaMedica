@@ -33,6 +33,10 @@ export class UsuariosService {
     const url = `${this.apiUrl}${ApiEndpoints.usuario.getUsuarioById(tokenid)}`;
     return this.http.get(url, { headers: this.headers });
   }
+  public UpdateUsuario(tokenid: number, formdata: FormGroup): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.usuario.updateUsuario}/${tokenid}`;
+    return this.http.put(url, formdata, { headers: this.headers });
+  }
   public CitasPacientes(tokenid: number): Observable<any> {
     const url = `${this.apiUrl}${ApiEndpoints.cita.getCitasByUser(tokenid)}`;
     return this.http.get(url, { headers: this.headers });
@@ -60,7 +64,43 @@ export class UsuariosService {
   public crearPaciente(registro: FormGroup): Observable<any> {
     return this.http.post(
       `${this.apiUrl}${ApiEndpoints.paciente.createPaciente}`,
-      registro, { headers: this.headers }
+      registro,
+      { headers: this.headers }
+    );
+  }
+  public ListaUsuarios(): Observable<any> {
+    return this.http.get(`${this.apiUrl}${ApiEndpoints.usuario.getUsuarios}`, {
+      headers: this.headers,
+    });
+  }
+  public ListarEspecialistas1(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}${ApiEndpoints.usuario.usuariosEspecialistas}`,
+      { headers: this.headers }
+    );
+  }
+  public ListarPacientes(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}${ApiEndpoints.usuario.usuariosPaciente}`,
+      { headers: this.headers }
+    );
+  }
+  public ListarEspecialistasNon(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}${ApiEndpoints.especialistaCmc.getEspecialistasNon}`,
+      { headers: this.headers }
+    );
+  }
+  public actualizarUsuario(id: string, usuarioData: any): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.usuario.updateUsuario}/${id}`;
+    console.log('servicio user datas', usuarioData);
+
+    return this.http.put(url, usuarioData, { headers: this.headers });
+  }
+  public ListarEspecialistas(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}${ApiEndpoints.especialistaCmc.getEspecialistas}`,
+      { headers: this.headers }
     );
   }
 }

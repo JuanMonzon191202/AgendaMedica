@@ -72,9 +72,20 @@ namespace BackEdn.Controllers
 
             try
             {
+                // Validaciones adicionales
+                if (
+                    string.IsNullOrEmpty(usuario.Nombre)
+                    && string.IsNullOrEmpty(usuario.Apellido)
+                    && string.IsNullOrEmpty(usuario.Email)
+                )
+                {
+                    return BadRequest(
+                        "Se requiere al menos uno de los campos (Nombre, Apellido, Email) para actualizar."
+                    );
+                }
+
                 await _service.UpdateAsync(usuario);
-                return StatusCode(204, new { Message = "Datos Actualizados" });
-                ;
+                return Ok(new { Message = "Datos Actualizados", UpdatedUser = usuario });
             }
             catch (Exception ex)
             {
@@ -84,6 +95,27 @@ namespace BackEdn.Controllers
                 // Return a 500 Internal Server Error response
                 return StatusCode(500, "Se produjo un error interno al actualizar el usuario.");
             }
+        }
+
+        [Authorize]
+        [HttpGet("usuarioPaciente")]
+        public async Task<IEnumerable<Usuario>> ObtenerPacientes()
+        {
+            return await _service.GetPacientesAsync();
+        }
+
+        [Authorize]
+        [HttpGet("usuarioEspecialista")]
+        public async Task<IEnumerable<Usuario>> ObtenerEspecialistas()
+        {
+            return await _service.GetEspecialistasAsync();
+        }
+
+        [Authorize]
+        [HttpGet("Especialistas-non")]
+        public async Task<IEnumerable<Usuario>> ObtenerEspecialistasNoActivos()
+        {
+            return await _service.GetEspecialistasNoActivosAsync();
         }
     }
 }

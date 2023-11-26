@@ -34,6 +34,7 @@ export const ApiEndpoints = {
     createEspecialista: '/api/EspecialistaCmc/especialistas',
     getEspecialistaById: '/api/EspecialistaCmc/especialistas/',
     updateEspecialista: `/api/EspecialistaCmc/especialistas/`,
+    getEspecialistasNon:'/api/EspecialistaCmc/especialistas-noActive',
     getEspecialistasByEspecialidad: (id: number) =>
       `/api/EspecialistaCmc/especialistas-por-especialidad/${id}`,
     getEspecialidadAndEstado: (idEspecialidad: number, estado: string) =>
@@ -54,7 +55,10 @@ export const ApiEndpoints = {
   usuario: {
     getUsuarios: '/api/Usuario/usuarios',
     getUsuarioById: (id: number) => `/api/Usuario/usuario/${id}`,
-    updateUsuario: (id: number) => `/api/Usuario/usuario/${id}`,
+    updateUsuario: `/api/Usuario/usuario`,
     createUsuario: '/api/Usuario/usuario',
+    usuariosPaciente: '/api/Usuario/usuarioPaciente',
+    usuariosEspecialistas: '/api/Usuario/usuarioEspecialista',
+    especialistaNon: '/api/Usuario/Especialistas-non', //esto es para los especialistas que no estan activos
   },
 };

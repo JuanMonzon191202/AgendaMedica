@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
       this.loginService.scheduleTokenCheck();
     }
   }
-  
+
   hasToken(): boolean {
     const token = localStorage.getItem('token');
     return !!token; // Devuelve true si token existe, false si no existe
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
   }
   getProfileLink(): string {
     const tokenRol = this.loginService.getUserRole();
-    const adminRoute = '/Admin-Dashboard';
+    const adminRoute = '/admin-area-usuarios';
     const userRoute = '/configuracion-cuenta';
     const especialistaRoute = '/configuracion-especialista';
 

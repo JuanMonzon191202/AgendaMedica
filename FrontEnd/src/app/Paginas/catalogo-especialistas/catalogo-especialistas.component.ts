@@ -44,7 +44,7 @@ export class CatalogoEspecialistasComponent implements OnInit {
 
   getProfileLink(): string {
     const tokenRol = this.loginService.getUserRole();
-    const adminRoute = '/Admin-Dashboard';
+    const adminRoute = '/admin-area-usuarios';
     const userRoute = '/configuracion-cuenta';
     const especialistaRoute = '/configuracion-especialista';
 

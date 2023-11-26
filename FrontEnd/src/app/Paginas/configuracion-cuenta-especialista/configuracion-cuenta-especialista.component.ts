@@ -47,18 +47,25 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     }
   }
 
-  public cerrarsesion() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+  public async cerrarsesion() {
+    const isConfirmed = await this.alertService.ShowConfirmationAlert(
+      '¿Estás seguro de que quieres cerrar la sesión?',
+      '',
+      'Si',
+      'Cancelar'
+    );
+    if (isConfirmed) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
   }
-
   private getUserData() {
     const tokenid = this.LoginService.getUserId();
 
     this.usuario.Usuario(tokenid).subscribe((res) => {
       this.userData = res;
       const alerta = this.userData.isActive;
-      
+
       if (alerta === false) {
         this.alertService.ShowConfirmationAlert(
           'Su cuenta no esta activada',

@@ -1,0 +1,111 @@
+.contenedor-general {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  height: 90vh; /* Cambié esto a 100vh para que ocupe el 100% de la altura de la pantalla */
+}
+
+.sidebar {
+  background-color: #333;
+  color: white;
+  padding: 10%;
+}
+
+.boton-sidebar {
+  border-radius: 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10%;
+  margin-top: 10%;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-sidebar:hover {
+  background-color: #8cdf90;
+}
+
+.contenido-principal {
+  padding: 20px;
+  background-color: #cccccc7c;
+  max-height: 90%; /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+  border: 1px solid #ccc;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Tres columnas iguales para las tarjetas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 5px 8px 8px #8cdf90; /* Efecto de sombra al hacer hover */
+}
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card-buttons button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-buttons button:hover {
+  background-color: #8cdf90;
+}
+.status-pill {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.active {
+  background-color: #8cdf90; /* Color de fondo verde para estado activo */
+  color: white;
+}
+
+.inactive {
+  background-color: #ff0800; /* Color de fondo rojo para estado inactivo */
+  color: white;
+}
+@media screen and (max-width: 768px) {
+  .contenedor-general {
+    grid-template-columns: 100%;
+  }
+
+  .sidebar {
+    padding: 5%;
+  }
+
+  .boton-sidebar {
+    width: 100%;
+  }
+
+  .card {
+    width: calc(50% - 20px); /* Dos columnas en pantallas pequeñas */
+  }
+}

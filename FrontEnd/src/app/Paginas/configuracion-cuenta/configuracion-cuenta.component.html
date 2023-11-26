@@ -1,5 +1,5 @@
 <div class="header">
-  <i class="bi bi-house-door-fill retroceder" routerLink="/home"></i>
+  <i class="bi bi-house-door-fill retroceder" routerLink="/home">inicio</i>
   <h1 class="nombreApp">Consultas medicas</h1>
 </div>
 
@@ -30,39 +30,53 @@
         <br />
       </div>
 
-      <button class="botonCerrarSesion" (click)="cerrarSesion()">
+      <button class="botonCerrarSesion" (click)="cerrarsesion()">
         Cerrar sesión <i class="bi bi-door-open"></i>
       </button>
     </div>
     <div class="derecho">
       <div class="contenedorConfiguracionCuenta">
         <h1>Configuración de la cuenta</h1>
-        <h3>Los campos que son totalmente requeridos estan marcados con *</h3>
-        <div class="form1">
-          <h1>Nombre:</h1>
-          <input type="text" [(ngModel)]="nombre" />
-        </div>
-        <div class="form1">
-          <h1>Apellido:</h1>
-          <input type="text" [(ngModel)]="apellido" />
-        </div>
+        <h3>Los campos que son totalmente requeridos están marcados con *</h3>
+        <form [formGroup]="formulario" (ngSubmit)="guardarCambios()">
+          <div class="form1">
+            <h1>Nombre:</h1>
+            <input type="text" formControlName="Nombre" />
+          </div>
+          <div class="form1">
+            <h1>Apellido:</h1>
+            <input type="text" formControlName="Apellido" />
+          </div>
 
-        <div class="separador">
-          <div class="ladoNumero">
-            <input
-              type="text"
-              [(ngModel)]="telefono"
-              placeholder="Número telefonico"
-            />
+          <div class="separador">
+            <div class="ladoNumero">
+              <input
+                type="text"
+                formControlName="Telefono"
+                placeholder="Número telefónico"
+              />
+            </div>
+            <div class="ladoEmail">
+              <input
+                type="email"
+                formControlName="Email"
+                placeholder="Correo"
+              />
+              <input
+                type="password"
+                formControlName="Password"
+                placeholder="Contraseña"
+              />
+            </div>
           </div>
-          <div class="ladoEmail">
-            <input type="email" [(ngModel)]="correo" placeholder="Correo" />
-            <input type="password" placeholder="Contraseña" />
-          </div>
-        </div>
-        <button class="botonGuardarCambios">
-          Guardar cambios <i class="bi bi-floppy-fill"></i>
-        </button>
+          <button
+            type="submit"
+            [disabled]="!formulario.valid"
+            class="botonGuardarCambios"
+          >
+            Guardar cambios <i class="bi bi-floppy-fill"></i>
+          </button>
+        </form>
       </div>
     </div>
   </div>

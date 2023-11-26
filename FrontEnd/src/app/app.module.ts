@@ -27,6 +27,8 @@ import { CitasComponent } from './Paginas/citas/citas.component';
 import { FooterComponent } from './Paginas/footer/footer.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { UsuariosComponent } from './Paginas/usuarios/usuarios.component';
+import { ModalComponent } from './Paginas/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
     AdminDashboardComponent,
     CitasComponent,
     FooterComponent,
+    UsuariosComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,7 @@ import { MatSelectModule } from '@angular/material/select';
       },
       { path: 'Admin-Dashboard', component: AdminDashboardComponent },
       { path: 'Mis-citas', component: CitasComponent },
+      { path: 'admin-area-usuarios', component: UsuariosComponent },
     ]),
     JwtModule.forRoot({
       config: {
