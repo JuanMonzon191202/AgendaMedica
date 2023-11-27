@@ -158,7 +158,13 @@
   font-weight: 600;
   line-height: normal;
 }
-
+select {
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  margin: 10px 0px;
+}
 .contenedorConfiguracionCuenta h3 {
   color: #7a7a7a;
   font-family: Poppins;
@@ -198,21 +204,37 @@
 .separador {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 100% 100%;
 }
-.ladoNumero,
-.ladoEmail {
+.ladoNumero {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  height: 300px;
+  width: 80%;
+  height: 100px;
   border-radius: 5px;
   gap: 5px;
 }
-
+.ladoEmail {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 270px;
+  border-radius: 5px;
+  gap: 5px;
+}
+.ladoEmail input:focus {
+  box-shadow: 0px 0px 8px 0px #47dd4e; /* Cambio en el box-shadow cuando el input está seleccionado */
+}
+.ladoNumero input:focus {
+  box-shadow: 0px 0px 8px 0px #47dd4e; /* Cambio en el box-shadow cuando el input está seleccionado */
+}
 .ladoNumero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100px;
+  border-radius: 5px;
+  gap: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 15px 0px;
 }
 .ladoNumero input {
   font-family: Poppins;

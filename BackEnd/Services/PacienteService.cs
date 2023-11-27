@@ -18,7 +18,9 @@ namespace BackEdn.Services
 
         public async Task<IEnumerable<Paciente>> GetAllAsync()
         {
-            var pacientesConUsuarios = await _context.Pacientes.Include(p => p.Usuario).ToListAsync();
+            var pacientesConUsuarios = await _context.Pacientes
+                .Include(p => p.Usuario)
+                .ToListAsync();
 
             return pacientesConUsuarios;
         }

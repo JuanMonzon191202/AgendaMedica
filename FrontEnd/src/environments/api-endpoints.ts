@@ -34,7 +34,7 @@ export const ApiEndpoints = {
     createEspecialista: '/api/EspecialistaCmc/especialistas',
     getEspecialistaById: '/api/EspecialistaCmc/especialistas/',
     updateEspecialista: `/api/EspecialistaCmc/especialistas/`,
-    getEspecialistasNon:'/api/EspecialistaCmc/especialistas-noActive',
+    getEspecialistasNon: '/api/EspecialistaCmc/especialistas-noActive',
     getEspecialistasByEspecialidad: (id: number) =>
       `/api/EspecialistaCmc/especialistas-por-especialidad/${id}`,
     getEspecialidadAndEstado: (idEspecialidad: number, estado: string) =>
@@ -43,7 +43,7 @@ export const ApiEndpoints = {
   paciente: {
     getPacientes: '/api/Paciente/pacientes',
     getPacienteById: (id: number) => `/api/Paciente/paciente/${id}`,
-    updatePaciente: (id: number) => `/api/Paciente/paciente/${id}`,
+    updatePaciente: `/api/Paciente/paciente/`,
     createPaciente: '/api/Paciente/paciente',
   },
   rol: {

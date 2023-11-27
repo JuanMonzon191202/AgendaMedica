@@ -49,26 +49,42 @@
           </div>
 
           <div class="separador">
-            <div class="ladoNumero">
-              <input
-                type="text"
-                formControlName="Telefono"
-                placeholder="Número telefónico"
-              />
-            </div>
-            <div class="ladoEmail">
-              <input
-                type="email"
-                formControlName="Email"
-                placeholder="Correo"
-              />
-              <input
-                type="password"
-                formControlName="Password"
-                placeholder="Contraseña"
-              />
-            </div>
+            <form
+              [formGroup]="formularioTablaPaciente"
+              (ngSubmit)="guardarCambios()"
+            >
+              <div class="ladoNumero">
+                <h1>Telefono:</h1>
+
+                <input
+                  type="text"
+                  formControlName="Telefono"
+                  placeholder="Número telefónico"
+                />
+              </div>
+              <div class="ladoEmail">
+                <input
+                  type="email"
+                  formControlName="Email"
+                  placeholder="Correo"
+                />
+                <input
+                  type="password"
+                  formControlName="Password"
+                  placeholder="Contraseña"
+                />
+
+                <!-- Agregar el select para el género -->
+                <h3>Genero:</h3>
+                <select formControlName="Genero">
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+            </form>
           </div>
+
           <button
             type="submit"
             [disabled]="!formulario.valid"
