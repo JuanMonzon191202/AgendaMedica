@@ -29,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { UsuariosComponent } from './Paginas/usuarios/usuarios.component';
 import { ModalComponent } from './Paginas/modal/modal.component';
+import { ModalPacienteComponent } from './Paginas/modal-paciente/modal-paciente.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ModalComponent } from './Paginas/modal/modal.component';
     FooterComponent,
     UsuariosComponent,
     ModalComponent,
+    ModalPacienteComponent,
   ],
   imports: [
     BrowserModule,

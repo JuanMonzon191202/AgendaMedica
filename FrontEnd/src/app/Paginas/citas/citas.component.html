@@ -45,6 +45,7 @@
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title> Citas </mat-card-title>
+
               <mat-card-subtitle>
                 <div
                   class="pildoraStatus"
@@ -58,10 +59,24 @@
               <p>
                 Fecha: {{ cita.fecha | date : "mediumDate" }}<br />
                 Hora: {{ cita.horaCita | date : "shortTime" }}
+                <br />
+                <ng-container
+                  *ngIf="
+                    userData.rol.nombreRol === 'Paciente';
+                    else especialistaBlock
+                  "
+                >
+                  {{ cita.especialistaCmc.nombre }}
+                  {{ cita.especialistaCmc.apellido }}
+                </ng-container>
+                <ng-template #especialistaBlock>
+                  {{ cita.paciente.nombre }} {{ cita.paciente.apellido }}
+                </ng-template>
               </p>
             </mat-card-content>
+
             <mat-card-actions>
-              <button mat-button>Button</button>
+              <button mat-button color="primary">Detalles</button>
             </mat-card-actions>
           </mat-card>
         </mat-grid-tile>

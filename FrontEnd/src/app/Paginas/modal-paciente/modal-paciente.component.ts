@@ -10,11 +10,11 @@ import { UsuariosService } from 'src/app/Services/Usuarios/usuarios.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css'],
+  selector: 'app-modal-paciente',
+  templateUrl: './modal-paciente.component.html',
+  styleUrls: ['./modal-paciente.component.css'],
 })
-export class ModalComponent {
+export class ModalPacienteComponent {
   constructor(
     private fb: FormBuilder,
     private alertService: AlertService,
@@ -23,7 +23,7 @@ export class ModalComponent {
     public LoginService: LoginServiceService
   ) {}
 
-  @Input() selectedUser: any;
+  @Input() selectedUserPaciente: any;
   @Output() cerrar = new EventEmitter<void>();
 
   cerrarModal(): void {
@@ -31,16 +31,16 @@ export class ModalComponent {
   }
 
   async Update(): Promise<void> {
-    const idUsuario = this.selectedUser.usuario.id;
+    const idUsuario = this.selectedUserPaciente.id;
     const usuarioData = {
-      id: this.selectedUser.usuario.id,
-      Nombre: this.selectedUser.usuario.nombre,
-      Apellido: this.selectedUser.usuario.apellido,
-      Email: this.selectedUser.usuario.email,
+      id: this.selectedUserPaciente.id,
+      Nombre: this.selectedUserPaciente.nombre,
+      Apellido: this.selectedUserPaciente.apellido,
+      Email: this.selectedUserPaciente.email,
       Foto: '',
-      Password: this.selectedUser.usuario.password,
-      isActive: this.selectedUser.usuario.isActive,
-      idRol: this.selectedUser.usuario.idRol,
+      Password: this.selectedUserPaciente.password,
+      isActive: this.selectedUserPaciente.isActive,
+      idRol: this.selectedUserPaciente.idRol,
     };
     console.log(usuarioData);
 
@@ -62,9 +62,6 @@ export class ModalComponent {
           );
 
           this.cerrarModal();
-          setTimeout(() => {
-            location.reload();
-          }, 3000);
         },
         (error) => {
           console.error('Error al actualizar usuario:', error);

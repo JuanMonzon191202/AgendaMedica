@@ -1,6 +1,5 @@
 <div class="header">
   <i class="bi bi-house-door-fill retroceder" routerLink="/home"></i>
-
   <h1 class="nombreApp">Consultas medicas</h1>
 </div>
 
@@ -36,71 +35,68 @@
         Cerrar sesión <i class="bi bi-door-open"></i>
       </button>
     </div>
+
     <div class="derecho">
       <div class="contenedorConfiguracionCuenta">
         <h1>Configuración de la cuenta</h1>
-        <h3>Los campos que son totalmente requeridos estan marcados con *</h3>
-        <div class="form1">
-          <h1>Nombre:</h1>
-          <input type="text" [(ngModel)]="userData.nombre" />
-        </div>
-        <div class="form1">
-          <h1>Apellido:</h1>
-          <input type="text" [(ngModel)]="userData.apellido" />
-        </div>
-
-        <div class="form1">
-          <h1>Direccion:</h1>
-          <input
-            type="text"
-            [(ngModel)]="userData.especialistasCmc.$values[0].direccion"
-          />
-        </div>
-
-        <div class="form1">
-          <h1>Ciudad:</h1>
-          <input
-            type="text"
-            [(ngModel)]="userData.especialistasCmc.$values[0].ciudad"
-          />
-        </div>
-
-        <div class="form1">
-          <h1>Ciudad:</h1>
-          <input
-            type="text"
-            [(ngModel)]="userData.especialistasCmc.$values[0].pais"
-          />
-        </div>
-
-        <div class="form1">
-          <h1>No. Cedula:</h1>
-          <input
-            type="text"
-            [(ngModel)]="userData.especialistasCmc.$values[0].noCedula"
-          />
-        </div>
-
-        <div class="form1">
-          <h1>Descripcion:</h1>
-
-          <input
-            type="text"
-            [(ngModel)]="userData.especialistasCmc.$values[0].descripcion"
-          />
-        </div>
-
-        <div class="separador">
-          <div class="ladoEmail">
-            <input
-              type="email"
-              [(ngModel)]="userData.correo"
-              placeholder="Correo"
-            />
-            <input type="password" placeholder="Contraseña" />
+        <h3>Los campos que son totalmente requeridos están marcados con *</h3>
+        <form [formGroup]="formulario">
+          <div class="form1">
+            <h1>Nombre:</h1>
+            <input type="text" formControlName="Nombre" />
           </div>
-        </div>
-        <button class="botonGuardarCambios">
+
+          <div class="form1">
+            <h1>Apellido:</h1>
+            <input type="text" formControlName="Apellido" />
+          </div>
+
+          <div class="form1">
+            <h1>Dirección:</h1>
+            <input type="text" formControlName="Direccion" />
+          </div>
+
+          <div class="form1">
+            <h1>Ciudad:</h1>
+            <input type="text" formControlName="Ciudad" />
+          </div>
+
+          <div class="form1">
+            <h1>País:</h1>
+            <input type="text" formControlName="Pais" />
+          </div>
+
+          <div class="form1">
+            <h1>No. Cédula:</h1>
+            <input type="text" formControlName="noCedula" />
+          </div>
+
+          <div class="form2">
+            <h1>Descripción:</h1>
+            <textarea class="form2" rows="5" formControlName="Descripcion"></textarea>
+          </div>
+
+          <div class="separador">
+            <div class="ladoEmail">
+              <input
+                type="email"
+                formControlName="Correo"
+                placeholder="Correo"
+              />
+              <input
+                type="password"
+                formControlName="Password"
+                placeholder="Contraseña"
+              />
+            </div>
+          </div>
+        </form>
+
+        <button
+          class="botonGuardarCambios"
+          (click)="guardarCambios()"
+          [disabled]="!formulario.valid"
+        >
           Guardar cambios <i class="bi bi-floppy-fill"></i>
         </button>
       </div>

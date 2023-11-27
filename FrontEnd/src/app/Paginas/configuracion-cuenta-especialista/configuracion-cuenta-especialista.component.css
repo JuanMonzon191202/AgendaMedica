@@ -50,7 +50,8 @@
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   width: 90%;
   height: 260px;
-  margin: auto;
+  margin: 10px 25px;
+
   border-radius: 5px;
 }
 
@@ -134,7 +135,7 @@
 }
 
 .botonCerrarSesion:hover {
-  background-color: #1985ce;
+  background-color: #ce5b19;
   border: 1px white solid;
   color: white;
 }
@@ -193,17 +194,32 @@
   width: 80%;
   padding: 5px 10px;
 }
+.form1 input:focus {
+  box-shadow: 0px 0px 8px 0px #47dd4e; /* Cambio en el box-shadow cuando el input está seleccionado */
+}
+.form2 textarea:focus {
+  box-shadow: 0px 0px 8px 0px #47dd4e; /* Cambio en el box-shadow cuando el input está seleccionado */
+}
+.form2 textarea {
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  outline: none;
+  font-family: Poppins;
+  font-size: 1rem;
+  width: 95%;
+  padding: 5px 10px;
+}
 
 .separador {
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: 50% 50%;
 }
 .ladoNumero,
 .ladoEmail {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   width: 100%;
-  height: 300px;
+  height: 150px;
   border-radius: 5px;
   gap: 5px;
 }
@@ -223,6 +239,9 @@
   padding: 5px 10px;
   border-bottom: 1px solid black;
   width: 90%;
+}
+.ladoEmail input:focus {
+  box-shadow: 0px 0px 8px 0px #47dd4e; /* Cambio en el box-shadow cuando el input está seleccionado */
 }
 .ladoEmail {
   display: flex;

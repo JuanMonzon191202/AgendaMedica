@@ -16,8 +16,13 @@ import { AppComponent } from 'src/app/app.component';
 export class UsuariosComponent implements OnInit {
   contenidoPrincipal: string = 'Contenido predeterminado';
   userData: any;
+  userDataPaciente: any;
   selectedUser: any;
+  selectedUserPaciente: any;
+
   modalAbierto: boolean = false;
+  modalAbiertoPaciente: boolean = false;
+
   contenidoAMostrar: string = ''; // Variable para determinar el contenido
 
   constructor(
@@ -29,7 +34,6 @@ export class UsuariosComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    const validityToken = this.LoginService.checkTokenValidity();
 
     if (tokencio != null) {
       this.LoginService.scheduleTokenCheck();
@@ -40,6 +44,7 @@ export class UsuariosComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       const tokenRol = this.LoginService.getUserRole();
+      console.log(tokenRol);
 
       if (tokenRol === 'Administrador') {
         // this.getUserData();
@@ -54,7 +59,9 @@ export class UsuariosComponent implements OnInit {
 
   visualizarPacientes(): void {
     this.userService.ListarPacientes().subscribe((response) => {
-      this.userData = response.$values;
+      this.userDataPaciente = response.$values;
+      console.log(this.userDataPaciente);
+
       this.contenidoAMostrar = 'Mostrar pacientes'; // Puedes asignar el contenido que quieras
     });
   }
@@ -78,6 +85,8 @@ export class UsuariosComponent implements OnInit {
   }
   openModal(user: any): void {
     this.selectedUser = user;
+    console.log(this.selectedUser);
+
     this.modalAbierto = true;
   }
 
@@ -86,9 +95,27 @@ export class UsuariosComponent implements OnInit {
     this.modalAbierto = true;
   }
 
+  cerrarModalPaciente(): void {
+    this.selectedUserPaciente = null;
+    this.modalAbiertoPaciente = false;
+  }
+  //
+  openModalPaciente(user: any): void {
+    this.selectedUserPaciente = user;
+    console.log(this.selectedUser);
+
+    this.modalAbiertoPaciente = true;
+  }
+
+  editInfoPaciente(user: any): void {
+    this.selectedUserPaciente = user;
+    this.modalAbiertoPaciente = true;
+  }
+
   cerrarModal(): void {
-    this.selectedUser = null;
+    this.selectedUserPaciente = null;
     this.modalAbierto = false;
+    this.modalAbiertoPaciente = false;
   }
   public async cerrarsesion() {
     const isConfirmed = await this.alertService.ShowConfirmationAlert(

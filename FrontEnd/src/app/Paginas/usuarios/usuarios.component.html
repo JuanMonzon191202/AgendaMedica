@@ -20,28 +20,30 @@
     <ng-container *ngIf="contenidoAMostrar === 'Mostrar pacientes'">
       <h2>Lista de Usuarios Pacientes</h2>
       <div class="card-container">
-        <div *ngFor="let paciente of userData">
+        <div *ngFor="let paciente1 of userDataPaciente | ObjToArray">
           <div class="card">
             <div class="card-info">
-              <h3>{{ paciente.nombre }} {{ paciente.apellido }}</h3>
-              <p>Email: {{ paciente.email }}</p>
+              <h3>{{ paciente1.nombre }} {{ paciente1.apellido }}</h3>
+              <p>Email: {{ paciente1.email }}</p>
               <!-- Agrega más información según sea necesario -->
 
               <!-- Píldora de estado -->
               <div
                 class="status-pill"
                 [ngClass]="{
-                  active: paciente.isActive,
-                  inactive: !paciente.isActive
+                  active: paciente1.isActive,
+                  inactive: !paciente1.isActive
                 }"
               >
-                {{ paciente.isActive ? "Activo" : "Inactivo" }}
+                {{ paciente1.isActive ? "Activo" : "Inactivo" }}
               </div>
 
               <!-- Botones en la parte inferior -->
               <div class="card-buttons">
-                <button (click)="openModal(paciente)">Ver Detalles</button>
-                <button (click)="editInfo(paciente)">Editar</button>
+                <!-- <button (click)="openModalPaciente(paciente1)">
+                  Ver Detalles
+                </button> -->
+                <button (click)="editInfoPaciente(paciente1)">Editar</button>
               </div>
             </div>
           </div>
@@ -139,5 +141,11 @@
       [selectedUser]="selectedUser"
       (cerrar)="cerrarModal()"
     ></app-modal>
+  </ng-container>
+  <ng-container *ngIf="modalAbiertoPaciente">
+    <app-modal-paciente
+      [selectedUserPaciente]="selectedUserPaciente"
+      (cerrar)="cerrarModal()"
+    ></app-modal-paciente>
   </ng-container>
 </div>

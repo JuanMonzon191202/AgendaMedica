@@ -115,7 +115,11 @@ export class ConfiguracionCuentaComponent implements OnInit {
             console.log('Respuesta del servidor:', res);
             if (res.message) {
               this.alertService.MinShowSucces(res.message, '!Correcto¡');
-              location.reload();
+
+              // Esperar 3 segundos antes de recargar la página
+              setTimeout(() => {
+                location.reload();
+              }, 3000);
             }
           },
           (error) => {

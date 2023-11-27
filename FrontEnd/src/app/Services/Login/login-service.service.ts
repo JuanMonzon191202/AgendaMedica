@@ -11,8 +11,7 @@ import { AlertService } from '../AlerServices/alert.service';
 })
 export class LoginServiceService {
   private apiUrl = environment.apiUrl;
-  private checkInterval: number = 60000; // Verificar cada minuto
-  
+  private checkInterval: number = 15000; // Verificar cada .5 minuto
 
   constructor(
     private http: HttpClient,
@@ -48,7 +47,6 @@ export class LoginServiceService {
   }
 
   public scheduleTokenCheck(): void {
-    // window.location.reload();
     setInterval(() => {
       this.checkTokenAndRefreshIfNeeded();
     }, this.checkInterval);
@@ -56,6 +54,7 @@ export class LoginServiceService {
 
   private async checkTokenAndRefreshIfNeeded(): Promise<void> {
     const isValid = this.checkTokenValidity();
+    
 
     if (!isValid) {
       // El token está cerca de expirar o ya expiró, refrescarlo

@@ -1,5 +1,8 @@
 .contenedor-general {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvgRMad98wVTdc-qAMIhYEF6tJ0QVKdJ03oA&usqp=CAU"); /* Cambia 'tu_ruta_de_imagen.jpg' por la ruta de tu imagen */
   display: grid;
+  background-position: center;
+  background-repeat: repeat;
   grid-template-columns: 10% 90%;
   height: 90vh; /* Cambié esto a 100vh para que ocupe el 100% de la altura de la pantalla */
 }
@@ -28,10 +31,10 @@
 
 .contenido-principal {
   padding: 20px;
-  background-color: #cccccc7c;
-  max-height: 90%; /* Ajusta la altura máxima según tus necesidades */
+  background-color: #6e6e6eab;
+  max-height: 100%; /* Ajusta la altura máxima según tus necesidades */
   overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido excede la altura máxima */
-  border: 1px solid #ccc;
+  border: 3px solid #818181;
 }
 
 .card-container {

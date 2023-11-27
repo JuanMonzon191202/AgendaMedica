@@ -24,7 +24,6 @@ export class CitasComponent {
 
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
-    const validityToken = this.LoginService.checkTokenValidity();
 
     if (tokencio != null) {
       this.LoginService.scheduleTokenCheck();
@@ -103,7 +102,11 @@ export class CitasComponent {
     if (tokenRol === 'Especialista') {
       this.usuario.CitasEspecialistas(tokenid).subscribe(
         (res) => {
+          console.log(res);
+
           this.userDataCitas = res.citas.$values;
+          console.log(this.userDataCitas);
+
           this.alertService.showSuccess(res.message, '');
         },
         (error) => {
@@ -118,7 +121,11 @@ export class CitasComponent {
     } else {
       this.usuario.CitasPacientes(tokenid).subscribe(
         (res) => {
+          console.log(res);
+
           this.userDataCitas = res.citas.$values;
+          console.log(this.userDataCitas);
+
           this.alertService.showSuccess(res.message, '');
         },
         (error) => {

@@ -11,7 +11,7 @@
           type="text"
           id="nombre"
           name="nombre"
-          [(ngModel)]="selectedUser.usuario.nombre"
+          [(ngModel)]="selectedUserPaciente.nombre"
         />
       </div>
 
@@ -21,7 +21,7 @@
           type="text"
           id="apellido"
           name="apellido"
-          [(ngModel)]="selectedUser.usuario.apellido"
+          [(ngModel)]="selectedUserPaciente.apellido"
         />
       </div>
 
@@ -32,7 +32,7 @@
           id="email"
           disabled="true"
           name="email"
-          [(ngModel)]="selectedUser.usuario.email"
+          [(ngModel)]="selectedUserPaciente.email"
         />
       </div>
 
@@ -41,7 +41,7 @@
         <select
           id="isActive"
           name="isActive"
-          [(ngModel)]="selectedUser.usuario.isActive"
+          [(ngModel)]="selectedUserPaciente.isActive"
         >
           <option [ngValue]="true">Activo</option>
           <option [ngValue]="false">Inactivo</option>

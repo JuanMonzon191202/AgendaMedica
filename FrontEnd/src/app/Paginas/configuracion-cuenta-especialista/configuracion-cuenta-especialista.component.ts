@@ -1,7 +1,6 @@
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertService } from 'src/app/Services/AlerServices/alert.service';
 import { LoginServiceService } from 'src/app/Services/Login/login-service.service';
 import { UsuariosService } from 'src/app/Services/Usuarios/usuarios.service';
@@ -13,6 +12,7 @@ import { UsuariosService } from 'src/app/Services/Usuarios/usuarios.service';
 })
 export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
   public userData: any;
+  formulario!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -20,17 +20,19 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     private usuario: UsuariosService,
     public LoginService: LoginServiceService,
     private router: Router
-  ) {}
+  ) {
+    this.initForm();
+  }
 
   ngOnInit(): void {
     const tokencio = localStorage.getItem('token');
     const validityToken = this.LoginService.checkTokenValidity();
 
-    if (tokencio != null) {
+    if (tokencio != '') {
       this.LoginService.scheduleTokenCheck();
     }
 
-    if (tokencio === null) {
+    if (tokencio === '') {
       this.alertService.ShowErrorAlert('Primero inicia sesión');
       this.router.navigate(['/login']);
     } else {
@@ -59,22 +61,60 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
   private getUserData() {
     const tokenid = this.LoginService.getUserId();
 
     this.usuario.Usuario(tokenid).subscribe((res) => {
       this.userData = res;
+      console.log(this.userData);
+
       const alerta = this.userData.isActive;
 
       if (alerta === false) {
         this.alertService.ShowConfirmationAlert(
-          'Su cuenta no esta activada',
-          'Complete su informacion y consulte con soporte',
+          'Su cuenta no está activada',
+          'Complete su información y consulte con soporte',
           'aceptar',
           'Salir'
         );
       }
-      // console.log(res);
+
+      this.formulario.patchValue({
+        Nombre: this.userData.nombre,
+        Apellido: this.userData.apellido,
+        Direccion: this.userData.especialistasCmc.$values[0].direccion,
+        Ciudad: this.userData.especialistasCmc.$values[0].ciudad,
+        Pais: this.userData.especialistasCmc.$values[0].pais,
+        noCedula: this.userData.especialistasCmc.$values[0].noCedula,
+        Descripcion: this.userData.especialistasCmc.$values[0].descripcion,
+        Correo: this.userData.correo,
+      });
     });
+  }
+
+  guardarCambios(): void {
+    // Lógica para guardar cambios, incluyendo la contraseña si es necesario
+    console.log('Guardando cambios...');
+    console.log('Datos del formulario:', this.formulario.value);
+  }
+
+  private initForm(): void {
+    this.formulario = this.fb.group({
+      Nombre: ['', Validators.required],
+      Apellido: ['', Validators.required],
+      Direccion: ['', Validators.required],
+      Ciudad: ['', Validators.required],
+      Pais: ['', Validators.required],
+      noCedula: ['', Validators.required],
+      Descripcion: ['', Validators.required],
+      Correo: ['', [Validators.required, Validators.email]],
+      Password: ['', Validators.required],
+    });
+  }
+  autoExpand(event: any): void {
+    const textarea = event.target;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
   }
 }
