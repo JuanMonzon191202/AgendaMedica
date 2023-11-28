@@ -70,7 +70,7 @@ namespace BackEdn.Controllers
 
             await _service.UpdateAsync(rol);
 
-            return StatusCode(204, new { Message = "Datos Actualizados" });
+            return Ok(new { Message = "Datos Actualizados", Updaterol = rol });
         }
     }
 }

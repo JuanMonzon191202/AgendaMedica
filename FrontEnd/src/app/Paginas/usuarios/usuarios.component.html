@@ -10,9 +10,8 @@
     <button class="boton-sidebar" (click)="visualizarNoAutorizados()">
       Visualizar Especialistas no autorizados
     </button>
-    <button class="boton-sidebar" (click)="visualizarNoAutorizados()">
-      Roles
-    </button>
+    <button class="boton-sidebar" (click)="roles()">Roles</button>
+
     <button class="boton-sidebar" (click)="especialidades()">
       Especialidades
     </button>
@@ -20,7 +19,7 @@
       Cerrar sesión
     </button>
   </div>
-
+  <!-- rolesData -->
   <div class="contenido-principal">
     <!-- Mostrar el contenido según la variable contenidoAMostrar -->
     <ng-container *ngIf="contenidoAMostrar === 'Mostrar pacientes'">
@@ -187,29 +186,67 @@
         +
       </button>
     </ng-container>
+    <ng-container *ngIf="contenidoAMostrar === 'Mostrar roles'">
+      <h2>Lista de Roles</h2>
+      <div class="card-container">
+        <div *ngFor="let rol of rolesData | ObjToArray">
+          <div class="card">
+            <div class="card-info">
+              <h3>
+                {{ rol.nombreRol }}
+              </h3>
+
+              <!-- Botones en la parte inferior -->
+              <div class="card-buttons">
+                <button (click)="openModalRol(rol)">Ver Detalles</button>
+                <button (click)="editInfoRol(rol)">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="circular-button" (click)="openModalRolCreate()">+</button>
+    </ng-container>
   </div>
+  <!-- modal para pacientes -->
   <ng-container *ngIf="modalAbierto">
     <app-modal
       [selectedUser]="selectedUser"
       (cerrar)="cerrarModal()"
     ></app-modal>
   </ng-container>
+  <!-- modal editar paciente -->
   <ng-container *ngIf="modalAbiertoPaciente">
     <app-modal-paciente
       [selectedUserPaciente]="selectedUserPaciente"
       (cerrar)="cerrarModal()"
     ></app-modal-paciente>
   </ng-container>
+  <!-- modal editar especialisada -->
   <ng-container *ngIf="modalAbiertoEspecialidad">
     <app-modal-especialidades
       [selectedEspecialiad]="selectedEspecialiad"
       (cerrar)="cerrarModalEspecialidad()"
     ></app-modal-especialidades>
   </ng-container>
+  <!-- modal crear especialidad -->
   <ng-container *ngIf="modalAbiertoEspecialidadCreate">
     <app-modal-especialidades-agregar
       (cerrar)="cerrarModalEspecialidadCreate()"
     ></app-modal-especialidades-agregar>
+  </ng-container>
+  <!-- modal listar roles -->
+  <ng-container *ngIf="modalAbiertoRoles">
+    <app-modal-roles
+      [selectedRol]="selectedRol"
+      (cerrar)="cerrarModalRol()"
+    ></app-modal-roles>
+  </ng-container>
+  <!-- modal crear roles -->
+  <ng-container *ngIf="modalAbiertoRolesCreate">
+    <app-modal-roles-create
+      (cerrar)="cerrarModalRolCreate()"
+    ></app-modal-roles-create>
   </ng-container>
 </div>
 <!-- app-modal-especialidades-agregar -->

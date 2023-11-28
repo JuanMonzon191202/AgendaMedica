@@ -29,6 +29,22 @@ export class EspecialidadesServiceService {
     this.headers = this.headers.set('Authorization', `Bearer ${token}`);
   }
 
+  public createRoles(Data: any): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.rol.createRol}`;
+
+    return this.http.post(url, Data, { headers: this.headers });
+  }
+
+  public listaRoles(): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.rol.getRoles}`;
+
+    return this.http.get(url, { headers: this.headers });
+  }
+  public updateRol(id: number, Data: any): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.rol.updateRol(id)}`;
+    return this.http.put(url, Data, { headers: this.headers });
+  }
+
   public Especialidades(): Observable<any> {
     return this.http.get(
       `${this.apiUrl}${ApiEndpoints.especialidad.getEspecialidades}`

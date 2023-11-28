@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { AlertService } from 'src/app/Services/AlerServices/alert.service';
 import { EspecialidadesServiceService } from 'src/app/Services/Especialidades/especialidades-service.service';
 import { LoginServiceService } from 'src/app/Services/Login/login-service.service';
-import { RegistroServiceService } from 'src/app/Services/Registro/registro-service.service';
 import { UsuariosService } from 'src/app/Services/Usuarios/usuarios.service';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,14 +16,18 @@ export class UsuariosComponent implements OnInit {
   userData: any;
   userDataPaciente: any;
   especialidadesData: any;
+  rolesData: any;
   selectedUser: any;
   selectedUserPaciente: any;
   selectedEspecialiad: any;
-  newEspecialidad: any;
+  selectedRol: any;
+  newRol: any;
   modalAbierto: boolean = false;
   modalAbiertoPaciente: boolean = false;
   modalAbiertoEspecialidad: boolean = false;
   modalAbiertoEspecialidadCreate: boolean = false;
+  modalAbiertoRoles: boolean = false;
+  modalAbiertoRolesCreate: boolean = false;
 
   contenidoAMostrar: string = ''; // Variable para determinar el contenido
 
@@ -51,6 +53,10 @@ export class UsuariosComponent implements OnInit {
       const tokenRol = this.LoginService.getUserRole();
 
       if (tokenRol === 'Administrador') {
+        this.alertService.MinShowSucces(
+          'Un gran poder conlleva una gran responsabilidad',
+          'Bienvenido Admin'
+        );
       } else {
         this.alertService.ShowErrorAlert(
           'No tienes permiso a esta vista (-.-)'
@@ -85,17 +91,20 @@ export class UsuariosComponent implements OnInit {
   especialidades(): void {
     this.especialidadesService.Especialidades().subscribe((response) => {
       this.especialidadesData = response.$values;
-
       this.contenidoAMostrar = 'Mostrar especialidades';
-      
     });
-    
+  }
+
+  roles(): void {
+    this.especialidadesService.listaRoles().subscribe((response) => {
+      this.rolesData = response.$values;
+      this.contenidoAMostrar = 'Mostrar roles';
+    });
   }
 
   // modal para especialista
   openModal(user: any): void {
     this.selectedUser = user;
-    // console.log(this.selectedUser);
 
     this.modalAbierto = true;
   }
@@ -126,7 +135,6 @@ export class UsuariosComponent implements OnInit {
 
   openModalEspecialiad(user: any): void {
     this.selectedEspecialiad = user;
-    // console.log(this.selectedEspecialiad);
 
     this.modalAbiertoEspecialidad = true;
   }
@@ -148,7 +156,30 @@ export class UsuariosComponent implements OnInit {
   cerrarModalEspecialidadCreate(): void {
     this.modalAbiertoEspecialidadCreate = false;
   }
+  // modal para los roles
+  openModalRol(user: any): void {
+    this.selectedRol = user;
 
+    this.modalAbiertoRoles = true;
+  }
+  editInfoRol(user: any): void {
+    this.selectedRol = user;
+    this.modalAbiertoRoles = true;
+  }
+  cerrarModalRol(): void {
+    this.selectedRol = null;
+    this.modalAbiertoRoles = false;
+  }
+  // modal para crear roles
+  openModalRolCreate(): void {
+    this.modalAbiertoRolesCreate = true;
+  }
+  editInfoRolCreate(): void {
+    this.modalAbiertoRolesCreate = true;
+  }
+  cerrarModalRolCreate(): void {
+    this.modalAbiertoRolesCreate = false;
+  }
   // cerrar todos los moades
 
   cerrarModal(): void {
@@ -157,6 +188,7 @@ export class UsuariosComponent implements OnInit {
     this.modalAbiertoPaciente = false;
     this.cerrarModalEspecialidad();
     this.cerrarModalEspecialidadCreate();
+    this.cerrarModalRolCreate();
   }
   public async cerrarsesion() {
     const isConfirmed = await this.alertService.ShowConfirmationAlert(

@@ -32,6 +32,8 @@ import { ModalComponent } from './Paginas/modal/modal.component';
 import { ModalPacienteComponent } from './Paginas/modal-paciente/modal-paciente.component';
 import { ModalEspecialidadesComponent } from './Paginas/modal-especialidades/modal-especialidades.component';
 import { ModalEspecialidadesAgregarComponent } from './Paginas/modal-especialidades-agregar/modal-especialidades-agregar.component';
+import { ModalRolesComponent } from './Paginas/modal-roles/modal-roles.component';
+import { ModalRolesCreateComponent } from './Paginas/modal-roles-create/modal-roles-create.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { ModalEspecialidadesAgregarComponent } from './Paginas/modal-especialida
     ModalPacienteComponent,
     ModalEspecialidadesComponent,
     ModalEspecialidadesAgregarComponent,
+    ModalRolesComponent,
+    ModalRolesCreateComponent,
   ],
   imports: [
     BrowserModule,

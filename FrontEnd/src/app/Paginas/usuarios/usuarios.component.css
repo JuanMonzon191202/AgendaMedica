@@ -35,7 +35,7 @@
 
 /* Estilo del mensaje emergente */
 .circular-button::before {
-  content: "Crear nueva especialidad"; /* Texto del mensaje emergente */
+  content: "Crear Nuevo Rol"; /* Texto del mensaje emergente */
   position: absolute;
   background-color: #333;
   color: #fff;
