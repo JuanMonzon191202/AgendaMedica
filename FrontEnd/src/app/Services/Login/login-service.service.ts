@@ -54,26 +54,27 @@ export class LoginServiceService {
 
   private async checkTokenAndRefreshIfNeeded(): Promise<void> {
     const isValid = this.checkTokenValidity();
-    
+    const token = localStorage.getItem('token');
+    if (token) {
+      if (!isValid) {
+        // El token está cerca de expirar o ya expiró, refrescarlo
+        console.log('El token está cerca de expirar o ya expiró, refrescar');
+        const isConfirmed = await this.Alertas.ShowConfirmationAlert(
+          'La sesión está cerca de expirar o ya expiró, renovar?',
+          'Si no se renueva la sesión no podrá seguir con sus actividades',
+          'Renovar',
+          'Salir'
+        );
+        if (isConfirmed) {
+          // Código para manejar la confirmación
+          this.refreshToken();
+        } else {
+          // Código para manejar la cancelación
+          localStorage.removeItem('token');
 
-    if (!isValid) {
-      // El token está cerca de expirar o ya expiró, refrescarlo
-      console.log('El token está cerca de expirar o ya expiró, refrescar');
-      const isConfirmed = await this.Alertas.ShowConfirmationAlert(
-        'La sesión está cerca de expirar o ya expiró, renovar?',
-        'Si no se renueva la sesión no podrá seguir con sus actividades',
-        'Renovar',
-        'Salir'
-      );
-      if (isConfirmed) {
-        // Código para manejar la confirmación
-        this.refreshToken();
-      } else {
-        // Código para manejar la cancelación
-        localStorage.removeItem('token');
-
-        this.Alertas.ShowErrorAlert('Sesión no renovada');
-        window.location.reload();
+          this.Alertas.ShowErrorAlert('Sesión no renovada');
+          window.location.reload();
+        }
       }
     }
   }

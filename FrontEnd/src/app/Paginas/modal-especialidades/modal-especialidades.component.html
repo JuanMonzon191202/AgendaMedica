@@ -1,0 +1,23 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <!-- Contenido del modal -->
+    <h2>Editar Especialidad</h2>
+
+    <form>
+      <!-- Campos del formulario -->
+      <div class="form-group">
+        <label for="nombre">Nombre de especialidad:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          [(ngModel)]="selectedEspecialiad.nombreEspecialidad"
+        />
+      </div>
+
+      <!-- Botón para cerrar el modal -->
+      <button type="button" (click)="cerrarModal()">Cancelar</button>
+      <button type="button" (click)="Update()">Actualizar</button>
+    </form>
+  </div>
+</div>

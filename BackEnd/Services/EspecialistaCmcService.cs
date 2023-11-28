@@ -81,7 +81,12 @@ public class EspecialistaCmcService
     public async Task UpdateAsync(EspecialistaCmc especialistaCmc)
     {
         var existingEspecialistaCmc = await GetByIdAsync(especialistaCmc.Id);
-
+        var exists = await _context.EspecialistasCmc.AnyAsync(e => e.Id == especialistaCmc.Id);
+        if (!exists)
+        {
+            // La entidad no existe, manejar el caso según sea necesario
+            return;
+        }
         if (existingEspecialistaCmc != null)
         {
             if (especialistaCmc.Direccion != null)

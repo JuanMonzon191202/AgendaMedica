@@ -1,0 +1,24 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <!-- Contenido del modal -->
+    <h2>Crear Especialidad</h2>
+
+    <form [formGroup]="formulario">
+      <!-- Campos del formulario -->
+      <div class="form-group">
+        <label for="nombre">Nombre de especialidad:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          formControlName="nombreEspecialidad"
+          required
+        />
+      </div>
+
+      <!-- Botón para cerrar el modal -->
+      <button type="button" (click)="cerrarModal()">Cancelar</button>
+      <button type="button" (click)="Create()">Crear</button>
+    </form>
+  </div>
+</div>

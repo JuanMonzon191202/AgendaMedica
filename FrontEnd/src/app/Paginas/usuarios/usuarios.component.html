@@ -10,6 +10,12 @@
     <button class="boton-sidebar" (click)="visualizarNoAutorizados()">
       Visualizar Especialistas no autorizados
     </button>
+    <button class="boton-sidebar" (click)="visualizarNoAutorizados()">
+      Roles
+    </button>
+    <button class="boton-sidebar" (click)="especialidades()">
+      Especialidades
+    </button>
     <button class="boton-sidebar" (click)="cerrarsesion()">
       Cerrar sesión
     </button>
@@ -55,7 +61,7 @@
 
     <ng-container *ngIf="contenidoAMostrar === 'Mostrar especialistas'">
       <!-- Coloca aquí el contenido que quieres mostrar para especialistas -->
-      <h2>Lista de Usuarios Pacientes</h2>
+      <h2>Lista de Especialistas</h2>
       <div class="card-container">
         <div *ngFor="let paciente of userData | ObjToArray">
           <div class="card">
@@ -107,7 +113,7 @@
       *ngIf="contenidoAMostrar === 'Mostrar especialistas no autorizados'"
     >
       <!-- Coloca aquí el contenido que quieres mostrar para especialistas no autorizados -->
-      <h2>Lista de Usuarios Pacientes</h2>
+      <h2>Lista de Especialistas No Activos</h2>
       <div class="card-container">
         <div *ngFor="let paciente of userData | ObjToArray">
           <div class="card">
@@ -153,6 +159,34 @@
         </div>
       </div>
     </ng-container>
+
+    <ng-container *ngIf="contenidoAMostrar === 'Mostrar especialidades'">
+      <h2>Lista de Especialidades</h2>
+      <div class="card-container">
+        <div *ngFor="let especialidad of especialidadesData | ObjToArray">
+          <div class="card">
+            <div class="card-info">
+              <h3>
+                {{ especialidad.nombreEspecialidad }}
+              </h3>
+
+              <!-- Botones en la parte inferior -->
+              <div class="card-buttons">
+                <button (click)="openModalEspecialiad(especialidad)">
+                  Ver Detalles
+                </button>
+                <button (click)="editInfoEspecialiad(especialidad)">
+                  Editar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="circular-button" (click)="openModalEspecialiadCreate()">
+        +
+      </button>
+    </ng-container>
   </div>
   <ng-container *ngIf="modalAbierto">
     <app-modal
@@ -166,4 +200,16 @@
       (cerrar)="cerrarModal()"
     ></app-modal-paciente>
   </ng-container>
+  <ng-container *ngIf="modalAbiertoEspecialidad">
+    <app-modal-especialidades
+      [selectedEspecialiad]="selectedEspecialiad"
+      (cerrar)="cerrarModalEspecialidad()"
+    ></app-modal-especialidades>
+  </ng-container>
+  <ng-container *ngIf="modalAbiertoEspecialidadCreate">
+    <app-modal-especialidades-agregar
+      (cerrar)="cerrarModalEspecialidadCreate()"
+    ></app-modal-especialidades-agregar>
+  </ng-container>
 </div>
+<!-- app-modal-especialidades-agregar -->

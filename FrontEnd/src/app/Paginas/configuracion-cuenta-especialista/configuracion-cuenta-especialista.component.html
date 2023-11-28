@@ -50,45 +50,51 @@
             <h1>Apellido:</h1>
             <input type="text" formControlName="Apellido" />
           </div>
-
-          <div class="form1">
-            <h1>Dirección:</h1>
-            <input type="text" formControlName="Direccion" />
-          </div>
-
-          <div class="form1">
-            <h1>Ciudad:</h1>
-            <input type="text" formControlName="Ciudad" />
-          </div>
-
-          <div class="form1">
-            <h1>País:</h1>
-            <input type="text" formControlName="Pais" />
-          </div>
-
-          <div class="form1">
-            <h1>No. Cédula:</h1>
-            <input type="text" formControlName="noCedula" />
-          </div>
-
-          <div class="form2">
-            <h1>Descripción:</h1>
-            <textarea class="form2" rows="5" formControlName="Descripcion"></textarea>
-          </div>
-
-          <div class="separador">
-            <div class="ladoEmail">
-              <input
-                type="email"
-                formControlName="Correo"
-                placeholder="Correo"
-              />
-              <input
-                type="password"
-                formControlName="Password"
-                placeholder="Contraseña"
-              />
+          <form [formGroup]="formularioESP">
+            <div class="form1">
+              <h1>Dirección:</h1>
+              <input type="text" formControlName="Direccion" />
             </div>
+
+            <div class="form1">
+              <h1>Ciudad:</h1>
+              <input type="text" formControlName="Ciudad" />
+            </div>
+
+            <div class="form1">
+              <h1>País:</h1>
+              <input type="text" formControlName="Pais" />
+            </div>
+
+            <div class="form1">
+              <h1>No. Cédula:</h1>
+              <input type="text" formControlName="noCedula" />
+            </div>
+
+            <div class="form2">
+              <h1>Descripción:</h1>
+              <textarea
+                class="form2"
+                rows="5"
+                formControlName="Descripcion"
+              ></textarea>
+            </div>
+          </form>
+          <div class="separador">
+            <form [formGroup]="formulario">
+              <div class="ladoEmail">
+                <input
+                  type="email"
+                  formControlName="Email"
+                  placeholder="Correo"
+                />
+                <input
+                  type="password"
+                  formControlName="Password"
+                  placeholder="Contraseña"
+                />
+              </div>
+            </form>
           </div>
         </form>
 

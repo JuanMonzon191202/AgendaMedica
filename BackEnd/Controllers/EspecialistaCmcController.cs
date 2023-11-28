@@ -125,6 +125,10 @@ namespace BackEdn.Controllers
         [HttpPut("especialistas/{id}")]
         public async Task<IActionResult> Update(int id, EspecialistaCmc especialistaCmc)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             if (id != especialistaCmc.Id)
             {
                 return BadRequest(
@@ -138,10 +142,16 @@ namespace BackEdn.Controllers
             {
                 return NotFound($"Usuario con ID {id} no encontrado.");
             }
-
-            await _service.UpdateAsync(especialistaCmc);
-
-            return Ok(new { Message = "Datos Actualizados" });
+            try
+            {
+                await _service.UpdateAsync(especialistaCmc);
+                return Ok(new { Message = "Datos Actualizados" });
+            }
+            catch (Exception ex)
+            {
+                // Loguear el error o devolver un mensaje de error específico
+                return StatusCode(500, $"Error al actualizar: {ex.Message}");
+            }
         }
     }
 }

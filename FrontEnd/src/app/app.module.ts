@@ -30,6 +30,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { UsuariosComponent } from './Paginas/usuarios/usuarios.component';
 import { ModalComponent } from './Paginas/modal/modal.component';
 import { ModalPacienteComponent } from './Paginas/modal-paciente/modal-paciente.component';
+import { ModalEspecialidadesComponent } from './Paginas/modal-especialidades/modal-especialidades.component';
+import { ModalEspecialidadesAgregarComponent } from './Paginas/modal-especialidades-agregar/modal-especialidades-agregar.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ModalPacienteComponent } from './Paginas/modal-paciente/modal-paciente.
     UsuariosComponent,
     ModalComponent,
     ModalPacienteComponent,
+    ModalEspecialidadesComponent,
+    ModalEspecialidadesAgregarComponent,
   ],
   imports: [
     BrowserModule,

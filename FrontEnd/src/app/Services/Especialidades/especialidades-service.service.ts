@@ -10,12 +10,43 @@ import { ApiEndpoints } from '../../../environments/api-endpoints';
 })
 export class EspecialidadesServiceService {
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient) {}
+  private headers: HttpHeaders;
+
+  constructor(private http: HttpClient) {
+    this.headers = new HttpHeaders();
+    this.checkToken();
+  }
+
+  private checkToken(): void {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.setAuthorizationHeader(token);
+    }
+  }
+
+  private setAuthorizationHeader(token: string): void {
+    this.headers = this.headers.set('Authorization', `Bearer ${token}`);
+  }
 
   public Especialidades(): Observable<any> {
     return this.http.get(
       `${this.apiUrl}${ApiEndpoints.especialidad.getEspecialidades}`
     );
+  }
+
+  public updateEspecialiad(id: number, Data: any): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.especialidad.updateEspecialidad(
+      id
+    )}`;
+
+    return this.http.put(url, Data, { headers: this.headers });
+  }
+
+  public createEspecialidad(Data: any): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.especialidad.createEspecialidad}`;
+
+    return this.http.post(url, Data, { headers: this.headers });
   }
   public Especialistas(
     idEspecialidad?: number,

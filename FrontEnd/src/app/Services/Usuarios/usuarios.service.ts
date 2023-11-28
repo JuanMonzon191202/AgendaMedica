@@ -112,4 +112,21 @@ export class UsuariosService {
 
     return this.http.put(url, usuarioData, { headers: this.headers });
   }
+
+  public actualizarEspecialista(
+    id: number,
+    formdata: FormGroup
+  ): Observable<any> {
+    const url = `${this.apiUrl}${ApiEndpoints.especialistaCmc.updateEspecialista}${id}`;
+    console.log(url);
+    console.log(formdata);
+
+    return this.http.put(url, formdata, { headers: this.headers });
+  }
 }
+// public UpdateUsuario(tokenid: number, formdata: FormGroup): Observable<any> {
+//     console.log(formdata);
+
+//     const url = `${this.apiUrl}${ApiEndpoints.usuario.updateUsuario}/${tokenid}`;
+//     return this.http.put(url, formdata, { headers: this.headers });
+//   }

@@ -1,5 +1,4 @@
 .contenedor-general {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvgRMad98wVTdc-qAMIhYEF6tJ0QVKdJ03oA&usqp=CAU"); /* Cambia 'tu_ruta_de_imagen.jpg' por la ruta de tu imagen */
   display: grid;
   background-position: center;
   background-repeat: repeat;
@@ -11,8 +10,49 @@
   background-color: #333;
   color: white;
   padding: 10%;
+} /* Estilos del botón circular en la parte superior derecha */
+.circular-button {
+  position: fixed;
+  top: 80px; /* Ajusta la posición superior según tus necesidades */
+  right: 5%; /* Ajusta la posición derecha según tus necesidades */
+  background-color: #80c7c7; /* Color verde claro */
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+/* Estilo hover del botón circular */
+.circular-button:hover {
+  background-color: #8cdf90; /* Nuevo color de fondo al pasar el cursor sobre el botón */
 }
 
+/* Estilo del mensaje emergente */
+.circular-button::before {
+  content: "Crear nueva especialidad"; /* Texto del mensaje emergente */
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  top: -60px; /* Ajusta la posición del mensaje emergente */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; /* Evita que el mensaje emergente bloquee clics en el botón */
+}
+
+/* Ajusta la visibilidad del mensaje emergente al pasar el cursor sobre el botón */
+.circular-button:hover::before {
+  opacity: 1;
+}
 .boton-sidebar {
   border-radius: 10px;
   background-color: #555;
@@ -74,7 +114,6 @@
   transition: background-color 0.3s ease;
 }
 .card-buttons button a {
-  
   color: white;
   border: none;
   padding: 5px 10px;

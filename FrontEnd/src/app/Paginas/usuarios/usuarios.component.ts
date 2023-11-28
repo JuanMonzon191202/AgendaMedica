@@ -17,16 +17,21 @@ export class UsuariosComponent implements OnInit {
   contenidoPrincipal: string = 'Contenido predeterminado';
   userData: any;
   userDataPaciente: any;
+  especialidadesData: any;
   selectedUser: any;
   selectedUserPaciente: any;
-
+  selectedEspecialiad: any;
+  newEspecialidad: any;
   modalAbierto: boolean = false;
   modalAbiertoPaciente: boolean = false;
+  modalAbiertoEspecialidad: boolean = false;
+  modalAbiertoEspecialidadCreate: boolean = false;
 
   contenidoAMostrar: string = ''; // Variable para determinar el contenido
 
   constructor(
     private fb: FormBuilder,
+    private especialidadesService: EspecialidadesServiceService,
     private alertService: AlertService,
     private userService: UsuariosService,
     private router: Router,
@@ -44,10 +49,8 @@ export class UsuariosComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       const tokenRol = this.LoginService.getUserRole();
-      console.log(tokenRol);
 
       if (tokenRol === 'Administrador') {
-        // this.getUserData();
       } else {
         this.alertService.ShowErrorAlert(
           'No tienes permiso a esta vista (-.-)'
@@ -60,7 +63,6 @@ export class UsuariosComponent implements OnInit {
   visualizarPacientes(): void {
     this.userService.ListarPacientes().subscribe((response) => {
       this.userDataPaciente = response.$values;
-      console.log(this.userDataPaciente);
 
       this.contenidoAMostrar = 'Mostrar pacientes'; // Puedes asignar el contenido que quieras
     });
@@ -68,9 +70,7 @@ export class UsuariosComponent implements OnInit {
 
   visualizarEspecialistas(): void {
     this.userService.ListarEspecialistas().subscribe((response) => {
-      console.log(response);
       this.userData = response.$values;
-      console.log(this.userData);
 
       this.contenidoAMostrar = 'Mostrar especialistas'; // Puedes asignar el contenido que quieras
     });
@@ -78,14 +78,24 @@ export class UsuariosComponent implements OnInit {
 
   visualizarNoAutorizados(): void {
     this.userService.ListarEspecialistasNon().subscribe((response) => {
-      console.log(response);
       this.userData = response.$values;
       this.contenidoAMostrar = 'Mostrar especialistas no autorizados'; // Puedes asignar el contenido que quieras
     });
   }
+  especialidades(): void {
+    this.especialidadesService.Especialidades().subscribe((response) => {
+      this.especialidadesData = response.$values;
+
+      this.contenidoAMostrar = 'Mostrar especialidades';
+      
+    });
+    
+  }
+
+  // modal para especialista
   openModal(user: any): void {
     this.selectedUser = user;
-    console.log(this.selectedUser);
+    // console.log(this.selectedUser);
 
     this.modalAbierto = true;
   }
@@ -94,6 +104,7 @@ export class UsuariosComponent implements OnInit {
     this.selectedUser = user;
     this.modalAbierto = true;
   }
+  // modales para pacientes (Usuario)
 
   cerrarModalPaciente(): void {
     this.selectedUserPaciente = null;
@@ -102,7 +113,7 @@ export class UsuariosComponent implements OnInit {
   //
   openModalPaciente(user: any): void {
     this.selectedUserPaciente = user;
-    console.log(this.selectedUser);
+    // console.log(this.selectedUser);
 
     this.modalAbiertoPaciente = true;
   }
@@ -111,11 +122,41 @@ export class UsuariosComponent implements OnInit {
     this.selectedUserPaciente = user;
     this.modalAbiertoPaciente = true;
   }
+  // modal para las especialidades
+
+  openModalEspecialiad(user: any): void {
+    this.selectedEspecialiad = user;
+    // console.log(this.selectedEspecialiad);
+
+    this.modalAbiertoEspecialidad = true;
+  }
+  editInfoEspecialiad(user: any): void {
+    this.selectedEspecialiad = user;
+    this.modalAbiertoEspecialidad = true;
+  }
+  cerrarModalEspecialidad(): void {
+    this.selectedEspecialiad = null;
+    this.modalAbiertoEspecialidad = false;
+  }
+  //  modal create especialidad
+  openModalEspecialiadCreate(): void {
+    this.modalAbiertoEspecialidadCreate = true;
+  }
+  editInfoEspecialiadCreate(): void {
+    this.modalAbiertoEspecialidadCreate = true;
+  }
+  cerrarModalEspecialidadCreate(): void {
+    this.modalAbiertoEspecialidadCreate = false;
+  }
+
+  // cerrar todos los moades
 
   cerrarModal(): void {
     this.selectedUserPaciente = null;
     this.modalAbierto = false;
     this.modalAbiertoPaciente = false;
+    this.cerrarModalEspecialidad();
+    this.cerrarModalEspecialidadCreate();
   }
   public async cerrarsesion() {
     const isConfirmed = await this.alertService.ShowConfirmationAlert(
