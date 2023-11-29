@@ -1,26 +1,35 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/Services/AlerServices/alert.service';
 import { LoginServiceService } from 'src/app/Services/Login/login-service.service';
 import { UsuariosService } from 'src/app/Services/Usuarios/usuarios.service';
 import { forkJoin } from 'rxjs';
+import { EspecialidadesServiceService } from 'src/app/Services/Especialidades/especialidades-service.service';
 
 @Component({
   selector: 'app-configuracion-cuenta-especialista',
   templateUrl: './configuracion-cuenta-especialista.component.html',
   styleUrls: ['./configuracion-cuenta-especialista.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
   public userData: any;
+  public especialidadData: any;
+  public especialidadesArray: any;
+
   formulario!: FormGroup;
   formularioESP!: FormGroup;
   idEspecialista: any;
+  mostrarEspecialidades: boolean = false;
+  mostrarConfiCuenta: boolean = false;
+  contenidoAMostrar: string = 'Mostrar Conficuenta'; // Variable para determinar el contenido
 
   constructor(
     private fb: FormBuilder,
     private alertService: AlertService,
     private usuario: UsuariosService,
+    private especialidadService: EspecialidadesServiceService,
     public LoginService: LoginServiceService,
     private router: Router
   ) {
@@ -70,9 +79,10 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     const tokenid = this.LoginService.getUserId();
     console.log(tokenid);
 
-    // let idEspecialista = '';
     this.usuario.Usuario(tokenid).subscribe((res) => {
       this.userData = res;
+      console.log(this.userData);
+
       console.log(this.userData);
       this.idEspecialista = this.userData.especialistasCmc.$values[0].id;
       const alerta = this.userData.isActive;
@@ -86,21 +96,17 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
         );
       }
 
-      this.formulario.patchValue({
+      // Utilizar setValue en lugar de patchValue para marcar los campos como 'dirty'
+      this.formulario.setValue({
         id: tokenid,
         Nombre: this.userData.nombre,
         Apellido: this.userData.apellido,
-        Direccion: this.userData.especialistasCmc.$values[0].direccion,
-        Ciudad: this.userData.especialistasCmc.$values[0].ciudad,
-        Pais: this.userData.especialistasCmc.$values[0].pais,
-        noCedula: this.userData.especialistasCmc.$values[0].noCedula,
-        Descripcion: this.userData.especialistasCmc.$values[0].descripcion,
         Foto: '',
         Email: this.userData.email,
+        Password: '',
       });
-      console.log(this.userData.email);
 
-      this.formularioESP.patchValue({
+      this.formularioESP.setValue({
         id: this.idEspecialista,
         Direccion: this.userData.especialistasCmc.$values[0].direccion,
         Ciudad: this.userData.especialistasCmc.$values[0].ciudad,
@@ -108,12 +114,19 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
         noCedula: this.userData.especialistasCmc.$values[0].noCedula,
         Descripcion: this.userData.especialistasCmc.$values[0].descripcion,
       });
-      console.log(this.formularioESP);
-      console.log(this.formulario);
     });
   }
 
   async guardarCambios(): Promise<void> {
+    console.log(this.formularioESP);
+    console.log(this.formulario);
+    // Marcar los formularios como 'dirty'
+    this.formulario.markAsDirty();
+    this.formularioESP.markAsDirty();
+    console.log('mamada de dirty', this.formulario.markAsDirty());
+
+    this.formularioESP.markAsDirty();
+
     const isConfirmed = await this.alertService.ShowConfirmationAlert(
       '¿Estás seguro de que quieres actualizar sus datos?',
       '',
@@ -123,7 +136,7 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     if (isConfirmed) {
       const tokenid = this.LoginService.getUserId();
 
-      if (this.formulario.valid) {
+      if (this.formulario) {
         const updateUsuario$ = this.usuario.UpdateUsuario(
           tokenid,
           this.formulario.value
@@ -132,6 +145,8 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
           this.idEspecialista,
           this.formularioESP.value
         );
+        console.log(updateUsuario$);
+        console.log(updateEspecialista$);
 
         forkJoin([updateUsuario$, updateEspecialista$]).subscribe(
           ([resUsuario, resPaciente]) => {
@@ -141,9 +156,9 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
             // Realiza acciones adicionales después de completar ambas solicitudes
             this.alertService.MinShowSucces('¡Correcto!', resPaciente.message);
             // Esperar 3 segundos antes de recargar la página
-            setTimeout(() => {
-              location.reload();
-            }, 3000);
+            // setTimeout(() => {
+            //   location.reload();
+            // }, 3000);
           },
           (error) => {
             console.error('Error al actualizar usuario o paciente:', error);
@@ -152,7 +167,29 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
       }
     }
     console.log('Guardando cambios...');
-    console.log('Datos del formulario:', this.formulario.value);
+    console.log('Datos del formulario: formulario', this.formulario.value);
+    console.log(
+      'Datos del formulario: formularioESP',
+      this.formularioESP.value
+    );
+  }
+
+  // Cambios en el servicio
+  public especialidades() {
+    const tokenid = this.LoginService.getUserId();
+    this.especialidadService
+      .EspecialidadXespecialista(tokenid)
+      .subscribe((res) => {
+        // Verificar si la respuesta tiene una propiedad 'especialidades'
+        if (res) {
+          console.log(res);
+
+          this.especialidadesArray = res.$values;
+          console.log('Array de especialidades:', this.especialidadesArray);
+        } else {
+          console.log('La respuesta no tiene la propiedad "especialidades".');
+        }
+      });
   }
 
   private initForm(): void {
@@ -160,11 +197,6 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
       id: '',
       Nombre: ['', Validators.required],
       Apellido: ['', Validators.required],
-      Direccion: ['', Validators.required],
-      Ciudad: ['', Validators.required],
-      Pais: ['', Validators.required],
-      noCedula: ['', Validators.required],
-      Descripcion: ['', Validators.required],
       Email: [''],
       Foto: '',
       Password: '',
@@ -175,7 +207,7 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
       id: ['', Validators.required],
       Direccion: ['', Validators.required],
       Ciudad: ['', Validators.required],
-      Pais: ['', Validators.required],
+      Pais: ['Pais', Validators.required],
       noCedula: ['', Validators.required],
       Descripcion: ['', Validators.required],
     });
@@ -184,5 +216,14 @@ export class ConfiguracionCuentaEspecialistaComponent implements OnInit {
     const textarea = event.target;
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
+  }
+  mostrarEspecialidadeshtml(): void {
+    this.mostrarEspecialidades = true;
+    this.contenidoAMostrar = 'Mostrar Especialidades';
+    this.especialidades();
+  }
+  confiCuenta(): void {
+    this.contenidoAMostrar = 'Mostrar Conficuenta';
+    this.mostrarConfiCuenta = true;
   }
 }

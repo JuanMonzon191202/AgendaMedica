@@ -57,6 +57,23 @@ public class EspecialidadEspecialistaService
         return newEspecialidadEspecialista;
     }
 
+    public async Task<List<EspecialidadEspecialista>> GetAllByEspecialistaAsync(int idEspecialista)
+    {
+        var especialidadesEspecialista = await _context.EspecialidadesEspecialistas
+            .Include(e => e.Especialidad)
+            .Where(e => e.IdEspecialistaCmc == idEspecialista)
+            .ToListAsync();
+
+        if (especialidadesEspecialista == null || especialidadesEspecialista.Count == 0)
+        {
+            Console.WriteLine(
+                $"EspecialidadesEspecialista para el ID de especialista {idEspecialista} no encontradas."
+            );
+        }
+
+        return especialidadesEspecialista;
+    }
+
     public async Task UpdateAsync(EspecialidadEspecialista especialidadEspecialista)
     {
         var existingEsp = await GetByIdAsync(especialidadEspecialista.Id);

@@ -29,6 +29,15 @@ export class EspecialidadesServiceService {
     this.headers = this.headers.set('Authorization', `Bearer ${token}`);
   }
 
+  public EspecialidadXespecialista(id: number): Observable<any> {
+    const url = `${
+      this.apiUrl
+    }${ApiEndpoints.especialidadEspecialista.getEspecialidadEspecialistaById(
+      id
+    )}`;
+    return this.http.get(url, { headers: this.headers });
+  }
+
   public createRoles(Data: any): Observable<any> {
     const url = `${this.apiUrl}${ApiEndpoints.rol.createRol}`;
 

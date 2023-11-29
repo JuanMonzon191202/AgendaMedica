@@ -27,15 +27,16 @@ namespace BackEdn.Controllers
         }
 
         [HttpGet("especialidadEspecialista/{id}")]
-        public async Task<ActionResult<EspecialidadEspecialista>> GetById(int id)
+        public async Task<ActionResult<List<EspecialidadEspecialista>>> GetById(int id)
         {
-            var EspFind = await _service.GetByIdAsync(id);
+            var especialidadesEspecialista = await _service.GetAllByEspecialistaAsync(id);
 
-            if (EspFind is null)
+            if (especialidadesEspecialista == null || especialidadesEspecialista.Count == 0)
             {
                 return NotFound("Especialidades no encontradas...");
             }
-            return EspFind;
+
+            return especialidadesEspecialista;
         }
 
         [HttpPost("especialidadEspecialista")]

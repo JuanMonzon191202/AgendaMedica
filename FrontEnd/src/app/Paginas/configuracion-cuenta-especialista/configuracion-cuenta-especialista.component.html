@@ -25,8 +25,9 @@
       <div class="menuNavegacion">
         <h1>Menú de navegación</h1>
         <div class="botones">
-          <button>Configuración de la cuenta</button>
+          <button (click)="confiCuenta()">Configuración de la cuenta</button>
           <button routerLink="/Mis-citas">Mis citas</button>
+          <button (click)="mostrarEspecialidadeshtml()">Especialidades</button>
         </div>
         <br />
       </div>
@@ -36,75 +37,100 @@
       </button>
     </div>
 
-    <div class="derecho">
-      <div class="contenedorConfiguracionCuenta">
-        <h1>Configuración de la cuenta</h1>
-        <h3>Los campos que son totalmente requeridos están marcados con *</h3>
-        <form [formGroup]="formulario">
-          <div class="form1">
-            <h1>Nombre:</h1>
-            <input type="text" formControlName="Nombre" />
+    <div
+      class="contenedorConfiguracionCuenta"
+      *ngIf="contenidoAMostrar === 'Mostrar Especialidades'"
+    >
+      <div class="derecho">
+        <h1>Especialidades</h1>
+
+        <div class="form1">
+          <div class="derecho">
+            <div *ngFor="let especialidad of especialidadesArray | ObjToArray">
+              <div class="card">
+                <h2>{{ especialidad.especialidad.nombreEspecialidad }}</h2>
+                <!-- Puedes mostrar otros detalles de la especialidad aquí -->
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="form1">
-            <h1>Apellido:</h1>
-            <input type="text" formControlName="Apellido" />
-          </div>
-          <form [formGroup]="formularioESP">
+        <!-- Botón circular con el símbolo + -->
+        <button class="botonCircular">+</button>
+      </div>
+    </div>
+
+    <div
+      class="contenedorConfiguracionCuenta"
+      *ngIf="contenidoAMostrar === 'Mostrar Conficuenta'"
+    >
+      <div class="derecho">
+        <div class="contenedorConfiguracionCuenta">
+          <h1>Configuración de la cuenta</h1>
+          <h3>Los campos que son totalmente requeridos están marcados con *</h3>
+          <form [formGroup]="formulario">
             <div class="form1">
-              <h1>Dirección:</h1>
-              <input type="text" formControlName="Direccion" />
+              <h1>Nombre:</h1>
+              <input type="text" formControlName="Nombre" />
             </div>
 
             <div class="form1">
-              <h1>Ciudad:</h1>
-              <input type="text" formControlName="Ciudad" />
+              <h1>Apellido:</h1>
+              <input type="text" formControlName="Apellido" />
             </div>
+            <form [formGroup]="formularioESP">
+              <div class="form1">
+                <h1>Dirección:</h1>
+                <input type="text" formControlName="Direccion" />
+              </div>
 
-            <div class="form1">
-              <h1>País:</h1>
-              <input type="text" formControlName="Pais" />
-            </div>
+              <div class="form1">
+                <h1>Ciudad:</h1>
+                <input type="text" formControlName="Ciudad" />
+              </div>
 
-            <div class="form1">
-              <h1>No. Cédula:</h1>
-              <input type="text" formControlName="noCedula" />
-            </div>
+              <div class="form1">
+                <h1>País:</h1>
+                <input type="text" formControlName="Pais" />
+              </div>
 
-            <div class="form2">
-              <h1>Descripción:</h1>
-              <textarea
-                class="form2"
-                rows="5"
-                formControlName="Descripcion"
-              ></textarea>
-            </div>
-          </form>
-          <div class="separador">
-            <form [formGroup]="formulario">
-              <div class="ladoEmail">
-                <input
-                  type="email"
-                  formControlName="Email"
-                  placeholder="Correo"
-                />
-                <input
-                  type="password"
-                  formControlName="Password"
-                  placeholder="Contraseña"
-                />
+              <div class="form1">
+                <h1>No. Cédula:</h1>
+                <input type="text" formControlName="noCedula" />
+              </div>
+
+              <div class="form2">
+                <h1>Descripción:</h1>
+                <textarea
+                  class="form2"
+                  rows="5"
+                  formControlName="Descripcion"
+                  placeholder="Descripcion"
+                ></textarea>
               </div>
             </form>
-          </div>
-        </form>
+            <div class="separador">
+              <form [formGroup]="formulario">
+                <div class="ladoEmail">
+                  <input
+                    type="email"
+                    formControlName="Email"
+                    placeholder="Correo"
+                  />
+                  <input
+                    type="password"
+                    formControlName="Password"
+                    placeholder="Contraseña"
+                  />
+                </div>
+              </form>
+            </div>
+          </form>
 
-        <button
-          class="botonGuardarCambios"
-          (click)="guardarCambios()"
-          [disabled]="!formulario.valid"
-        >
-          Guardar cambios <i class="bi bi-floppy-fill"></i>
-        </button>
+          <button class="botonGuardarCambios" (click)="guardarCambios()">
+            Guardar cambios <i class="bi bi-floppy-fill"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>

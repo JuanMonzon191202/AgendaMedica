@@ -53,10 +53,10 @@ export class UsuariosComponent implements OnInit {
       const tokenRol = this.LoginService.getUserRole();
 
       if (tokenRol === 'Administrador') {
-        this.alertService.MinShowSucces(
-          'Un gran poder conlleva una gran responsabilidad',
-          'Bienvenido Admin'
-        );
+        // this.alertService.MinShowSucces(
+        //   'Un gran poder conlleva una gran responsabilidad',
+        //   'Bienvenido Admin'
+        // );
       } else {
         this.alertService.ShowErrorAlert(
           'No tienes permiso a esta vista (-.-)'

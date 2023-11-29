@@ -97,6 +97,10 @@ public class EspecialistaCmcService
             {
                 existingEspecialistaCmc.Ciudad = especialistaCmc.Ciudad;
             }
+            if (especialistaCmc.Pais != null)
+            {
+                existingEspecialistaCmc.Pais = especialistaCmc.Pais;
+            }
             if (especialistaCmc.NoCedula != null)
             {
                 existingEspecialistaCmc.NoCedula = especialistaCmc.NoCedula;

@@ -129,14 +129,18 @@ export class LoginServiceService {
   }
 
   checkTokenValidity(): boolean {
-    try {
-      const decodedToken: any = this.getDecodedToken();
-      //obtener la fecha y hora exacta en las que el token expira
-      const expirationDate = new Date(decodedToken.exp * 1000);
-      return expirationDate > new Date();
-    } catch (error) {
-      console.error('Error decoding or checking token validity:', error);
-      return false;
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken: any = this.getDecodedToken();
+        //obtener la fecha y hora exacta en las que el token expira
+        const expirationDate = new Date(decodedToken.exp * 1000);
+        return expirationDate > new Date();
+      } catch (error) {
+        console.error('Error decoding or checking token validity:', error);
+        return false;
+      }
     }
+    return false;
   }
 }
